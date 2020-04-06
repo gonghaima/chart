@@ -6,9 +6,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { populationDataFemale } from "./DataFemale";
-import { populationDataMale } from "./DataMale";
+import { populationDataFemale } from "./data/DataFemale";
+import { populationDataMale } from "./data/DataMale";
 import { BasicChart } from './BaiscChart';
+import { Summary } from './Summary';
 
 function App() {
 
@@ -19,9 +20,7 @@ function App() {
           <BasicChart />
         </Route>
         <Route path="/">
-          <div>
-            main chart
-          </div>
+          <Summary />
         </Route>
       </Switch>
     </Router>
