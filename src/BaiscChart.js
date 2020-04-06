@@ -2,8 +2,8 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import logo from './logo.svg';
 import './App.css';
-import { populationDataFemale } from "./DataFemale";
-import { populationDataMale } from "./DataMale";
+import { populationDataFemale } from "./data/DataFemale";
+import { populationDataMale } from "./data/DataMale";
 
 export const BasicChart = () => {
     const getOption = () => {
