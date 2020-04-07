@@ -7,7 +7,8 @@ export const Summary = () => {
     const getOption = () => {
         let countries = [];
         let confirmedNumbers = [];
-        summaryData.Countries.map(d => {
+        const topCountries = summaryData.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed).slice(0, 26);
+        topCountries.map(d => {
             countries.push(d.Country);
             confirmedNumbers.push(d.TotalConfirmed);
         })
@@ -19,12 +20,55 @@ export const Summary = () => {
             legend: {
                 data: ['Summary']
             },
-            xAxis: {
-                data: countries
+            grid: {
+                top: 100,
+                bottom: 150,
+                tooltip: {
+                    trigger: "axis",
+                    axisPointer: {
+                        type: "cross",
+                        label: {
+                            show: true
+                        }
+                    }
+                }
             },
-            yAxis: {},
+            xAxis: [
+                {
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 55,
+                        textStyle: {
+                            baseline: "top",
+                            color: "#333",
+                            fontSize: 10,
+                            fontWeight: "bold"
+                        }
+                    },
+                    axisLine: { lineStyle: { color: "#aaa" }, show: true },
+                    axisTick: { show: false },
+                    data: countries,
+                    splitLine: { show: false },
+                    type: "category"
+                }
+            ],
+            yAxis: [
+                {
+                    axisLabel: {
+                        textStyle: { fontSize: 10 }
+                    },
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    name: "Population",
+                    splitLine: {
+                        lineStyle: {
+                            type: "dotted"
+                        }
+                    },
+                    type: "value"
+                }
+            ],
             series: [{
-                name: 'Summary',
                 type: 'bar',
                 data: confirmedNumbers
             }]
