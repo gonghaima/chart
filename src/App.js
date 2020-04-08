@@ -10,6 +10,7 @@ import { populationDataFemale } from "./data/DataFemale";
 import { populationDataMale } from "./data/DataMale";
 import { BasicChart } from './BaiscChart';
 import { Summary } from './Summary';
+import { Pie } from './Pie';
 
 function App() {
 
@@ -18,6 +19,9 @@ function App() {
       <Switch>
         <Route path="/basic-chart">
           <BasicChart />
+        </Route>
+        <Route path="/pie">
+          <Pie />
         </Route>
         <Route path="/">
           <Summary />
