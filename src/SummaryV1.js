@@ -17,53 +17,45 @@ export const SummaryV1 = () => {
         })
 
         const years = [0];
-        let options = years.map(year => {
-            let obj = {};
+        // let options = years.map(year => {
+        //     let obj = {};
 
-            obj["series"] = [
-                {
+        //     obj["series"] = [
+        //         {
+        //             stack: "group",
+        //             data: existingNumbers
+        //         },
+        //         {
+        //             stack: "group",
+        //             data: newConfirmedNumbers
+        //         }
+        //     ];
+
+        //     obj["title"] = {
+        //         text: `Population of Singapore by District, ${year}`
+        //     };
+
+        //     return obj;
+        // });
+
+        let options = [
+            {
+                series: {
                     stack: "group",
                     data: existingNumbers
-                },
-                {
+                }
+            },
+            {
+                series: {
                     stack: "group",
                     data: newConfirmedNumbers
                 }
-            ];
-
-            obj["title"] = {
-                text: `Population of Singapore by District, ${year}`
-            };
-
-            return obj;
-        });
+            }
+        ];
 
         return {
             baseOption: {
-                timeline: {
-                    bottom: 20,
-                    height: null,
-                    inverse: true,
-                    left: null,
-                    orient: "vertical",
-                    playInterval: 1000,
-                    right: 0,
-                    top: 20,
-                    width: 55,
-                    label: {
-                        normal: {
-                            textStyle: {
-                                color: "#aaa"
-                            }
-                        },
-                        emphasis: {
-                            textStyle: {
-                                color: "#333"
-                            }
-                        }
-                    },
-                    symbol: "none"
-                },
+
                 color: ["#e91e63", "#354EF6"],
                 title: {
                     subtext: "Data from the Singapore Department of Statistics",
@@ -130,9 +122,8 @@ export const SummaryV1 = () => {
                         type: "value"
                     }
                 ],
-                series: [{ name: "ExistingCases", type: "bar" }, { name: "NewCases", type: "bar" }]
-            },
-            options: options
+                series: [{ name: "ExistingCases", stack: "group", type: "bar", data: existingNumbers }, { name: "NewCases", stack: "group", type: "bar", data: newConfirmedNumbers }]
+            }
         };
     };
 
