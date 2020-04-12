@@ -11,6 +11,7 @@ import { populationDataMale } from "./data/DataMale";
 import { BasicChart } from './BaiscChart';
 import { Summary } from './Summary';
 import { SummaryV1 } from './SummaryV1';
+import { World } from './World';
 import { Pie } from './Pie';
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/summary-v1">
           <SummaryV1 />
+        </Route>
+        <Route path="/world">
+          <World />
         </Route>
         <Route path="/">
           <Summary />
