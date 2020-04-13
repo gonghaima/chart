@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
-import { mapData } from './data/DataMap'
+import { mapDataUSA } from './data/DataMapUSA'
 import './App.css';
 
-echarts.registerMap('world', mapData);
+echarts.registerMap('usa', mapDataUSA);
 
-export const World = () => {
+const usaUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/95368/USA_geo.json';
+
+export const USA = () => {
     const [option, setOption] = useState(null);
     const [loading, setLoading] = useState(false);
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         setLoading(true);
-        !loading && fetch('https://s3-us-west-2.amazonaws.com/s.cdpn.io/95368/world.json').then(chinaJson => {
+        !loading && fetch(usaUrl).then(chinaJson => {
             setOption({
                 series: [{
                     type: 'map',
-                    map: 'world'
+                    map: 'usa'
                 }]
             });
             setLoaded(true);
