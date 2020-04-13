@@ -12,6 +12,7 @@ import { BasicChart } from './BaiscChart';
 import { Summary } from './Summary';
 import { SummaryV1 } from './SummaryV1';
 import { World } from './World';
+import { USA } from './USA';
 import { Pie } from './Pie';
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/world">
           <World />
+        </Route>
+        <Route path="/usa">
+          <USA />
         </Route>
         <Route path="/">
           <Summary />
