@@ -13,6 +13,7 @@ import { Summary } from './Summary';
 import { SummaryV1 } from './SummaryV1';
 import { World } from './World';
 import { USA } from './USA';
+import { AUSTRALIA } from './AUSTRALIA';
 import { Pie } from './Pie';
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route path="/usa">
           <USA />
+        </Route>
+        <Route path="/australia">
+          <AUSTRALIA />
         </Route>
         <Route path="/">
           <Summary />
