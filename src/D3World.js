@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import WorldMap from './components/WorldMap'
 import WorldMapSummary from './components/WorldMapSummary'
+import WorldMapV1 from './components/WorldMapV1'
 
 
 export const D3World = () => {
@@ -11,6 +12,7 @@ export const D3World = () => {
         <div>
             <WorldMap />
             <WorldMapSummary />
+            <WorldMapV1 />
         </div>
     );
 }
