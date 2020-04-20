@@ -15,6 +15,7 @@ import { World } from './World';
 import { USA } from './USA';
 import { AUSTRALIA } from './AUSTRALIA';
 import { D3World } from './D3World';
+import BasicShape from './BasicShape';
 import { Pie } from './Pie';
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path="/d3-world">
           <D3World />
+        </Route>
+        <Route path="/basic-shape">
+          <BasicShape />
         </Route>
         <Route path="/">
           <Summary />
