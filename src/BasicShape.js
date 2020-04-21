@@ -12,6 +12,7 @@ export default () => {
                     <circle cx="50" cy="50" r="40" stroke-width="5"></circle>
                     <rect x="100" y="25" width="50" height="50"></rect>
                 </g>
+                <line x1="200" y1="20" x2="300" y2="280" stroke="black" stroke-width="10"></line>
             </svg>
         </div>
     )
