@@ -9,10 +9,18 @@ const Basic = () => {
         const svg = d3
             .select(visEl.current)
             .append('svg');
-        svg.style('background-color', 'red');
+        svg.attr('width', '100%')
+        svg.attr('height', '100vh')
+
+        const circle = svg.append('circle');
+        circle.attr('r', 100);
+        circle.attr('cx', 300);
+        circle.attr('cy', 200);
     });
     return (
-        <div ref={visEl}></div>
+        <g>
+            <div ref={visEl}></div>
+        </g>
     )
 }
 
