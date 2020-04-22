@@ -14,7 +14,7 @@ export default () => {
                 </g>
                 <g stroke="black" stroke-width="10">
                     <line x1="200" y1="20" x2="300" y2="280"></line>
-                    <path fill="none" d="M300 280 L350 200 L400 250"></path>
+                    <path fill="none" d="M300 280 L350 200 L400 250 L450 230"></path>
                 </g>
             </svg>
         </div>
