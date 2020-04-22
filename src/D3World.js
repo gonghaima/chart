@@ -7,7 +7,6 @@ import WorldMapV1 from './components/WorldMapV1'
 
 export const D3World = () => {
 
-
     return (
         <div>
             <WorldMap />

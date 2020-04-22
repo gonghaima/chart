@@ -14,6 +14,7 @@ import { SummaryV1 } from './SummaryV1';
 import { World } from './World';
 import { USA } from './USA';
 import { AUSTRALIA } from './AUSTRALIA';
+import { D3 } from './D3';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
 import { Pie } from './Pie';
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/australia">
           <AUSTRALIA />
+        </Route>
+        <Route path="/d3">
+          <D3 />
         </Route>
         <Route path="/d3-world">
           <D3World />
