@@ -6,30 +6,29 @@ const Basic = () => {
     const visEl = useRef(null);
 
     useEffect(() => {
+        // const width = '100%';
+        // const height = '100vh';
+
+        const width = '400';
+        const height = '400';
+
         const svg = d3
             .select(visEl.current)
             .append('svg');
-        svg.attr('width', '100%')
-        svg.attr('height', '100vh')
+        svg.attr('width', width);
+        svg.attr('height', height);
+        svg.attr('viewBox', "0 0 400 400");
 
-        const circle = svg.append('circle');
-        circle.attr('r', 100);
-        circle.attr('cx', 300);
-        circle.attr('cy', 200);
+        const group = svg.append('g');
+        group.attr("transform", "translate(200, 200)");
+        const circle = group.append('circle');
+        circle.attr('r', 200);
+        circle.attr('cx', "0");
+        circle.attr('cy', "0");
     });
     return (
-        <g>
-            <div ref={visEl}></div>
-        </g>
+        <div ref={visEl}></div>
     )
 }
 
 export default Basic
-
-
-// export const D3World = () => {
-//     const visEl = useRef(null);
-//     return (
-//         <div ref={visEl}></div>
-//     );
-// }
