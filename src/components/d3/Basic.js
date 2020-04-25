@@ -2,6 +2,13 @@ import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
 
+const basicSvgStyle = {
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+};
+
 const Basic = () => {
     const visEl = useRef(null);
 
@@ -27,7 +34,9 @@ const Basic = () => {
         circle.attr('cy', "0");
     });
     return (
-        <div ref={visEl}></div>
+
+        <div style={basicSvgStyle} ref={visEl}></div>
+
     )
 }
 
