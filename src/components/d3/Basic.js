@@ -28,10 +28,30 @@ const Basic = () => {
 
         const group = svg.append('g');
         group.attr("transform", "translate(200, 200)");
-        const circle = group.append('circle');
-        circle.attr('r', 200);
-        circle.attr('cx', "0");
-        circle.attr('cy', "0");
+
+
+        const circleWidth = 0;
+        const circleHeight = 0;
+
+        const circle = group.append('circle').attr('r', 200)
+            .attr('cx', circleWidth)
+            .attr('cy', circleHeight)
+            .attr('fill', "yellow")
+            .attr('stroke', "black");
+
+        const leftEye = group.append('circle')
+            .attr('r', 30)
+            .attr('cx', circleWidth - 100)
+            .attr('cy', circleHeight - 70)
+            .attr('fill', "yellow")
+            .attr('fill', "black");
+
+        const rightEye = group.append('circle')
+            .attr('r', 30)
+            .attr('cx', circleWidth + 100)
+            .attr('cy', circleHeight - 70)
+            .attr('fill', "yellow")
+            .attr('fill', "black")
     });
     return (
 
