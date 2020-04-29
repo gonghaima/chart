@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
+import { arc } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -39,19 +40,34 @@ const Basic = () => {
             .attr('fill', "yellow")
             .attr('stroke', "black");
 
+
+        const eyeSpacing = 100;
+        const eyeYOffset = 70;
+
         const leftEye = group.append('circle')
             .attr('r', 30)
-            .attr('cx', circleWidth - 100)
-            .attr('cy', circleHeight - 70)
+            .attr('cx', circleWidth - eyeSpacing)
+            .attr('cy', circleHeight - eyeYOffset)
             .attr('fill', "yellow")
             .attr('fill', "black");
 
         const rightEye = group.append('circle')
             .attr('r', 30)
-            .attr('cx', circleWidth + 100)
-            .attr('cy', circleHeight - 70)
+            .attr('cx', circleWidth + eyeSpacing)
+            .attr('cy', circleHeight - eyeYOffset)
             .attr('fill', "yellow")
-            .attr('fill', "black")
+            .attr('fill', "black");
+
+
+        const g = group.append('g')
+            .attr('transform', `translate(${width},translate(${height})`);
+        const mouth = g.append('path')
+            .attr('d', arc()({
+                innerRadius: 80,
+                outerRadius: 100,
+                startAngle: Math.PI / 2,
+                endAngle: Math.PI * 3 / 2
+            }));
     });
     return (
 
