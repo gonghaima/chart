@@ -19,6 +19,15 @@ const Basic = () => {
 
         const width = '400';
         const height = '400';
+        const faceXOffset = 0;
+        const faceYOffset = 0;
+        const eyeXOffset = 90;
+        const eyeYOffset = 50;
+
+        const eyebrowWidth = 70;
+        const eyebrowHeight = 15;
+        const leftEyebrowYOffset = -105;
+        const rightEyebrowYOffset = 15;
 
         const svg = d3
             .select(visEl.current)
@@ -30,41 +39,45 @@ const Basic = () => {
         const group = svg.append('g');
         group.attr("transform", "translate(200, 200)");
 
-
-        const circleWidth = 0;
-        const circleHeight = 0;
-
         const circle = group.append('circle').attr('r', 200)
-            .attr('cx', circleWidth)
-            .attr('cy', circleHeight)
+            .attr('cx', faceXOffset)
+            .attr('cy', faceYOffset)
             .attr('fill', "yellow")
             .attr('stroke', "black");
 
-
-        const eyeSpacing = 100;
-        const eyeYOffset = 70;
-
         const leftEye = group.append('circle')
             .attr('r', 30)
-            .attr('cx', circleWidth - eyeSpacing)
-            .attr('cy', circleHeight - eyeYOffset)
+            .attr('cx', faceXOffset - eyeXOffset)
+            .attr('cy', faceYOffset - eyeYOffset)
             .attr('fill', "yellow")
             .attr('fill', "black");
 
         const rightEye = group.append('circle')
             .attr('r', 30)
-            .attr('cx', circleWidth + eyeSpacing)
-            .attr('cy', circleHeight - eyeYOffset)
+            .attr('cx', faceXOffset + eyeXOffset)
+            .attr('cy', faceYOffset - eyeYOffset)
             .attr('fill', "yellow")
             .attr('fill', "black");
+
+        const leftEyebrow = group.append('rect')
+            .attr('x', -eyeXOffset - eyebrowWidth / 2)
+            .attr('y', leftEyebrowYOffset)
+            .attr('width', eyebrowWidth)
+            .attr('height', eyebrowHeight);
+
+        const rightEyebrow = group.append('rect')
+            .attr('x', eyeXOffset - eyebrowWidth / 2)
+            .attr('y', leftEyebrowYOffset)
+            .attr('width', eyebrowWidth)
+            .attr('height', eyebrowHeight);
 
 
         const g = group.append('g')
             .attr('transform', `translate(${width},translate(${height})`);
         const mouth = g.append('path')
             .attr('d', arc()({
-                innerRadius: 80,
-                outerRadius: 100,
+                innerRadius: 130,
+                outerRadius: 150,
                 startAngle: Math.PI / 2,
                 endAngle: Math.PI * 3 / 2
             }));
