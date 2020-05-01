@@ -65,11 +65,14 @@ const Basic = () => {
             .attr('width', eyebrowWidth)
             .attr('height', eyebrowHeight);
 
-        const rightEyebrow = group.append('rect')
+        const rightEyebrow = group
+            .append('rect')
             .attr('x', eyeXOffset - eyebrowWidth / 2)
             .attr('y', leftEyebrowYOffset)
             .attr('width', eyebrowWidth)
-            .attr('height', eyebrowHeight);
+            .attr('height', eyebrowHeight)
+            .transition().duration(2000).attr('y', leftEyebrowYOffset - 30)
+            .transition().duration(2000).attr('y', leftEyebrowYOffset);
 
 
         const g = group.append('g')
