@@ -59,17 +59,25 @@ const Basic = () => {
             .attr('fill', "yellow")
             .attr('fill', "black");
 
-        const leftEyebrow = group.append('rect')
+        const eyeBrowGroup = group.append('g');
+
+        eyeBrowGroup
+            .transition().duration(2000).attr('transform', `translate(0, ${leftEyebrowYOffset + 80})`)
+            .transition().duration(2000).attr('transform', `translate(0, 0)`);
+
+        const leftEyebrow = eyeBrowGroup.append('rect')
             .attr('x', -eyeXOffset - eyebrowWidth / 2)
             .attr('y', leftEyebrowYOffset)
             .attr('width', eyebrowWidth)
             .attr('height', eyebrowHeight);
 
-        const rightEyebrow = group.append('rect')
+        const rightEyebrow = eyeBrowGroup
+            .append('rect')
             .attr('x', eyeXOffset - eyebrowWidth / 2)
             .attr('y', leftEyebrowYOffset)
             .attr('width', eyebrowWidth)
-            .attr('height', eyebrowHeight);
+            .attr('height', eyebrowHeight)
+            ;
 
 
         const g = group.append('g')
