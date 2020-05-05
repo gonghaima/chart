@@ -23,7 +23,11 @@ export const D3BAR = () => {
 
         csv(data).then(data => {
             data.forEach(d => d.population = +d.population * 1000);
-            // console.log(data);
+
+
+            const xValue = xs => d => xs(d.population);
+            const yValue = ys => d => ys(d.country);
+
             const xScale = scaleLinear()
                 .domain([0, max(data, d => d.population)])
                 .range([0, 960]);
@@ -34,8 +38,8 @@ export const D3BAR = () => {
             // console.log(`yscale: ${yScale.domain()}`);
 
             svg.selectAll().data(data).enter().append('rect')
-                .attr('y', d => yScale(d.country))
-                .attr('width', d => xScale(d.population))
+                .attr('y', yValue(yScale))
+                .attr('width', xValue(xScale))
                 .attr('height', yScale.bandwidth())
         }).catch(err => {
         })
