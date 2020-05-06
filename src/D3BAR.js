@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, scaleLinear, max, scaleBand } from 'd3'
+import { csv, scaleLinear, max, scaleBand, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -19,6 +19,8 @@ export const D3BAR = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
+        // svg.attr('viewBox', "0 0 20 20");
+
 
         csv(data).then(data => {
             data.forEach(d => d.population = +d.population * 1000);
@@ -26,7 +28,7 @@ export const D3BAR = () => {
 
             const xValue = xs => d => xs(d.population);
             const yValue = ys => d => ys(d.country);
-            const margin = { top: 20, right: 40, bottom: 20, left: 20 };
+            const margin = { top: 20, right: 40, bottom: 30, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
@@ -36,11 +38,17 @@ export const D3BAR = () => {
 
             const yScale = scaleBand()
                 .domain(data.map(d => d.country))
-                .range([0, innerHeight]);
+                .range([0, height]);
             // console.log(`yscale: ${yScale.domain()}`);
+            //const yAxis = axisLeft(yScale);
 
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.right})`);
+
+            //yAxis(g.append('g'));  same as below
+            g.append('g').call(axisLeft(yScale));
+            g.append('g').call(axisBottom(xScale))
+                .attr('transform', `translate(0,${innerHeight})`);
 
             g.selectAll().data(data).enter().append('rect')
                 .attr('y', yValue(yScale))
