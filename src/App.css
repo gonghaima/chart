@@ -11,6 +11,14 @@ html, body, #root, #root div {
   pointer-events: none;
 }
 
+rect {
+  fill: steelblue;
+}
+
+text{
+  font-size: 1.4em;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

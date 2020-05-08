@@ -10,7 +10,7 @@ import data from './data/d3/worldPopulation.csv'
 
 export const D3BAR = () => {
     const visEl = useRef(null);
-    const width = '960';
+    const width = '850';
     const height = '450';
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const D3BAR = () => {
 
             const xValue = xs => d => xs(d.population);
             const yValue = ys => d => ys(d.country);
-            const margin = { top: 20, right: 40, bottom: 38, left: 200 };
+            const margin = { top: 20, right: 40, bottom: 40, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
@@ -38,7 +38,8 @@ export const D3BAR = () => {
 
             const yScale = scaleBand()
                 .domain(data.map(d => d.country))
-                .range([0, innerHeight]);
+                .range([0, innerHeight])
+                .padding(0.1);
             // console.log(`yscale: ${yScale.domain()}`);
             //const yAxis = axisLeft(yScale);
 
