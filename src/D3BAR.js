@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, scaleLinear, max, scaleBand, axisLeft, axisBottom } from 'd3'
+import { csv, scaleLinear, max, scaleBand, axisLeft, axisBottom, format } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -46,9 +46,11 @@ export const D3BAR = () => {
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.right})`);
 
+            const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
+            const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
             //yAxis(g.append('g'));  same as below
             g.append('g').call(axisLeft(yScale));
-            g.append('g').call(axisBottom(xScale))
+            g.append('g').call(xAxis)
                 .attr('transform', `translate(0,${innerHeight})`);
 
             g.selectAll().data(data).enter().append('rect')
