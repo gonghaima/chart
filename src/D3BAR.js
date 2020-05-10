@@ -49,9 +49,10 @@ export const D3BAR = () => {
             const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
             const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
             //yAxis(g.append('g'));  same as below
-            g.append('g').call(axisLeft(yScale));
+            g.append('g').call(axisLeft(yScale)).selectAll('.domain, .tick line').remove();
             g.append('g').call(xAxis)
-                .attr('transform', `translate(0,${innerHeight})`);
+                .attr('transform', `translate(0,${innerHeight})`)
+                .select('.domain').remove();
 
             g.selectAll().data(data).enter().append('rect')
                 .attr('y', yValue(yScale))
