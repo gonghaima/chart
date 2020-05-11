@@ -28,7 +28,7 @@ export const D3BAR = () => {
 
             const xValue = xs => d => xs(d.population);
             const yValue = ys => d => ys(d.country);
-            const margin = { top: 20, right: 40, bottom: 40, left: 200 };
+            const margin = { top: 50, right: 40, bottom: 40, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
@@ -44,7 +44,7 @@ export const D3BAR = () => {
             //const yAxis = axisLeft(yScale);
 
             const g = svg.append('g')
-                .attr('transform', `translate(${margin.left},${margin.right})`);
+                .attr('transform', `translate(${margin.left},${margin.top})`);
 
             const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
             const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
@@ -52,18 +52,20 @@ export const D3BAR = () => {
             g.append('g').call(axisLeft(yScale)).selectAll('.domain, .tick line').remove();
             g.append('g').call(xAxis)
                 .attr('transform', `translate(0,${innerHeight})`)
-                .select('.domain').remove();
+                .select('.domain').remove(); Math.floor()
 
             g.selectAll().data(data).enter().append('rect')
                 .attr('y', yValue(yScale))
                 .attr('width', xValue(xScale))
                 .attr('height', yScale.bandwidth())
+            g.append('text')
+                .attr('y', -10)
+                .text('Top 10 Most Populous Countries');
         }).catch(err => {
         })
     });
     return (
         <div>
-            hello
             <div ref={visEl}></div>
         </div>
     );
