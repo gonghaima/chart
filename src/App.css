@@ -15,8 +15,9 @@ rect {
   fill: steelblue;
 }
 
-text{
-  font-size: 1.4em;
+text {
+  font-size: 2em;
+  font-family: sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
