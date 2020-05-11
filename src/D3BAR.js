@@ -28,7 +28,7 @@ export const D3BAR = () => {
 
             const xValue = xs => d => xs(d.population);
             const yValue = ys => d => ys(d.country);
-            const margin = { top: 50, right: 40, bottom: 40, left: 200 };
+            const margin = { top: 50, right: 40, bottom: 70, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
@@ -50,9 +50,14 @@ export const D3BAR = () => {
             const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
             //yAxis(g.append('g'));  same as below
             g.append('g').call(axisLeft(yScale)).selectAll('.domain, .tick line').remove();
-            g.append('g').call(xAxis)
-                .attr('transform', `translate(0,${innerHeight})`)
-                .select('.domain').remove(); Math.floor()
+            const xAxisG = g.append('g').call(xAxis)
+                .attr('transform', `translate(0,${innerHeight})`);
+            xAxisG.select('.domain').remove();
+            xAxisG.append('text')
+                .attr('y', 60)
+                .attr('x', innerWidth / 2)
+                .attr('fill', 'black')
+                .text('Population');
 
             g.selectAll().data(data).enter().append('rect')
                 .attr('y', yValue(yScale))
