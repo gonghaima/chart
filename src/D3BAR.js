@@ -28,7 +28,7 @@ export const D3BAR = () => {
 
             const xValue = xs => d => xs(d.population);
             const yValue = ys => d => ys(d.country);
-            const margin = { top: 50, right: 40, bottom: 70, left: 200 };
+            const margin = { top: 50, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
@@ -47,13 +47,16 @@ export const D3BAR = () => {
                 .attr('transform', `translate(${margin.left},${margin.top})`);
 
             const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
-            const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
+            const xAxis = axisBottom(xScale
+            ).tickFormat(xAxisTickFormat)
+                .tickSize(- innerHeight);
             //yAxis(g.append('g'));  same as below
             g.append('g').call(axisLeft(yScale)).selectAll('.domain, .tick line').remove();
             const xAxisG = g.append('g').call(xAxis)
                 .attr('transform', `translate(0,${innerHeight})`);
             xAxisG.select('.domain').remove();
             xAxisG.append('text')
+                .attr('class', 'axis-label')
                 .attr('y', 60)
                 .attr('x', innerWidth / 2)
                 .attr('fill', 'black')
@@ -64,6 +67,7 @@ export const D3BAR = () => {
                 .attr('width', xValue(xScale))
                 .attr('height', yScale.bandwidth())
             g.append('text')
+                .attr('class', 'title')
                 .attr('y', -10)
                 .text('Top 10 Most Populous Countries');
         }).catch(err => {
