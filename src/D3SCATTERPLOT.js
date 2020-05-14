@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, scaleLinear, max, scaleBand, axisLeft, axisBottom, format } from 'd3'
+import { csv, scaleLinear, max, scalePoint, axisLeft, axisBottom, format } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -36,7 +36,7 @@ export const D3SCATTERPLOT = () => {
                 .domain([0, max(data, d => d.population)])
                 .range([0, innerWidth]);
 
-            const yScale = scaleBand()
+            const yScale = scalePoint()
                 .domain(data.map(d => d.country))
                 .range([0, innerHeight])
                 .padding(0.1);
@@ -63,9 +63,9 @@ export const D3SCATTERPLOT = () => {
                 .text('Population');
 
             g.selectAll().data(data).enter().append('circle')
-                .attr('cy', d => yValue(yScale)(d) + yScale.bandwidth() / 2)
+                .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
-                .attr('r', yScale.bandwidth()/2)
+                .attr('r', 10)
             g.append('text')
                 .attr('class', 'title')
                 .attr('y', -10)
