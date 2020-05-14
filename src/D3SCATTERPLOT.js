@@ -62,10 +62,10 @@ export const D3SCATTERPLOT = () => {
                 .attr('fill', 'black')
                 .text('Population');
 
-            g.selectAll().data(data).enter().append('rect')
-                .attr('y', yValue(yScale))
-                .attr('width', xValue(xScale))
-                .attr('height', yScale.bandwidth())
+            g.selectAll().data(data).enter().append('circle')
+                .attr('cy', d => yValue(yScale)(d) + yScale.bandwidth() / 2)
+                .attr('cx', xValue(xScale))
+                .attr('r', yScale.bandwidth()/2)
             g.append('text')
                 .attr('class', 'title')
                 .attr('y', -10)
