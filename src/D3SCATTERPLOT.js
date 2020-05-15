@@ -34,7 +34,7 @@ export const D3SCATTERPLOT = () => {
 
             const xScale = scaleLinear()
                 .domain([0, max(data, d => d.population)])
-                .range([0, innerWidth]);
+                .range([0, innerWidth]).nice();
 
             const yScale = scalePoint()
                 .domain(data.map(d => d.country))
