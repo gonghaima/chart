@@ -34,12 +34,12 @@ export const D3SCATTERPLOT = () => {
 
             const xScale = scaleLinear()
                 .domain([0, max(data, d => d.population)])
-                .range([0, innerWidth]);
+                .range([0, innerWidth]).nice();
 
             const yScale = scalePoint()
                 .domain(data.map(d => d.country))
                 .range([0, innerHeight])
-                .padding(0.1);
+                .padding(0.5);
             // console.log(`yscale: ${yScale.domain()}`);
             //const yAxis = axisLeft(yScale);
 
@@ -49,9 +49,11 @@ export const D3SCATTERPLOT = () => {
             const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
             const xAxis = axisBottom(xScale
             ).tickFormat(xAxisTickFormat)
-                .tickSize(- innerHeight);
+                .tickSize(-innerHeight);
+
+            const yAxis = axisLeft(yScale).tickSize(-innerWidth);
             //yAxis(g.append('g'));  same as below
-            g.append('g').call(axisLeft(yScale)).selectAll('.domain, .tick line').remove();
+            g.append('g').call(yAxis).selectAll('.domain').remove();
             const xAxisG = g.append('g').call(xAxis)
                 .attr('transform', `translate(0,${innerHeight})`);
             xAxisG.select('.domain').remove();
