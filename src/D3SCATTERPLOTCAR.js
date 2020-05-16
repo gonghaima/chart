@@ -22,18 +22,26 @@ export const D3SCATTERPLOTCAR = () => {
         // svg.attr('viewBox', "0 0 20 20");
 
 
-        csv(data).then(data => {
-            data.forEach(d => d.population = +d.population * 1000);
+        csv('https://vizhub.com/curran/datasets/auto-mpg.csv').then(data => {
+            data.forEach(d => {
+                d.mpg = +d.mpg;
+                d.cylinders = +d.cylinders;
+                d.displacement = +d.displacement;
+                d.horsepower = +d.horsepower;
+                d.weight = +d.weight;
+                d.acceleration = +d.acceleration;
+                d.year = +d.year;
+            });
 
 
-            const xValue = xs => d => xs(d.population);
+            const xValue = xs => d => xs(d.cylinders);
             const yValue = ys => d => ys(d.country);
             const margin = { top: 50, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
             const xScale = scaleLinear()
-                .domain([0, max(data, d => d.population)])
+                .domain([0, max(data, d => d.cylinders)])
                 .range([0, innerWidth]).nice();
 
             const yScale = scalePoint()
