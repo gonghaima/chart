@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, scaleLinear, max, scalePoint, axisLeft, axisBottom, format } from 'd3'
+import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -35,19 +35,18 @@ export const D3SCATTERPLOTCAR = () => {
 
 
             const xValue = xs => d => xs(d.cylinders);
-            const yValue = ys => d => ys(d.country);
+            const yValue = ys => d => ys(d.horsepower);
             const margin = { top: 50, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
             const xScale = scaleLinear()
-                .domain([0, max(data, d => d.cylinders)])
+                .domain(extent(data, d => d.cylinders))
                 .range([0, innerWidth]).nice();
 
-            const yScale = scalePoint()
-                .domain(data.map(d => d.country))
-                .range([0, innerHeight])
-                .padding(0.5);
+            const yScale = scaleLinear()
+                .domain(extent(data, d => d.horsepower))
+                .range([0, innerHeight]);
             // console.log(`yscale: ${yScale.domain()}`);
             //const yAxis = axisLeft(yScale);
 
