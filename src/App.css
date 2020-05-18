@@ -12,7 +12,8 @@ html, body, #root, #root div {
 }
 
 rect, circle {
-  fill: steelblue;
+  fill: red;
+  opacity: 0.3;
 }
 
 text {
