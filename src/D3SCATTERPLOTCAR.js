@@ -33,34 +33,47 @@ export const D3SCATTERPLOTCAR = () => {
                 d.year = +d.year;
             });
 
-
-            const xValue = xs => d => xs(d.cylinders);
-            const yValue = ys => d => ys(d.horsepower);
-            const margin = { top: 50, right: 40, bottom: 90, left: 200 };
+            const title = "Cars: Horsepower vs. Weight";
+            const xValue = xs => d => xs(d.horsepower);
+            const yValue = ys => d => ys(d.weight);
+            const circleRadius = 10;
+            const xAxisLabel = "Horsepower";
+            const yAxisLabel = "Weight";
+            const margin = { top: 60, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
             const xScale = scaleLinear()
-                .domain(extent(data, d => d.cylinders))
+                .domain(extent(data, d => d.horsepower))
                 .range([0, innerWidth]).nice();
 
             const yScale = scaleLinear()
-                .domain(extent(data, d => d.horsepower))
-                .range([0, innerHeight]);
-            // console.log(`yscale: ${yScale.domain()}`);
-            //const yAxis = axisLeft(yScale);
+                .domain(extent(data, d => d.weight))
+                .range([0, innerHeight]).nice();
 
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`);
 
-            const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
-            const xAxis = axisBottom(xScale
-            ).tickFormat(xAxisTickFormat)
-                .tickSize(-innerHeight);
+            const xAxis = axisBottom(xScale)
+                .tickSize(-innerHeight)
+                .tickPadding(15);
 
-            const yAxis = axisLeft(yScale).tickSize(-innerWidth);
-            //yAxis(g.append('g'));  same as below
+            const yAxis = axisLeft(yScale).tickSize(-innerWidth).tickPadding(10);
+
             g.append('g').call(yAxis).selectAll('.domain').remove();
+
+            const yAxisG = g.append('g').call(yAxis);
+            yAxisG.select('.domain').remove();
+
+            yAxisG.append('text')
+                .attr('class', 'axis-label')
+                .attr('y', -80)
+                .attr('x', -innerHeight / 2)
+                .attr('fill', 'black')
+                .attr('transform', `rotate(-90)`)
+                .attr('text-anchor', 'middle')
+                .text(yAxisLabel);
+
             const xAxisG = g.append('g').call(xAxis)
                 .attr('transform', `translate(0,${innerHeight})`);
             xAxisG.select('.domain').remove();
@@ -69,16 +82,16 @@ export const D3SCATTERPLOTCAR = () => {
                 .attr('y', 60)
                 .attr('x', innerWidth / 2)
                 .attr('fill', 'black')
-                .text('Population');
+                .text(xAxisLabel);
 
             g.selectAll().data(data).enter().append('circle')
                 .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
-                .attr('r', 10)
+                .attr('r', circleRadius)
             g.append('text')
                 .attr('class', 'title')
                 .attr('y', -10)
-                .text('Top 10 Most Populous Countries');
+                .text(title);
         }).catch(err => {
         })
     });
