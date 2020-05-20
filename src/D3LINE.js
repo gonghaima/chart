@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format } from 'd3'
+import { csv, extent, scaleLinear, max, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -21,34 +21,30 @@ export const D3LINE = () => {
         svg.attr('height', height);
         // svg.attr('viewBox', "0 0 20 20");
 
+        //https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv
 
-        csv('https://vizhub.com/curran/datasets/auto-mpg.csv').then(data => {
+        csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(data => {
             data.forEach(d => {
-                d.mpg = +d.mpg;
-                d.cylinders = +d.cylinders;
-                d.displacement = +d.displacement;
-                d.horsepower = +d.horsepower;
-                d.weight = +d.weight;
-                d.acceleration = +d.acceleration;
-                d.year = +d.year;
+                d.temperature = +d.temperature;
+                d.timestamp = new Date(d.timestamp);
             });
 
             const title = "Cars: Horsepower vs. Weight";
-            const xValue = xs => d => xs(d.horsepower);
-            const yValue = ys => d => ys(d.weight);
+            const xValue = xs => d => xs(d.timestamp);
+            const yValue = ys => d => ys(d.temperature);
             const circleRadius = 10;
-            const xAxisLabel = "Horsepower";
-            const yAxisLabel = "Weight";
+            const xAxisLabel = "Time";
+            const yAxisLabel = "Temperature";
             const margin = { top: 60, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
             const xScale = scaleLinear()
-                .domain(extent(data, d => d.horsepower))
+                .domain(extent(data, d => d.timestamp))
                 .range([0, innerWidth]).nice();
 
             const yScale = scaleLinear()
-                .domain(extent(data, d => d.weight))
+                .domain(extent(data, d => d.temperature))
                 .range([0, innerHeight]).nice();
 
             const g = svg.append('g')
