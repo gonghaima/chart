@@ -29,7 +29,7 @@ export const D3LINE = () => {
                 d.timestamp = new Date(d.timestamp);
             });
 
-            const title = "Cars: Horsepower vs. Weight";
+            const title = "A Week in San Francisco";
             const xValue = xs => d => xs(d.timestamp);
             const yValue = ys => d => ys(d.temperature);
             const circleRadius = 6;
@@ -81,7 +81,7 @@ export const D3LINE = () => {
                 .text(xAxisLabel);
 
             g.selectAll().data(data).enter().append('circle')
-                .attr('class','d3line-circle')
+                .attr('class', 'd3line-circle')
                 .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
                 .attr('r', circleRadius)
