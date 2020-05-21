@@ -8,7 +8,7 @@ import data from './data/d3/worldPopulation.csv'
 
 
 
-export const D3LINE = () => {
+export const D3LINESCATTERPLOT = () => {
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
