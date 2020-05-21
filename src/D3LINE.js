@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, extent, scaleLinear, max, axisLeft, axisBottom } from 'd3'
+import { csv, extent, scaleLinear, scaleTime, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -32,20 +32,20 @@ export const D3LINE = () => {
             const title = "Cars: Horsepower vs. Weight";
             const xValue = xs => d => xs(d.timestamp);
             const yValue = ys => d => ys(d.temperature);
-            const circleRadius = 10;
+            const circleRadius = 6;
             const xAxisLabel = "Time";
             const yAxisLabel = "Temperature";
             const margin = { top: 60, right: 40, bottom: 90, left: 200 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
 
-            const xScale = scaleLinear()
+            const xScale = scaleTime()
                 .domain(extent(data, d => d.timestamp))
                 .range([0, innerWidth]).nice();
 
             const yScale = scaleLinear()
                 .domain(extent(data, d => d.temperature))
-                .range([0, innerHeight]).nice();
+                .range([innerHeight, 0]).nice();
 
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -81,6 +81,7 @@ export const D3LINE = () => {
                 .text(xAxisLabel);
 
             g.selectAll().data(data).enter().append('circle')
+                .attr('class','d3line-circle')
                 .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
                 .attr('r', circleRadius)
