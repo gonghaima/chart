@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, extent, line, scaleLinear, scaleTime, axisLeft, axisBottom } from 'd3'
+import { csv, extent, scaleLinear, scaleTime, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
 
 
 
-export const D3LINE = () => {
+export const D3LINESCATTERPLOT = () => {
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
@@ -30,8 +30,6 @@ export const D3LINE = () => {
             });
 
             const title = "A Week in San Francisco";
-            const x = d => d.timestamp;
-            const y = d => d.temperature;
             const xValue = xs => d => xs(d.timestamp);
             const yValue = ys => d => ys(d.temperature);
             const circleRadius = 6;
@@ -82,14 +80,11 @@ export const D3LINE = () => {
                 .attr('fill', 'black')
                 .text(xAxisLabel);
 
-            const lineGenerator = line()
-                .x(xValue(xScale))
-                .y(yValue(yScale))
-                .curve(curveBasis);
-            g.append('path')
-                .attr('class', 'line-path')
-                .attr('d', lineGenerator(data));
-
+            g.selectAll().data(data).enter().append('circle')
+                .attr('class', 'd3line-circle')
+                .attr('cy', yValue(yScale))
+                .attr('cx', xValue(xScale))
+                .attr('r', circleRadius)
             g.append('text')
                 .attr('class', 'title')
                 .attr('y', -10)

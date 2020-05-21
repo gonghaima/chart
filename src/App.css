@@ -21,6 +21,13 @@ circle.d3line-circle {
   fill: steelblue;
 }
 
+.line-path{
+  fill:none;
+  stroke: maroon;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
 text {
   font-size: 2em;
   font-family: sans-serif;

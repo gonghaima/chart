@@ -17,6 +17,8 @@ import { AUSTRALIA } from './AUSTRALIA';
 import { D3 } from './D3';
 import { D3BAR } from './D3BAR';
 import { D3LINE } from './D3LINE';
+import { D3LINESCATTERPLOT } from './D3LINESCATTERPLOT';
+
 import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
 import { D3World } from './D3World';
@@ -60,6 +62,9 @@ function App() {
         </Route>
         <Route path="/d3-line">
           <D3LINE />
+        </Route>
+        <Route path="/d3-line-scatter-plot">
+          <D3LINESCATTERPLOT />
         </Route>
         <Route path="/d3-world">
           <D3World />
