@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, extent, area, scaleLinear, scaleTime, axisLeft, axisBottom } from 'd3'
+import { csv, curveBasis, extent, area, scaleLinear, scaleTime, tickFormat, timeFormat, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -53,7 +53,9 @@ export const D3AREA = () => {
                 .attr('transform', `translate(${margin.left},${margin.top})`);
 
             const xAxis = axisBottom(xScale)
+                .ticks(6)
                 .tickSize(-innerHeight)
+                .tickFormat(timeFormat("%b %d"))
                 .tickPadding(15);
 
             const yAxis = axisLeft(yScale).tickSize(-innerWidth).tickPadding(10);
