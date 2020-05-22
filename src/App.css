@@ -14,18 +14,22 @@ html, body, #root, #root div {
 rect, circle {
   fill: red;
   opacity: 0.3;
-  opacity:1;
+  opacity: 1;
 }
 
 circle.d3line-circle {
   fill: steelblue;
 }
 
-.line-path{
-  fill:none;
+.line-path {
+  fill: none;
   stroke: maroon;
   stroke-width: 5;
   stroke-linejoin: round;
+}
+
+.area-path {
+  fill: maroon;
 }
 
 text {
