@@ -22,18 +22,20 @@ export const D3AREAPOPULATION = () => {
         // svg.attr('viewBox', "0 0 20 20");
 
         //https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv
+        //https://vizhub.com/curran/datasets/world-population-by-year-2015.csv
+        // csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(data => {});
 
-        csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(data => {
+        csv('https://vizhub.com/curran/datasets/world-population-by-year-2015.csv').then(data => {
             data.forEach(d => {
-                d.temperature = +d.temperature;
-                d.timestamp = new Date(d.timestamp);
+                d.population = +d.population * 1000;
+                d.year = new Date(d.year);
             });
 
             const title = "A Week in San Francisco";
-            const x = d => d.timestamp;
-            const y = d => d.temperature;
-            const xValue = xs => d => xs(d.timestamp);
-            const yValue = ys => d => ys(d.temperature);
+            const x = d => d.year;
+            const y = d => d.population;
+            const xValue = xs => d => xs(d.year);
+            const yValue = ys => d => ys(d.population);
             const circleRadius = 6;
             const xAxisLabel = "Time";
             const yAxisLabel = "Temperature";
@@ -42,11 +44,11 @@ export const D3AREAPOPULATION = () => {
             const innerHeight = height - margin.top - margin.bottom;
 
             const xScale = scaleTime()
-                .domain(extent(data, d => d.timestamp))
+                .domain(extent(data, d => d.year))
                 .range([0, innerWidth]);
 
             const yScale = scaleLinear()
-                .domain(extent(data, d => d.temperature))
+                .domain(extent(data, d => d.population))
                 .range([innerHeight, 0]).nice();
 
             const g = svg.append('g')
@@ -55,7 +57,7 @@ export const D3AREAPOPULATION = () => {
             const xAxis = axisBottom(xScale)
                 .ticks(6)
                 .tickSize(-innerHeight)
-                .tickFormat(timeFormat("%b %d"))
+                .tickFormat(timeFormat("%Y"))
                 .tickPadding(15);
 
             const yAxis = axisLeft(yScale).tickSize(-innerWidth).tickPadding(10);
