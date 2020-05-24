@@ -19,6 +19,7 @@ import { D3BAR } from './D3BAR';
 import { D3LINE } from './D3LINE';
 import { D3LINESCATTERPLOT } from './D3LINESCATTERPLOT';
 import { D3AREA } from './D3AREA';
+import { D3AREAPOPULATION } from './D3AREAPOPULATION';
 import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
 import { D3World } from './D3World';
@@ -68,6 +69,9 @@ function App() {
         </Route>
         <Route path="/d3-area">
           <D3AREA />
+        </Route>
+        <Route path="/d3-area-population">
+          <D3AREAPOPULATION />
         </Route>
         <Route path="/d3-world">
           <D3World />
