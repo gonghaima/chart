@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, extent, area, scaleLinear, scaleTime, tickFormat, timeFormat, axisLeft, axisBottom } from 'd3'
+import { csv, curveBasis, extent, area, scaleLinear, scaleTime, max, tickFormat, timeFormat, axisLeft, axisBottom } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -45,10 +45,11 @@ export const D3AREAPOPULATION = () => {
 
             const xScale = scaleTime()
                 .domain(extent(data, d => d.year))
-                .range([0, innerWidth]);
+                .range([0, innerWidth])
+                .nice();
 
             const yScale = scaleLinear()
-                .domain(extent(data, d => d.population))
+                .domain([0, max(data, y)])
                 .range([innerHeight, 0]).nice();
 
             const g = svg.append('g')
