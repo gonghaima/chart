@@ -98,9 +98,10 @@ export const D3AREAPOPULATION = () => {
                 .attr('class', 'area-path')
                 .attr('d', areaGenerator(data));
 
-            g.append('text')
+            svg.append('text')
                 .attr('class', 'title')
-                .attr('y', -10)
+                .attr('x', width/2)
+                .attr('y', 45)
                 .text(title);
         }).catch(err => {
         })

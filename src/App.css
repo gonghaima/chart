@@ -54,6 +54,7 @@ text {
 .title {
   font-size: 2.2em;
   fill: #615F5D;
+  text-anchor: middle;
 }
 
 @media (prefers-reduced-motion: no-preference) {
