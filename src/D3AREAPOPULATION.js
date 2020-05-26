@@ -55,6 +55,15 @@ export const D3AREAPOPULATION = () => {
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`);
 
+            const areaGenerator = area()
+                .x(xValue(xScale))
+                .y0(innerHeight)
+                .y1(yValue(yScale))
+                .curve(curveBasis);
+
+            g.append('path')
+                .attr('class', 'area-path')
+                .attr('d', areaGenerator(data));
 
             const xAxis = axisBottom(xScale)
                 .ticks(6)
@@ -89,18 +98,12 @@ export const D3AREAPOPULATION = () => {
                 .attr('fill', 'black')
                 .text(xAxisLabel);
 
-            const areaGenerator = area()
-                .x(xValue(xScale))
-                .y0(innerHeight)
-                .y1(yValue(yScale))
-                .curve(curveBasis);
-            g.append('path')
-                .attr('class', 'area-path')
-                .attr('d', areaGenerator(data));
 
-            g.append('text')
+
+            svg.append('text')
                 .attr('class', 'title')
-                .attr('y', -10)
+                .attr('x', width / 2)
+                .attr('y', 45)
                 .text(title);
         }).catch(err => {
         })
