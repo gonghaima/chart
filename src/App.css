@@ -11,6 +11,8 @@ html, body, #root, #root div {
   pointer-events: none;
 }
 
+/* include cicle for scatter plot */
+
 rect, circle {
   fill: red;
   opacity: 0.3;
@@ -19,6 +21,14 @@ rect, circle {
 
 circle.d3line-circle {
   fill: steelblue;
+}
+
+circle.basic-circle {
+  fill: yellow;
+}
+
+circle.eye, rect.eye-brow {
+  fill: black !important;
 }
 
 .line-path {

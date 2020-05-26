@@ -40,19 +40,20 @@ const Basic = () => {
         group.attr("transform", "translate(200, 200)");
 
         const circle = group.append('circle').attr('r', 200)
+            .attr('class', 'basic-circle')
             .attr('cx', faceXOffset)
             .attr('cy', faceYOffset)
             .attr('fill', "yellow")
             .attr('stroke', "black");
 
         const leftEye = group.append('circle')
+            .attr('class', 'eye')
             .attr('r', 30)
             .attr('cx', faceXOffset - eyeXOffset)
-            .attr('cy', faceYOffset - eyeYOffset)
-            .attr('fill', "yellow")
-            .attr('fill', "black");
+            .attr('cy', faceYOffset - eyeYOffset);
 
         const rightEye = group.append('circle')
+            .attr('class', 'eye')
             .attr('r', 30)
             .attr('cx', faceXOffset + eyeXOffset)
             .attr('cy', faceYOffset - eyeYOffset)
@@ -66,6 +67,7 @@ const Basic = () => {
             .transition().duration(2000).attr('transform', `translate(0, 0)`);
 
         const leftEyebrow = eyeBrowGroup.append('rect')
+            .attr('class', 'eye-brow')
             .attr('x', -eyeXOffset - eyebrowWidth / 2)
             .attr('y', leftEyebrowYOffset)
             .attr('width', eyebrowWidth)
@@ -73,11 +75,11 @@ const Basic = () => {
 
         const rightEyebrow = eyeBrowGroup
             .append('rect')
+            .attr('class', 'eye-brow')
             .attr('x', eyeXOffset - eyebrowWidth / 2)
             .attr('y', leftEyebrowYOffset)
             .attr('width', eyebrowWidth)
-            .attr('height', eyebrowHeight)
-            ;
+            .attr('height', eyebrowHeight);
 
 
         const g = group.append('g')
