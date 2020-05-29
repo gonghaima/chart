@@ -36,23 +36,26 @@ export const D3GENERALUPDATEPATTERN = () => {
         svg.attr('height', height);
         svg.attr('viewBox', "0 0 400 400");
 
+        const render = (selection, { fruits }) => {
+            selection
+                .selectAll('circle')
+                .data(fruits)
+                .enter()
+                .append('circle')
+                .attr('class', 'd3-pattern')
+                .attr('cx', (d, i) => i * 90 + 40)
+                .attr('cy', height / 2)
+                .attr('r', 40);
+
+            selection.selectAll('circle').data(fruits).exit().remove();
+        }
+
         const makeFruit = type => ({ type });
         const fruits = range(5).map(() => makeFruit('apple'));
-        console.log(fruits);
-        svg
-            .selectAll('circle')
-            .data(fruits)
-            .enter()
-            .append('circle')
-            .attr('class', 'd3-pattern')
-            .attr('cx', (d, i) => i * 90 + 40)
-            .attr('cy', height / 2)
-            .attr('r', 40);
+        render(svg, { fruits });
         // Eat an apple
         fruits.pop();
-
-        svg.selectAll('circle').data(fruits).exit().remove();
-
+        render(svg, { fruits });
     });
     return (
         <div>
