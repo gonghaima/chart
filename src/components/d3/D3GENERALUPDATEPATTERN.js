@@ -48,6 +48,12 @@ export const D3GENERALUPDATEPATTERN = () => {
             .attr('cx', (d, i) => i * 90 + 40)
             .attr('cy', height / 2)
             .attr('r', 40);
+        // Eat an apple
+        fruits.pop();
+
+        svg.selectAll('circle').data(fruits).exit()
+            .attr('class', 'd3-pattern-exit')
+            .attr('fill', 'black');
 
     });
     return (

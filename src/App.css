@@ -23,6 +23,11 @@ circle.d3-pattern {
   opacity: 1;
 }
 
+circle.d3-pattern-exit {
+  fill: black;
+  opacity: 1;
+}
+
 circle.d3line-circle {
   fill: steelblue;
 }
