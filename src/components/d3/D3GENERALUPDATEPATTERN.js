@@ -51,8 +51,11 @@ export const D3GENERALUPDATEPATTERN = () => {
 
     });
     return (
+        <div>
+            <h1>Bowl of Fruit - General Update Pattern</h1>
+            <div style={basicSvgStyle} ref={visEl}></div>
+        </div>
 
-        <div style={basicSvgStyle} ref={visEl}></div>
 
     )
 }
