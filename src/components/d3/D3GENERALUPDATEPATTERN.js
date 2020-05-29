@@ -51,9 +51,7 @@ export const D3GENERALUPDATEPATTERN = () => {
         // Eat an apple
         fruits.pop();
 
-        svg.selectAll('circle').data(fruits).exit()
-            .attr('class', 'd3-pattern-exit')
-            .attr('fill', 'black');
+        svg.selectAll('circle').data(fruits).exit().remove();
 
     });
     return (
