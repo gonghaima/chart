@@ -17,7 +17,7 @@ export const D3GENERALUPDATEPATTERN = () => {
         // const width = '100%';
         // const height = '100vh';
 
-        const width = '400';
+        const width = '600';
         const height = '400';
         const faceXOffset = 0;
         const faceYOffset = 0;
@@ -39,11 +39,23 @@ export const D3GENERALUPDATEPATTERN = () => {
         const makeFruit = type => ({ type });
         const fruits = range(5).map(() => makeFruit('apple'));
         console.log(fruits);
+        svg
+            .selectAll('circle')
+            .data(fruits)
+            .enter()
+            .append('circle')
+            .attr('class', 'd3-pattern')
+            .attr('cx', (d, i) => i * 90 + 40)
+            .attr('cy', height / 2)
+            .attr('r', 40);
 
     });
     return (
+        <div>
+            <h1>Bowl of Fruit - General Update Pattern</h1>
+            <div style={basicSvgStyle} ref={visEl}></div>
+        </div>
 
-        <div style={basicSvgStyle} ref={visEl}></div>
 
     )
 }

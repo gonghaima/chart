@@ -15,7 +15,11 @@ html, body, #root, #root div {
 
 rect, circle {
   fill: red;
-  opacity: 0.3;
+  opacity: 1;
+}
+
+circle.d3-pattern {
+  fill: #c11d1d;
   opacity: 1;
 }
 
