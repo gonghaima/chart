@@ -37,17 +37,17 @@ export const D3GENERALUPDATEPATTERN = () => {
         svg.attr('viewBox', "0 0 400 400");
 
         const render = (selection, { fruits }) => {
-            selection
+            const circles = selection
                 .selectAll('circle')
-                .data(fruits)
-                .enter()
+                .data(fruits);
+            circles.enter()
                 .append('circle')
                 .attr('class', 'd3-pattern')
                 .attr('cx', (d, i) => i * 90 + 40)
                 .attr('cy', height / 2)
                 .attr('r', 40);
 
-            selection.selectAll('circle').data(fruits).exit().remove();
+            circles.exit().remove();
         }
 
         const makeFruit = type => ({ type });
