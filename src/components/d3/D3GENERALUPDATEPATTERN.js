@@ -53,9 +53,12 @@ export const D3GENERALUPDATEPATTERN = () => {
         const makeFruit = type => ({ type });
         const fruits = range(5).map(() => makeFruit('apple'));
         render(svg, { fruits });
-        // Eat an apple
-        fruits.pop();
-        render(svg, { fruits });
+
+        // Eat an apple.
+        setTimeout(() => {
+            fruits.pop();
+            render(svg, { fruits });
+        }, 1000);
     });
     return (
         <div>
