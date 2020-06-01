@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { range } from 'd3';
+import { range, scaleOrdinal } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -29,6 +29,10 @@ export const D3GENERALUPDATEPATTERN = () => {
         const leftEyebrowYOffset = -105;
         const rightEyebrowYOffset = 15;
 
+        const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
+
+        const radiusScale = scaleOrdinal().domain(['apple', 'lemon']).range([30, 20]);
+
         const svg = d3
             .select(visEl.current)
             .append('svg');
@@ -37,25 +41,40 @@ export const D3GENERALUPDATEPATTERN = () => {
         svg.attr('viewBox', "0 0 400 400");
 
         const render = (selection, { fruits }) => {
-            selection
+            const circles = selection
                 .selectAll('circle')
-                .data(fruits)
-                .enter()
+                .data(fruits);
+            circles.enter()
                 .append('circle')
-                .attr('class', 'd3-pattern')
+                // .attr('class', 'd3-pattern')
                 .attr('cx', (d, i) => i * 90 + 40)
                 .attr('cy', height / 2)
-                .attr('r', 40);
+                .attr('fill', d => colorScale(d.type))
+                .attr('r', d => radiusScale(d.type))
 
-            selection.selectAll('circle').data(fruits).exit().remove();
+
+            circles
+                .attr('fill', d => colorScale(d.type))
+                .attr('r', d => radiusScale(d.type))
+
+            circles.exit().remove();
         }
 
         const makeFruit = type => ({ type });
         const fruits = range(5).map(() => makeFruit('apple'));
         render(svg, { fruits });
-        // Eat an apple
-        fruits.pop();
-        render(svg, { fruits });
+
+        // Eat an apple.
+        setTimeout(() => {
+            fruits.pop();
+            render(svg, { fruits });
+        }, 1000);
+
+        //Replacing an apple with a lemon
+        setTimeout(() => {
+            fruits[2].type = 'lemon';
+            render(svg, { fruits });
+        }, 2000);
     });
     return (
         <div>
