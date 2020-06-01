@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { range } from 'd3';
+import { range, scaleOrdinal } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -29,6 +29,10 @@ export const D3GENERALUPDATEPATTERN = () => {
         const leftEyebrowYOffset = -105;
         const rightEyebrowYOffset = 15;
 
+        const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
+
+        const radiusScale = scaleOrdinal().domain(['apple', 'lemon']).range([30, 20]);
+
         const svg = d3
             .select(visEl.current)
             .append('svg');
@@ -45,8 +49,13 @@ export const D3GENERALUPDATEPATTERN = () => {
                 // .attr('class', 'd3-pattern')
                 .attr('cx', (d, i) => i * 90 + 40)
                 .attr('cy', height / 2)
-                .attr('fill','#c11d1d')
-                .attr('r', 40);
+                .attr('fill', d => colorScale(d.type))
+                .attr('r', d => radiusScale(d.type))
+
+
+            circles
+                .attr('fill', d => colorScale(d.type))
+                .attr('r', d => radiusScale(d.type))
 
             circles.exit().remove();
         }
