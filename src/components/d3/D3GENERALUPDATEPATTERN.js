@@ -42,9 +42,10 @@ export const D3GENERALUPDATEPATTERN = () => {
                 .data(fruits);
             circles.enter()
                 .append('circle')
-                .attr('class', 'd3-pattern')
+                // .attr('class', 'd3-pattern')
                 .attr('cx', (d, i) => i * 90 + 40)
                 .attr('cy', height / 2)
+                .attr('fill','#c11d1d')
                 .attr('r', 40);
 
             circles.exit().remove();
@@ -59,6 +60,12 @@ export const D3GENERALUPDATEPATTERN = () => {
             fruits.pop();
             render(svg, { fruits });
         }, 1000);
+
+        //Replacing an apple with a lemon
+        setTimeout(() => {
+            fruits[2].type = 'lemon';
+            render(svg, { fruits });
+        }, 2000);
     });
     return (
         <div>

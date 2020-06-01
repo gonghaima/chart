@@ -13,7 +13,7 @@ html, body, #root, #root div {
 
 /* include cicle for scatter plot */
 
-rect, circle {
+/* rect, circle {
   fill: red;
   opacity: 1;
 }
@@ -21,7 +21,7 @@ rect, circle {
 circle.d3-pattern {
   fill: #c11d1d;
   opacity: 1;
-}
+} */
 
 circle.d3-pattern-exit {
   fill: black;
