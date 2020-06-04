@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
+import { fruitBowl } from './lib/fruitBowl';
 
 import * as d3 from 'd3'
-import { range, scaleOrdinal } from 'd3';
+import { range } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -29,9 +30,7 @@ export const D3GENERALUPDATEPATTERN = () => {
         const leftEyebrowYOffset = -105;
         const rightEyebrowYOffset = 15;
 
-        const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
 
-        const radiusScale = scaleOrdinal().domain(['apple', 'lemon']).range([30, 20]);
 
         const svg = d3
             .select(visEl.current)
@@ -40,35 +39,19 @@ export const D3GENERALUPDATEPATTERN = () => {
         svg.attr('height', height);
         svg.attr('viewBox', "0 0 400 400");
 
-        const render = (selection, { fruits }) => {
-            const circles = selection
-                .selectAll('circle')
-                .data(fruits);
-            circles.enter()
-                .append('circle')
-                // .attr('class', 'd3-pattern')
-                .attr('cx', (d, i) => i * 90 + 40)
-                .attr('cy', height / 2)
-                .merge(circles)
-                .attr('fill', d => colorScale(d.type))
-                .attr('r', d => radiusScale(d.type))
 
-
-            // circles
-            //     .attr('fill', d => colorScale(d.type))
-            //     .attr('r', d => radiusScale(d.type))
-
-            circles.exit().remove();
+        const render = () => {
+            fruitBowl(svg, { fruits, height });
         }
 
         const makeFruit = type => ({ type });
         const fruits = range(5).map(() => makeFruit('apple'));
-        render(svg, { fruits });
+        render();
 
         // Eat an apple.
         setTimeout(() => {
             fruits.pop();
-            render(svg, { fruits });
+            render();
         }, 1000);
 
         //Replacing an apple with a lemon
