@@ -45,7 +45,7 @@ export const D3GENERALUPDATEPATTERN = () => {
         }
 
         const makeFruit = type => ({ type });
-        const fruits = range(5).map(() => makeFruit('apple'));
+        let fruits = range(5).map(() => makeFruit('apple'));
         render();
 
         // Eat an apple.
@@ -59,6 +59,12 @@ export const D3GENERALUPDATEPATTERN = () => {
             fruits[2].type = 'lemon';
             render(svg, { fruits });
         }, 2000);
+
+        // Eat another apple.
+        setTimeout(() => {
+            fruits = fruits.filter((d, i) => i !== 1);
+            render();
+        }, 3000);
     });
     return (
         <div>
