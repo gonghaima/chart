@@ -16,8 +16,10 @@ export const fruitBowl = (selection, props) => {
         // .attr('class', 'd3-pattern')
         .attr('cx', (d, i) => i * 90 + 40)
         .attr('cy', height / 2)
+        // .attr('r', 0)
         .merge(circles)
         .attr('fill', d => colorScale(d.type))
+        .transition()
         .attr('r', d => radiusScale(d.type))
 
 
