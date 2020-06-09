@@ -19,7 +19,7 @@ export const fruitBowl = (selection, props) => {
         // .attr('r', 0)
         .merge(circles)
         .attr('fill', d => colorScale(d.type))
-        .transition()
+        .transition().duration(1000)
         .attr('r', d => radiusScale(d.type))
 
 
