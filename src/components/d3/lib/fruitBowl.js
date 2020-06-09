@@ -6,21 +6,23 @@ const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '
 
 const radiusScale = scaleOrdinal().domain(['apple', 'lemon']).range([30, 20]);
 
+const xPosition = (d, i) => i * 90 + 40;
+
 export const fruitBowl = (selection, props) => {
     const { fruits, height } = props;
     const circles = selection
         .selectAll('circle')
-        .data(fruits, d=>d.id);
+        .data(fruits, d => d.id);
     circles.enter()
         .append('circle')
         // .attr('class', 'd3-pattern')
-        .attr('cx', (d, i) => i * 90 + 40)
+        .attr('cx', xPosition)
         .attr('cy', height / 2)
         // .attr('r', 0)
         .merge(circles)
         .attr('fill', d => colorScale(d.type))
         .transition().duration(1000)
-        .attr('cx', (d, i) => i * 90 + 40)
+        .attr('cx', xPosition)
         .attr('r', d => radiusScale(d.type))
 
 
