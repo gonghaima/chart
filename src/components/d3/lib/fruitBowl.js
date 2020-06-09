@@ -10,7 +10,7 @@ export const fruitBowl = (selection, props) => {
     const { fruits, height } = props;
     const circles = selection
         .selectAll('circle')
-        .data(fruits);
+        .data(fruits, d=>d.id);
     circles.enter()
         .append('circle')
         // .attr('class', 'd3-pattern')
@@ -20,6 +20,7 @@ export const fruitBowl = (selection, props) => {
         .merge(circles)
         .attr('fill', d => colorScale(d.type))
         .transition().duration(1000)
+        .attr('cx', (d, i) => i * 90 + 40)
         .attr('r', d => radiusScale(d.type))
 
 

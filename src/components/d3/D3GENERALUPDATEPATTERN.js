@@ -44,7 +44,7 @@ export const D3GENERALUPDATEPATTERN = () => {
             fruitBowl(svg, { fruits, height });
         }
 
-        const makeFruit = type => ({ type });
+        const makeFruit = type => ({ type, id: Math.random() });
         let fruits = range(5).map(() => makeFruit('apple'));
         render();
 
