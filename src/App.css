@@ -56,6 +56,12 @@ text {
   font-family: sans-serif;
 }
 
+text.nested-element {
+  font-size: 1em;
+  text-anchor: middle;
+  font-family: sans-serif;
+}
+
 .tick text {
   font-size: 1.7em;
   fill: #635f5d;
