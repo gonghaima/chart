@@ -10,6 +10,16 @@ const xPosition = (d, i) => i * 90 + 40;
 
 export const fruitBowl = (selection, props) => {
     const { fruits, height } = props;
+    const groups = selection
+        .selectAll('g')
+        .data(fruits, d => d.id);
+    groups.enter().append('g')
+        .merge(groups)
+        .attr('transform', (d, i) => `translate(${i * 90 + 40}, ${height / 2})`);
+
+    groups.exit().remove();
+
+
     const circles = selection
         .selectAll('circle')
         .data(fruits, d => d.id);
