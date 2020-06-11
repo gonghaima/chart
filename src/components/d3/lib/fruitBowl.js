@@ -26,9 +26,15 @@ export const fruitBowl = (selection, props) => {
         .attr('r', d => radiusScale(d.type))
 
 
-    // circles
-    //     .attr('fill', d => colorScale(d.type))
-    //     .attr('r', d => radiusScale(d.type))
+    const text = selection.selectAll('text').data(fruits);
+    text.enter().append('text')
+        .attr('class', 'nested-element')
+        .attr('x', xPosition)
+        .attr('y', height / 2 + 50)
+        .merge(text)
+        .text(d => d.type);
+    text.exit().remove();
+
 
     circles.exit()
         .transition().duration(1000).attr('r', 0)
