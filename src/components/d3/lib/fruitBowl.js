@@ -19,15 +19,11 @@ export const fruitBowl = (selection, props) => {
 
     groups.exit().remove();
 
-
-
-
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
             .attr('r', d => radiusScale(d.type))
             .attr('fill', d => colorScale(d.type))
             .transition().duration(1000)
-
 
     const text = selection.selectAll('text').data(fruits);
     text.enter().append('text')
