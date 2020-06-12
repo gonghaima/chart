@@ -13,27 +13,20 @@ export const fruitBowl = (selection, props) => {
     const groups = selection
         .selectAll('g')
         .data(fruits, d => d.id);
-    groups.enter().append('g')
-        .merge(groups)
+    const groupsEnter = groups.enter().append('g');
+    groupsEnter.merge(groups)
         .attr('transform', (d, i) => `translate(${i * 90 + 40}, ${height / 2})`);
 
     groups.exit().remove();
 
 
-    const circles = selection
-        .selectAll('circle')
-        .data(fruits, d => d.id);
-    circles.enter()
-        .append('circle')
-        // .attr('class', 'd3-pattern')
-        .attr('cx', xPosition)
-        .attr('cy', height / 2)
-        // .attr('r', 0)
-        .merge(circles)
-        .attr('fill', d => colorScale(d.type))
-        .transition().duration(1000)
-        .attr('cx', xPosition)
-        .attr('r', d => radiusScale(d.type))
+
+
+    groupsEnter.append('circle')
+        .merge(groups.select('circle'))
+            .attr('r', d => radiusScale(d.type))
+            .attr('fill', d => colorScale(d.type))
+            .transition().duration(1000)
 
 
     const text = selection.selectAll('text').data(fruits);
@@ -44,9 +37,4 @@ export const fruitBowl = (selection, props) => {
         .merge(text)
         .text(d => d.type);
     text.exit().remove();
-
-
-    circles.exit()
-        .transition().duration(1000).attr('r', 0)
-        .remove();
 }
