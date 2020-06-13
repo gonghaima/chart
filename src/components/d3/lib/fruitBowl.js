@@ -15,9 +15,12 @@ export const fruitBowl = (selection, props) => {
         .data(fruits, d => d.id);
     const groupsEnter = groups.enter().append('g');
     groupsEnter.merge(groups)
+        .transition().duration(1000)
         .attr('transform', (d, i) => `translate(${i * 90 + 40}, ${height / 2})`);
 
     groups.exit().remove();
+    // groups.exit().transition().duration(1000).remove();
+
 
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
