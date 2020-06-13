@@ -21,16 +21,22 @@ export const fruitBowl = (selection, props) => {
 
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
-            .attr('r', d => radiusScale(d.type))
-            .attr('fill', d => colorScale(d.type))
-            .transition().duration(1000)
+        .attr('r', d => radiusScale(d.type))
+        .attr('fill', d => colorScale(d.type))
+        .transition().duration(1000);
 
-    const text = selection.selectAll('text').data(fruits);
-    text.enter().append('text')
+    groupsEnter.append('text')
+        .merge(groups.select('text'))
         .attr('class', 'nested-element')
-        .attr('x', xPosition)
-        .attr('y', height / 2 + 50)
-        .merge(text)
-        .text(d => d.type);
-    text.exit().remove();
+        .text(d => d.type)
+        .attr('y', 50);
+
+    // const text = selection.selectAll('text').data(fruits);
+    // text.enter().append('text')
+    //     .attr('class', 'nested-element')
+    //     .attr('x', xPosition)
+    //     .attr('y', height / 2 + 50)
+    //     .merge(text)
+    //     .text(d => d.type);
+    // text.exit().remove();
 }
