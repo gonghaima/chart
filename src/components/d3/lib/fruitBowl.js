@@ -10,33 +10,36 @@ const xPosition = (d, i) => i * 90 + 40;
 
 export const fruitBowl = (selection, props) => {
     const { fruits, height } = props;
-    const circles = selection
-        .selectAll('circle')
+    const groups = selection
+        .selectAll('g')
         .data(fruits, d => d.id);
-    circles.enter()
-        .append('circle')
-        // .attr('class', 'd3-pattern')
-        .attr('cx', xPosition)
-        .attr('cy', height / 2)
-        // .attr('r', 0)
-        .merge(circles)
-        .attr('fill', d => colorScale(d.type))
+    const groupsEnter = groups.enter().append('g');
+    groupsEnter.merge(groups)
         .transition().duration(1000)
-        .attr('cx', xPosition)
+        .attr('transform', (d, i) => `translate(${i * 90 + 40}, ${height / 2})`);
+
+    groups.exit().remove();
+    // groups.exit().transition().duration(1000).remove();
+
+
+    groupsEnter.append('circle')
+        .merge(groups.select('circle'))
         .attr('r', d => radiusScale(d.type))
+        .attr('fill', d => colorScale(d.type))
+        .transition().duration(1000);
 
-
-    const text = selection.selectAll('text').data(fruits);
-    text.enter().append('text')
+    groupsEnter.append('text')
+        .merge(groups.select('text'))
         .attr('class', 'nested-element')
-        .attr('x', xPosition)
-        .attr('y', height / 2 + 50)
-        .merge(text)
-        .text(d => d.type);
-    text.exit().remove();
+        .text(d => d.type)
+        .attr('y', 50);
 
-
-    circles.exit()
-        .transition().duration(1000).attr('r', 0)
-        .remove();
+    // const text = selection.selectAll('text').data(fruits);
+    // text.enter().append('text')
+    //     .attr('class', 'nested-element')
+    //     .attr('x', xPosition)
+    //     .attr('y', height / 2 + 50)
+    //     .merge(text)
+    //     .text(d => d.type);
+    // text.exit().remove();
 }
