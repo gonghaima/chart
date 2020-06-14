@@ -10,6 +10,16 @@ const xPosition = (d, i) => i * 90 + 40;
 
 export const fruitBowl = (selection, props) => {
     const { fruits, height } = props;
+
+    const bowl = selection.selectAll('rect')
+        .data([null])
+        .enter()
+        .append('rect')
+        .attr('y', 110)
+        .attr('width', 450)
+        .attr('height', 200)
+        .attr('rx', 100)
+
     const groups = selection
         .selectAll('g')
         .data(fruits, d => d.id);
