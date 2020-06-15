@@ -51,6 +51,10 @@ circle.eye, rect.eye-brow {
   fill: maroon;
 }
 
+rect {
+  fill: #e5ddbc;
+}
+
 text {
   font-size: 2em;
   font-family: sans-serif;
