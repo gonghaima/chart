@@ -22,7 +22,8 @@ import { D3AREA } from './D3AREA';
 import { D3AREAPOPULATION } from './D3AREAPOPULATION';
 import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
-import {D3GENERALUPDATEPATTERN} from './components/d3/D3GENERALUPDATEPATTERN';
+import { D3GENERALUPDATEPATTERN } from './components/d3/D3GENERALUPDATEPATTERN';
+import { D3CLICK } from './components/d3/D3CLICK';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
 import { Pie } from './Pie';
@@ -76,6 +77,9 @@ function App() {
         </Route>
         <Route path="/d3-general-update-pattern">
           <D3GENERALUPDATEPATTERN />
+        </Route>
+        <Route path="/d3-click">
+          <D3CLICK />
         </Route>
         <Route path="/d3-world">
           <D3World />
