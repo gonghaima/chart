@@ -13,12 +13,13 @@ export const fruitBowlWithClickEvent = (selection, props) => {
         .data(fruits);
     circles.enter()
         .append('circle')
-        // .attr('class', 'd3-pattern')
-        .attr('cx', (d, i) => i * 90 + 40)
-        .attr('cy', height / 2)
-        // .attr('r', 0)
+            .attr('cx', (d, i) => i * 90 + 40)
+            .attr('cy', height / 2)
         .merge(circles)
-        .attr('fill', d => colorScale(d.type))
+            .attr('fill', d => colorScale(d.type))
+            .on('click',()=>{
+                console.log('clicked');
+            })
         .transition().duration(1000)
         .attr('r', d => radiusScale(d.type))
 
