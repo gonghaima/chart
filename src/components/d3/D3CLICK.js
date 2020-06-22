@@ -39,13 +39,21 @@ export const D3CLICK = () => {
         svg.attr('height', height);
         svg.attr('viewBox', "0 0 400 400");
 
-
-        const render = () => {
-            fruitBowlWithClickEvent(svg, { fruits, height });
-        }
-
         const makeFruit = type => ({ type, id: Math.random() });
         let fruits = range(5).map(() => makeFruit('apple'));
+        let selectedFruit = null;
+
+        const render = () => {
+            console.log(selectedFruit);
+
+            fruitBowlWithClickEvent(svg, { fruits, height, onClick });
+        }
+
+        const onClick = id => {
+            selectedFruit = id;
+            render();
+        }
+
         render();
 
         // Eat an apple.
