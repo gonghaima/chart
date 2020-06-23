@@ -46,7 +46,8 @@ export const D3CLICK = () => {
         const render = () => {
             console.log(selectedFruit);
 
-            fruitBowlWithClickEvent(svg, { fruits, height, onClick });
+
+            fruitBowlWithClickEvent(svg, { fruits, height, onClick, selectedFruit });
         }
 
         const onClick = id => {
