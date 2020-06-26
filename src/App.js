@@ -24,6 +24,7 @@ import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
 import { D3GENERALUPDATEPATTERN } from './components/d3/D3GENERALUPDATEPATTERN';
 import { D3CLICK } from './components/d3/D3CLICK';
+import { D3HOVER } from './components/d3/D3HOVER';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
 import { Pie } from './Pie';
@@ -80,6 +81,9 @@ function App() {
         </Route>
         <Route path="/d3-click">
           <D3CLICK />
+        </Route>
+        <Route path="/d3-hover">
+          <D3HOVER />
         </Route>
         <Route path="/d3-world">
           <D3World />
