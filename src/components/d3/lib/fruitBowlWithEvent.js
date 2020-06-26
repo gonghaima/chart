@@ -6,8 +6,8 @@ const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '
 
 const radiusScale = scaleOrdinal().domain(['apple', 'lemon']).range([30, 20]);
 
-export const fruitBowlWithClickEvent = (selection, props) => {
-    const { fruits, height, onClick, selectedFruit } = props;
+export const fruitBowlWithEvent = (selection, props) => {
+    const { fruits, height, setSelectedFruit, selectedFruit } = props;
     const circles = selection
         .selectAll('circle')
         .data(fruits);
@@ -21,7 +21,7 @@ export const fruitBowlWithClickEvent = (selection, props) => {
         .attr('fill', d => colorScale(d.type))
         .attr('stroke-width', 5)
         .attr('stroke', d => d.id === selectedFruit ? 'black' : 'none')
-        .on('click', d => onClick(d.id))
+        .on('click', d => setSelectedFruit(d.id))
 
         .transition().duration(1000)
         .attr('r', d => radiusScale(d.type))

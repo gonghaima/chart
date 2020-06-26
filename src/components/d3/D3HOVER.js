@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { fruitBowlWithClickEvent } from './lib/fruitBowlWithClickEvent';
+import { fruitBowlWithEvent } from './lib/fruitBowlWithEvent';
 
 import * as d3 from 'd3'
 import { range } from 'd3';
@@ -43,16 +43,14 @@ export const D3HOVER = () => {
         let fruits = range(5).map(() => makeFruit('apple'));
         let selectedFruit = null;
 
-        const render = () => {
-            console.log(selectedFruit);
-
-
-            fruitBowlWithClickEvent(svg, { fruits, height, onClick, selectedFruit });
-        }
-
-        const onClick = id => {
+        const setSelectedFruit = id => {
             selectedFruit = id;
             render();
+        }
+
+        const render = () => {
+            console.log(selectedFruit);
+            fruitBowlWithEvent(svg, { fruits, height, setSelectedFruit, selectedFruit });
         }
 
         render();
@@ -75,6 +73,7 @@ export const D3HOVER = () => {
             render();
         }, 3000);
     });
+
     return (
         <div>
             <h1>Bowl of Fruit - hover</h1>

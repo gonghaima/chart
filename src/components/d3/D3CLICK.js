@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { fruitBowlWithClickEvent } from './lib/fruitBowlWithClickEvent';
+import { fruitBowlWithEvent } from './lib/fruitBowlWithEvent';
 
 import * as d3 from 'd3'
 import { range } from 'd3';
@@ -45,9 +45,7 @@ export const D3CLICK = () => {
 
         const render = () => {
             console.log(selectedFruit);
-
-
-            fruitBowlWithClickEvent(svg, { fruits, height, onClick, selectedFruit });
+            fruitBowlWithEvent(svg, { fruits, height, onClick, selectedFruit });
         }
 
         const onClick = id => {
