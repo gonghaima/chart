@@ -21,7 +21,8 @@ export const fruitBowlWithHoverEvent = (selection, props) => {
         .attr('fill', d => colorScale(d.type))
         .attr('stroke-width', 5)
         .attr('stroke', d => d.id === selectedFruit ? 'black' : 'none')
-        .on('click', d => setSelectedFruit(d.id))
+        .on('mouseover', d => setSelectedFruit(d.id))
+        .on('mouseout', () => setSelectedFruit(null))
 
         .transition().duration(1000)
         .attr('r', d => radiusScale(d.type))
