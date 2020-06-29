@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { arc } from 'd3';
+import { arc, json } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -13,9 +13,19 @@ const basicSvgStyle = {
 export const D3WORLDMAP = () => {
     const visEl = useRef(null);
 
+
+
+    // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+
     useEffect(() => {
         // const width = '100%';
         // const height = '100vh';
+        json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
+            console.log(`logging data...`);
+
+            console.log(data);
+
+        })
 
         const width = '400';
         const height = '400';
