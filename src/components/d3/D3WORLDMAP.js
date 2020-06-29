@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { arc } from 'd3';
+import { arc, json, geoPath, geoMercator } from 'd3';
+import { feature } from "topojson";
 
 const basicSvgStyle = {
     height: '100vh',
@@ -12,22 +13,21 @@ const basicSvgStyle = {
 
 export const D3WORLDMAP = () => {
     const visEl = useRef(null);
+    // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
 
     useEffect(() => {
         // const width = '100%';
         // const height = '100vh';
+        json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
+            console.log(`logging data...`);
+            const countries = feature(data, data.objects.countries);
+
+            console.log(countries);
+
+        })
 
         const width = '400';
         const height = '400';
-        const faceXOffset = 0;
-        const faceYOffset = 0;
-        const eyeXOffset = 90;
-        const eyeYOffset = 50;
-
-        const eyebrowWidth = 70;
-        const eyebrowHeight = 15;
-        const leftEyebrowYOffset = -105;
-        const rightEyebrowYOffset = 15;
 
         const svg = d3
             .select(visEl.current)
@@ -39,63 +39,10 @@ export const D3WORLDMAP = () => {
         const group = svg.append('g');
         group.attr("transform", "translate(200, 200)");
 
-        const circle = group.append('circle').attr('r', 200)
-            .attr('class', 'basic-circle')
-            .attr('cx', faceXOffset)
-            .attr('cy', faceYOffset)
-            .attr('fill', "yellow")
-            .attr('stroke', "black");
 
-        const leftEye = group.append('circle')
-            .attr('class', 'eye')
-            .attr('r', 30)
-            .attr('cx', faceXOffset - eyeXOffset)
-            .attr('cy', faceYOffset - eyeYOffset);
-
-        const rightEye = group.append('circle')
-            .attr('class', 'eye')
-            .attr('r', 30)
-            .attr('cx', faceXOffset + eyeXOffset)
-            .attr('cy', faceYOffset - eyeYOffset)
-            .attr('fill', "yellow")
-            .attr('fill', "black");
-
-        const eyeBrowGroup = group.append('g');
-
-        eyeBrowGroup
-            .transition().duration(2000).attr('transform', `translate(0, ${leftEyebrowYOffset + 80})`)
-            .transition().duration(2000).attr('transform', `translate(0, 0)`);
-
-        const leftEyebrow = eyeBrowGroup.append('rect')
-            .attr('class', 'eye-brow')
-            .attr('x', -eyeXOffset - eyebrowWidth / 2)
-            .attr('y', leftEyebrowYOffset)
-            .attr('width', eyebrowWidth)
-            .attr('height', eyebrowHeight);
-
-        const rightEyebrow = eyeBrowGroup
-            .append('rect')
-            .attr('class', 'eye-brow')
-            .attr('x', eyeXOffset - eyebrowWidth / 2)
-            .attr('y', leftEyebrowYOffset)
-            .attr('width', eyebrowWidth)
-            .attr('height', eyebrowHeight);
-
-
-        const g = group.append('g')
-            .attr('transform', `translate(${width},translate(${height})`);
-        const mouth = g.append('path')
-            .attr('d', arc()({
-                innerRadius: 130,
-                outerRadius: 150,
-                startAngle: Math.PI / 2,
-                endAngle: Math.PI * 3 / 2
-            }));
     });
     return (
-
         <div style={basicSvgStyle} ref={visEl}></div>
-
     )
 }
 
