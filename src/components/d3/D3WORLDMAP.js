@@ -15,6 +15,9 @@ export const D3WORLDMAP = () => {
     const visEl = useRef(null);
     // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
 
+    const projection = geoMercator();
+    const pathGenerator = geoPath().projection(projection);
+
     useEffect(() => {
         // const width = '100%';
         // const height = '100vh';
@@ -23,6 +26,10 @@ export const D3WORLDMAP = () => {
             const countries = feature(data, data.objects.countries);
 
             console.log(countries);
+
+            const paths = svg.selectAll('path').data(countries.features);
+            paths.enter().append('path')
+                .attr('d', d => pathGenerator(d));
 
         })
 
