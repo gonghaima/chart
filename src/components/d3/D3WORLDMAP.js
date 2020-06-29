@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { arc, json } from 'd3';
+import { arc, json, geoPath, geoMercator } from 'd3';
+import { feature } from "topojson";
 
 const basicSvgStyle = {
     height: '100vh',
@@ -12,9 +13,6 @@ const basicSvgStyle = {
 
 export const D3WORLDMAP = () => {
     const visEl = useRef(null);
-
-
-
     // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
 
     useEffect(() => {
@@ -22,8 +20,9 @@ export const D3WORLDMAP = () => {
         // const height = '100vh';
         json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
             console.log(`logging data...`);
+            const countries = feature(data, data.objects.countries);
 
-            console.log(data);
+            console.log(countries);
 
         })
 
