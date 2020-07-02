@@ -27,9 +27,10 @@ export const D3WORLDMAP = () => {
 
             console.log(countries);
 
-            const paths = svg.selectAll('path').data(countries.features);
-            paths.enter().append('path')
-                .attr('d', d => pathGenerator(d));
+            svg.selectAll('path')
+                .data(countries.features)
+                .enter().append('path')
+                .attr('d', pathGenerator);
 
         })
 
