@@ -34,7 +34,7 @@ export const D3WORLDMAP = () => {
 
         })
 
-        const width = '400';
+        const width = '800';
         const height = '400';
 
         const svg = d3
@@ -42,7 +42,7 @@ export const D3WORLDMAP = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
-        svg.attr('viewBox', "0 0 400 400");
+        svg.attr('viewBox', "0 0 1000 800");
 
         const group = svg.append('g');
         group.attr("transform", "translate(200, 200)");
