@@ -19,8 +19,11 @@ export const D3WORLDMAP = () => {
     const pathGenerator = geoPath().projection(projection);
 
     useEffect(() => {
-        // const width = '100%';
-        // const height = '100vh';
+        const svg = d3
+            .select(visEl.current)
+            .append('svg')
+            .attr('class', 'd3-world-map-svg');
+
         json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
             console.log(`logging data...`);
             const countries = feature(data, data.objects.countries);
@@ -30,16 +33,15 @@ export const D3WORLDMAP = () => {
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
+                .attr('class', 'd3-world-map-path')
                 .attr('d', pathGenerator);
 
         })
 
         const width = '800';
-        const height = '400';
+        const height = '600';
 
-        const svg = d3
-            .select(visEl.current)
-            .append('svg');
+
         svg.attr('width', width);
         svg.attr('height', height);
         svg.attr('viewBox', "0 0 1000 800");
