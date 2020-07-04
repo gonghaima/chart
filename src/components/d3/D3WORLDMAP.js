@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { arc, json, geoPath, geoMercator } from 'd3';
+import { arc, json, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1 } from 'd3';
 import { feature } from "topojson";
 
 const basicSvgStyle = {
@@ -15,7 +15,10 @@ export const D3WORLDMAP = () => {
     const visEl = useRef(null);
     // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
 
-    const projection = geoMercator();
+    // const projection = geoMercator();
+    // const projection = geoOrthographic();
+    // const projection = geoEquirectangular();
+    const projection = geoNaturalEarth1();
     const pathGenerator = geoPath().projection(projection);
 
     useEffect(() => {
