@@ -23,14 +23,20 @@ circle.d3-pattern {
   opacity: 1;
 } */
 
-.d3-world-map-path {
+.sphere {
+  fill: #4242e4;
+  stroke: black;
+  stroke-opacity: 0.1;
+}
+
+.country {
   fill: lightgreen;
   stroke: black;
   stroke-opacity: 0.1;
 }
 
 .d3-world-map-svg {
-  background-color: darkblue;
+  background-color: lightgrey;
 }
 
 circle.d3-pattern-exit {

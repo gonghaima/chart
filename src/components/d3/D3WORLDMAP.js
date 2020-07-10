@@ -26,6 +26,7 @@ export const D3WORLDMAP = () => {
             .select(visEl.current)
             .append('svg')
             .attr('class', 'd3-world-map-svg');
+       
 
         json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
             console.log(`logging data...`);
@@ -33,10 +34,14 @@ export const D3WORLDMAP = () => {
 
             console.log(countries);
 
+            svg.append('path')
+                .attr('class', 'sphere')
+                .attr('d', pathGenerator({ type: "Sphere" }));
+
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
-                .attr('class', 'd3-world-map-path')
+                .attr('class', 'country')
                 .attr('d', pathGenerator);
 
         })
