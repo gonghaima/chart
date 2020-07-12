@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { arc, json, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1 } from 'd3';
+import { arc, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1 } from 'd3';
 import { feature } from "topojson";
 
 const basicSvgStyle = {
@@ -13,11 +13,6 @@ const basicSvgStyle = {
 
 export const D3WORLDMAPINTERACTION = () => {
     const visEl = useRef(null);
-    // json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-
-    // const projection = geoMercator();
-    // const projection = geoOrthographic();
-    // const projection = geoEquirectangular();
     const projection = geoNaturalEarth1();
     const pathGenerator = geoPath().projection(projection);
 
@@ -27,10 +22,17 @@ export const D3WORLDMAPINTERACTION = () => {
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
-
-        json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
-            console.log(`logging data...`);
-            const countries = feature(data, data.objects.countries);
+        Promise.all([
+            tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/110m.tsv'),
+            json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        ]).then(([tsvData, topoJSONdata]) => {
+            console.log(tsvData);
+            console.log(topoJSONdata);
+            const countryName = {};
+            tsvData.map(d => {
+                countryName[d.iso_n3] = d.name;
+            })
+            const countries = feature(topoJSONdata, topoJSONdata.objects.countries);
 
             console.log(countries);
 
@@ -41,10 +43,15 @@ export const D3WORLDMAPINTERACTION = () => {
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
-                    .attr('class', 'country')
-                    .attr('d', pathGenerator)
+                .attr('class', 'country')
+                .attr('d', pathGenerator)
                 .append('title')
-                    .text(d => console.log(d));
+                .text(d => countryName[d.id]);
+        });
+
+        json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(topoJSONdata => {
+            console.log(`logging data...`);
+
 
         })
 
