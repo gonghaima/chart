@@ -41,8 +41,10 @@ export const D3WORLDMAPINTERACTION = () => {
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
-                .attr('class', 'country')
-                .attr('d', pathGenerator);
+                    .attr('class', 'country')
+                    .attr('d', pathGenerator)
+                .append('title')
+                    .text('Hello');
 
         })
 
