@@ -44,7 +44,7 @@ export const D3WORLDMAPINTERACTION = () => {
                     .attr('class', 'country')
                     .attr('d', pathGenerator)
                 .append('title')
-                    .text('Hello');
+                    .text(d => console.log(d));
 
         })
 
