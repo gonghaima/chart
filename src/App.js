@@ -26,6 +26,7 @@ import { D3GENERALUPDATEPATTERN } from './components/d3/D3GENERALUPDATEPATTERN';
 import { D3CLICK } from './components/d3/D3CLICK';
 import { D3HOVER } from './components/d3/D3HOVER';
 import { D3WORLDMAP } from './components/d3/D3WORLDMAP';
+import { D3WORLDMAPINTERACTION } from './components/d3/D3WORLDMAPINTERACTION';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
 import { Pie } from './Pie';
@@ -91,6 +92,9 @@ function App() {
         </Route>
         <Route path="/d3-world-map">
           <D3WORLDMAP />
+        </Route>
+        <Route path="/d3-world-map-interaction">
+          <D3WORLDMAPINTERACTION />
         </Route>
         <Route path="/basic-shape">
           <BasicShape />
