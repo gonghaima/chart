@@ -28,10 +28,14 @@ export const D3WORLDMAPINTERACTION = () => {
         ]).then(([tsvData, topoJSONdata]) => {
             console.log(tsvData);
             console.log(topoJSONdata);
-            const countryName = {};
-            tsvData.map(d => {
-                countryName[d.iso_n3] = d.name;
-            })
+            // const countryName = {};
+            // tsvData.map(d => {
+            //     countryName[d.iso_n3] = d.name;
+            // })
+            const countryName = tsvData.reduce((accumulator, d) => {
+                accumulator[d.iso_n3] = d.name;
+                return accumulator;
+            }, {});
             const countries = feature(topoJSONdata, topoJSONdata.objects.countries);
 
             console.log(countries);
