@@ -53,12 +53,6 @@ export const D3WORLDMAPINTERACTION = () => {
                 .text(d => countryName[d.id]);
         });
 
-        json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(topoJSONdata => {
-            console.log(`logging data...`);
-
-
-        })
-
         const width = '800';
         const height = '600';
 
