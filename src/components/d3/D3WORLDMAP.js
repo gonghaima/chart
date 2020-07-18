@@ -29,7 +29,6 @@ export const D3WORLDMAP = () => {
        
 
         json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(data => {
-            console.log(`logging data...`);
             const countries = feature(data, data.objects.countries);
 
             console.log(countries);
