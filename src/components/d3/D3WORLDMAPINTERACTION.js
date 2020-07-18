@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-import * as d3 from 'd3'
-import { arc, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1 } from 'd3';
+import { select, arc, event, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1, zoom } from 'd3';
 import { feature } from "topojson";
 
 const basicSvgStyle = {
@@ -17,8 +16,7 @@ export const D3WORLDMAPINTERACTION = () => {
     const pathGenerator = geoPath().projection(projection);
 
     useEffect(() => {
-        const svg = d3
-            .select(visEl.current)
+        const svg = select(visEl.current)
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
@@ -28,10 +26,6 @@ export const D3WORLDMAPINTERACTION = () => {
         ]).then(([tsvData, topoJSONdata]) => {
             console.log(tsvData);
             console.log(topoJSONdata);
-            // const countryName = {};
-            // tsvData.map(d => {
-            //     countryName[d.iso_n3] = d.name;
-            // })
             const countryName = tsvData.reduce((accumulator, d) => {
                 accumulator[d.iso_n3] = d.name;
                 return accumulator;
@@ -43,6 +37,11 @@ export const D3WORLDMAPINTERACTION = () => {
             svg.append('path')
                 .attr('class', 'sphere')
                 .attr('d', pathGenerator({ type: "Sphere" }));
+
+            svg.call(zoom().on("zoom", function () {
+                console.log('zoomming!');
+                // svg.attr("transform", event.transform)
+            }))
 
             svg.selectAll('path')
                 .data(countries.features)
