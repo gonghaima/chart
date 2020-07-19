@@ -20,6 +20,10 @@ export const D3WORLDMAPINTERACTION = () => {
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
+        svg.call(zoom().on("zoom", function () {
+            svg.attr("transform", event.transform)
+        }))
+
         Promise.all([
             tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/110m.tsv'),
             json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
@@ -34,14 +38,12 @@ export const D3WORLDMAPINTERACTION = () => {
 
             console.log(countries);
 
-            svg.append('path')
+            const g = svg.append('g');
+            g.append('path')
                 .attr('class', 'sphere')
                 .attr('d', pathGenerator({ type: "Sphere" }));
 
-            svg.call(zoom().on("zoom", function () {
-                console.log('zoomming!');
-                // svg.attr("transform", event.transform)
-            }))
+
 
             svg.selectAll('path')
                 .data(countries.features)
