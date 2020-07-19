@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-import { select, arc, event, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1, zoom } from 'd3';
+import { select, arc, event, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular } from 'd3';
 import { feature } from "topojson";
 
 const basicSvgStyle = {
@@ -12,47 +12,10 @@ const basicSvgStyle = {
 
 export const D3CANVAS = () => {
     const visEl = useRef(null);
-    const projection = geoNaturalEarth1();
-    const pathGenerator = geoPath().projection(projection);
 
     useEffect(() => {
         const svg = select(visEl.current)
-            .append('svg')
-            .attr('class', 'd3-world-map-svg');
-
-        svg.call(zoom().on("zoom", function () {
-            svg.attr("transform", event.transform)
-        }))
-
-        Promise.all([
-            tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/50m.tsv'),
-            json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
-        ]).then(([tsvData, topoJSONdata]) => {
-            console.log(tsvData);
-            console.log(topoJSONdata);
-            const countryName = tsvData.reduce((accumulator, d) => {
-                accumulator[d.iso_n3] = d.name;
-                return accumulator;
-            }, {});
-            const countries = feature(topoJSONdata, topoJSONdata.objects.countries);
-
-            console.log(countries);
-
-            const g = svg.append('g');
-            g.append('path')
-                .attr('class', 'sphere')
-                .attr('d', pathGenerator({ type: "Sphere" }));
-
-
-
-            svg.selectAll('path')
-                .data(countries.features)
-                .enter().append('path')
-                .attr('class', 'country')
-                .attr('d', pathGenerator)
-                .append('title')
-                .text(d => countryName[d.id]);
-        });
+            .append('svg');
 
         const width = '800';
         const height = '600';
@@ -60,15 +23,17 @@ export const D3CANVAS = () => {
 
         svg.attr('width', width);
         svg.attr('height', height);
-        svg.attr('viewBox', "0 0 1000 800");
 
-        const group = svg.append('g');
-        group.attr("transform", "translate(200, 200)");
+        svg.append('rect')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('rx', 40);
 
 
     });
     return (
-        <div style={basicSvgStyle} ref={visEl}></div>
+        <div style={basicSvgStyle} ref={visEl}>
+        </div>
     )
 }
 
