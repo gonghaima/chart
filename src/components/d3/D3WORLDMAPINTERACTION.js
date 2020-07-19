@@ -25,8 +25,8 @@ export const D3WORLDMAPINTERACTION = () => {
         }))
 
         Promise.all([
-            tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/110m.tsv'),
-            json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+            tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/50m.tsv'),
+            json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
         ]).then(([tsvData, topoJSONdata]) => {
             console.log(tsvData);
             console.log(topoJSONdata);
