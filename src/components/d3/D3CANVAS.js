@@ -17,8 +17,8 @@ export const D3CANVAS = () => {
         const svg = select(visEl.current)
             .append('svg');
 
-        const width = '800';
-        const height = '600';
+        const width = document.body.clientWidth;
+        const height = document.body.clientHeight;
 
 
         svg.attr('width', width);
