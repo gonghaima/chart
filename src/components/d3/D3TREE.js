@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-import { select, arc, event, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular } from 'd3';
+import { select, tree, hierarchy, linkHorizontal } from 'd3';
 import { feature } from "topojson";
 
 import data from "../../data/d3/countryHierarchy.json"
@@ -23,17 +23,16 @@ export const D3TREE = () => {
 
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
-
-
         svg.attr('width', width);
         svg.attr('height', height);
 
-        svg.append('rect')
-            .attr('width', width)
-            .attr('height', height)
-            .attr('rx', 40);
-
         console.log(data);
+        const root = hierarchy(data);
+        const treeLayout = tree().size([height, width]);
+        const links = treeLayout(root).links();
+        const linkPathGenerator = linkHorizontal().x(d => d.y).y(d => d.x);
+
+        svg.selectAll('path').data(links).enter().append('path').attr('d', linkPathGenerator);
     });
     return (
         <div style={basicSvgStyle} ref={visEl}>
