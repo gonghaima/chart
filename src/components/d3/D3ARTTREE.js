@@ -14,14 +14,12 @@ const basicSvgStyle = {
 
 //https://bl.ocks.org/curran/1dd7ab046a4ed32380b21e81a38447aa
 
-export const D3TREE = () => {
+export const D3ARTTREE = () => {
     const visEl = useRef(null);
 
     useEffect(() => {
         const svg = select(visEl.current)
             .append('svg');
-
-        svg.attr('class', 'd3-tree-svg');
 
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
