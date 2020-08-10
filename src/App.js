@@ -29,6 +29,7 @@ import { D3WORLDMAP } from './components/d3/D3WORLDMAP';
 import { D3WORLDMAPINTERACTION } from './components/d3/D3WORLDMAPINTERACTION';
 import { D3CANVAS } from './components/d3/D3CANVAS';
 import { D3TREE } from './components/d3/D3TREE';
+import { D3ARTTREE } from './components/d3/D3ARTTREE';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
 import { Pie } from './Pie';
@@ -106,6 +107,9 @@ function App() {
         </Route>
         <Route path="/d3-tree">
           <D3TREE />
+        </Route>
+        <Route path="/d3-art-tree">
+          <D3ARTTREE />
         </Route>
         <Route path="/">
           <Summary />
