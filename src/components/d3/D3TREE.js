@@ -21,6 +21,8 @@ export const D3TREE = () => {
         const svg = select(visEl.current)
             .append('svg');
 
+        svg.attr('class', 'd3-tree-svg');
+
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
         svg.attr('width', width);

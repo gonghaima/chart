@@ -43,6 +43,11 @@ circle.d3-pattern {
   background-color: lightgrey;
 }
 
+.d3-tree-svg path {
+  fill: none;
+  stroke: black;
+}
+
 circle.d3-pattern-exit {
   fill: black;
   opacity: 1;
