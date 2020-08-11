@@ -35,6 +35,10 @@ export const D3TREE = () => {
         const linkPathGenerator = linkHorizontal().x(d => d.y).y(d => d.x);
 
         svg.selectAll('path').data(links).enter().append('path').attr('d', linkPathGenerator);
+        svg.selectAll('text').data(root.descendants()).enter().append('text')
+            .attr('x', d => d.y)
+            .attr('y', d => d.x)
+            .text(d => d.data.data.id);
     });
     return (
         <div style={basicSvgStyle} ref={visEl}>
