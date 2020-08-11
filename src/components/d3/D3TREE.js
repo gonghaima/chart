@@ -38,6 +38,7 @@ export const D3TREE = () => {
         svg.selectAll('text').data(root.descendants()).enter().append('text')
             .attr('x', d => d.y)
             .attr('y', d => d.x)
+            .attr('dy', '0.32em')
             .text(d => d.data.data.id);
     });
     return (

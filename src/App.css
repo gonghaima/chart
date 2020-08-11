@@ -48,6 +48,16 @@ circle.d3-pattern {
   stroke: black;
 }
 
+.d3-tree-svg text {
+  font-size: 12px;
+  text-shadow: 
+  -1px -1px 3px white,
+  -1px 1px 3px white,
+  1px -1px 3px white,
+  1px 1px 3px white;
+
+}
+
 circle.d3-pattern-exit {
   fill: black;
   opacity: 1;
