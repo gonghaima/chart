@@ -45,17 +45,11 @@ circle.d3-pattern {
 
 .d3-tree-svg path {
   fill: none;
-  stroke:#57bdc3;
+  stroke: #57bdc3;
 }
 
 .d3-tree-svg text {
-  font-size: 12px;
-  text-shadow: 
-  -1px -1px 3px white,
-  -1px 1px 3px white,
-  1px -1px 3px white,
-  1px 1px 3px white;
-
+  text-shadow: -1px -1px 3px white, -1px 1px 3px white, 1px -1px 3px white, 1px 1px 3px white;
 }
 
 circle.d3-pattern-exit {
@@ -91,7 +85,7 @@ rect {
 }
 
 text {
-  font-size: 2em;
+  /* font-size: 2em; */
   font-family: sans-serif;
 }
 
