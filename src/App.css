@@ -45,7 +45,7 @@ circle.d3-pattern {
 
 .d3-tree-svg path {
   fill: none;
-  stroke: black;
+  stroke:#57bdc3;
 }
 
 .d3-tree-svg text {
