@@ -30,7 +30,13 @@ export const D3TREE = () => {
 
         console.log(data);
         const root = hierarchy(data);
-        const treeLayout = tree().size([height, width]);
+        const margin = { top: 0, right: 50, bottom: 0, left: 0 };
+        
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+        
+        const treeLayout = tree().size([innerHeight, innerWidth]);
+
         const links = treeLayout(root).links();
         const linkPathGenerator = linkHorizontal().x(d => d.y).y(d => d.x);
 
