@@ -27,7 +27,7 @@ export const D3TREE = () => {
         const height = document.body.clientHeight;
 
         const root = hierarchy(data);
-        const margin = { top: 0, right: 50, bottom: 0, left: 50 };
+        const margin = { top: 0, right: 50, bottom: 0, left: 75 };
 
         const g = svg
             .attr('width', width)
@@ -49,6 +49,7 @@ export const D3TREE = () => {
             .attr('y', d => d.x)
             .attr('dy', '0.32em')
             .attr('text-anchor', d => d.children ? 'middle' : 'start')
+            .attr('font-size', d => 3.25 - d.depth + 'em')
             .text(d => d.data.data.id);
     });
     return (
