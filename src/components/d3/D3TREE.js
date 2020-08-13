@@ -48,7 +48,7 @@ export const D3TREE = () => {
             .attr('x', d => d.y)
             .attr('y', d => d.x)
             .attr('dy', '0.32em')
-            .attr('text-anchor', 'middle')
+            .attr('text-anchor', d => d.children ? 'middle' : 'start')
             .text(d => d.data.data.id);
     });
     return (
