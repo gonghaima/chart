@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-import { select, tree, hierarchy, linkHorizontal } from 'd3';
+import { select, tree, hierarchy, linkHorizontal, zoom, event } from 'd3';
 import { feature } from "topojson";
 
 import data from "../../data/d3/countryHierarchy.json"
@@ -29,11 +29,17 @@ export const D3TREE = () => {
         const root = hierarchy(data);
         const margin = { top: 0, right: 50, bottom: 0, left: 75 };
 
-        const g = svg
+        const zoomG = svg
             .attr('width', width)
             .attr('height', height)
-            .append('g')
+            .append('g');
+
+        const g = zoomG.append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        svg.call(zoom().on('zoom', () => {
+            zoomG.attr('transform', event.transform);
+        }));
 
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
