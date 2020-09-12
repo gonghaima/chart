@@ -29,14 +29,16 @@ export const D3TREE = () => {
         const root = hierarchy(data);
         const margin = { top: 0, right: 50, bottom: 0, left: 75 };
 
-        const g = svg
+        const zoomG = svg
             .attr('width', width)
             .attr('height', height)
-            .append('g')
+            .append('g');
+
+        const g = zoomG.append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
         svg.call(zoom().on('zoom', () => {
-            g.attr('transform', event.transform);
+            zoomG.attr('transform', event.transform);
         }));
 
         const innerWidth = width - margin.left - margin.right;
