@@ -23,6 +23,7 @@ import { D3AREAPOPULATION } from './D3AREAPOPULATION';
 import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
 import { D3GENERALUPDATEPATTERN } from './components/d3/D3GENERALUPDATEPATTERN';
+import { D3LEGEND } from './components/d3/D3LEGEND';
 import { D3CLICK } from './components/d3/D3CLICK';
 import { D3HOVER } from './components/d3/D3HOVER';
 import { D3WORLDMAP } from './components/d3/D3WORLDMAP';
@@ -83,6 +84,9 @@ function App() {
         </Route>
         <Route path="/d3-general-update-pattern">
           <D3GENERALUPDATEPATTERN />
+        </Route>
+        <Route path="/d3-legend">
+          <D3LEGEND />
         </Route>
         <Route path="/d3-click">
           <D3CLICK />
