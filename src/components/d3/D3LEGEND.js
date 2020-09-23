@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { fruitBowl } from './lib/fruitBowl';
+import { colorLegend } from './lib/colorLegend';
 
 import * as d3 from 'd3'
-import { range } from 'd3';
+import { range, scaleOrdinal } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -20,15 +20,6 @@ export const D3LEGEND = () => {
 
         const width = '600';
         const height = '400';
-        const faceXOffset = 0;
-        const faceYOffset = 0;
-        const eyeXOffset = 90;
-        const eyeYOffset = 50;
-
-        const eyebrowWidth = 70;
-        const eyebrowHeight = 15;
-        const leftEyebrowYOffset = -105;
-        const rightEyebrowYOffset = 15;
 
 
 
@@ -39,36 +30,14 @@ export const D3LEGEND = () => {
         svg.attr('height', height);
         svg.attr('viewBox', "0 0 400 400");
 
+        const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
 
-        const render = () => {
-            fruitBowl(svg, { fruits, height });
-        }
+        colorLegend(svg, { colorScale, height });
 
-        const makeFruit = type => ({ type, id: Math.random() });
-        let fruits = range(5).map(() => makeFruit('apple'));
-        render();
-
-        // Eat an apple.
-        setTimeout(() => {
-            fruits.pop();
-            render();
-        }, 1000);
-
-        //Replacing an apple with a lemon
-        setTimeout(() => {
-            fruits[2].type = 'lemon';
-            render(svg, { fruits });
-        }, 2000);
-
-        // Eat another apple.
-        setTimeout(() => {
-            fruits = fruits.filter((d, i) => i !== 1);
-            render();
-        }, 3000);
     });
     return (
         <div>
-            <h1>Bowl of Fruit - General Update Pattern</h1>
+            <h1>Color and Size Legends</h1>
             <div style={basicSvgStyle} ref={visEl}></div>
         </div>
 
