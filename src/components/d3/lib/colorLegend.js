@@ -14,12 +14,12 @@ export const colorLegend = (selection, props) => {
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
         .attr('r', 20)
-        .attr('fill', d => colorScale(d.type))
+        .attr('fill', colorScale)
         .transition().duration(1000);
 
     groupsEnter.append('text')
         .merge(groups.select('text'))
         .attr('class', 'nested-element')
-        .text(d => d.type)
+        .text(d => d)
         .attr('y', 50);
 }
