@@ -1,5 +1,5 @@
 export const colorLegend = (selection, props) => {
-    const { colorScale, height } = props;
+    const { colorScale, cirlcleRadius, spacing, textOffset } = props;
 
     const groups = selection
         .selectAll('g')
@@ -7,13 +7,13 @@ export const colorLegend = (selection, props) => {
     const groupsEnter = groups.enter().append('g');
     groupsEnter.merge(groups)
         .transition().duration(1000)
-        .attr('transform', (d, i) => `translate(${i * 90 + 40}, ${height / 2})`);
+        .attr('transform', (d, i) => `translate(${i * spacing}, 0)`);
 
     groups.exit().remove();
 
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
-        .attr('r', 20)
+        .attr('r', cirlcleRadius)
         .attr('fill', colorScale)
         .transition().duration(1000);
 
@@ -21,5 +21,5 @@ export const colorLegend = (selection, props) => {
         .merge(groups.select('text'))
         .attr('class', 'nested-element')
         .text(d => d)
-        .attr('y', 50);
+        .attr('y', textOffset);
 }

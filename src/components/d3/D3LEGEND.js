@@ -32,7 +32,9 @@ export const D3LEGEND = () => {
 
         const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
 
-        colorLegend(svg, { colorScale, height });
+        svg.append('g')
+            .attr('transform', `translate(40,${height / 2})`)
+            .call(colorLegend, { colorScale, cirlcleRadius: 30, spacing: 90, textOffset: 50 });
 
     });
     return (
