@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { colorLegend } from './lib/colorLegend';
 
 import * as d3 from 'd3'
-import { range, scaleOrdinal } from 'd3';
+import { range, scaleOrdinal, scaleSqrt } from 'd3';
 
 const basicSvgStyle = {
     height: '100vh',
@@ -38,6 +38,7 @@ export const D3LEGEND = () => {
             .attr('transform', `translate(40,${height / 2})`)
             .call(colorLegend, { colorScale, cirlcleRadius: 20, spacing: 50, textOffset: 70 });
 
+        const sizeScale = scaleSqrt().domain([0, 10]).range([0, 50]);
     });
     return (
         <div>
