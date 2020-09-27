@@ -7,7 +7,7 @@ export const colorLegend = (selection, props) => {
     const groupsEnter = groups.enter().append('g');
     groupsEnter.merge(groups)
         .transition().duration(1000)
-        .attr('transform', (d, i) => `translate(${i * spacing}, 0)`);
+        .attr('transform', (d, i) => `translate(0, ${i * spacing})`);
 
     groups.exit().remove();
 
@@ -21,5 +21,6 @@ export const colorLegend = (selection, props) => {
         .merge(groups.select('text'))
         .attr('class', 'nested-element')
         .text(d => d)
-        .attr('y', textOffset);
+        .attr('dy', '0.32em')
+        .attr('x', textOffset);
 }

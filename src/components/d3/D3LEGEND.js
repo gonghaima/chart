@@ -34,7 +34,7 @@ export const D3LEGEND = () => {
 
         svg.append('g')
             .attr('transform', `translate(40,${height / 2})`)
-            .call(colorLegend, { colorScale, cirlcleRadius: 30, spacing: 90, textOffset: 50 });
+            .call(colorLegend, { colorScale, cirlcleRadius: 30, spacing: 90, textOffset: 70 });
 
     });
     return (
