@@ -28,13 +28,15 @@ export const D3LEGEND = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
-        svg.attr('viewBox', "0 0 400 400");
+        svg.attr('viewBox', "0 100 400 400");
 
-        const colorScale = scaleOrdinal().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
+        const colorScale = scaleOrdinal()
+            .domain(['apple', 'lemon', 'lime', 'orange'])
+            .range(['#c11d1d', '#eae600', 'green', 'orange']);
 
         svg.append('g')
             .attr('transform', `translate(40,${height / 2})`)
-            .call(colorLegend, { colorScale, cirlcleRadius: 30, spacing: 90, textOffset: 70 });
+            .call(colorLegend, { colorScale, cirlcleRadius: 20, spacing: 50, textOffset: 70 });
 
     });
     return (
