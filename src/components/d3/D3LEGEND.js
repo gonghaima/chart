@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { colorLegend } from './lib/colorLegend';
+import { sizeLegend } from './lib/sizeLegend';
 
 import * as d3 from 'd3'
 import { range, scaleOrdinal, scaleSqrt } from 'd3';
@@ -38,7 +39,11 @@ export const D3LEGEND = () => {
             .attr('transform', `translate(40,${height / 2})`)
             .call(colorLegend, { colorScale, cirlcleRadius: 20, spacing: 50, textOffset: 70 });
 
-        const sizeScale = scaleSqrt().domain([0, 10]).range([0, 50]);
+        const sizeScale = scaleSqrt().domain([0, 10]).range([0, 20]);
+
+        svg.append('g')
+            .attr('transform', `translate(180,${height / 2.5})`)
+            .call(sizeLegend, { sizeScale, spacing: 50, textOffset: 20, numTicks: 5, circleFill: 'rgba(0,0,0,0.5)' });
     });
     return (
         <div>
