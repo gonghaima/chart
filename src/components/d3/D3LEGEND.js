@@ -43,7 +43,7 @@ export const D3LEGEND = () => {
 
         svg.append('g')
             .attr('transform', `translate(180,${height / 2.5})`)
-            .call(sizeLegend, { sizeScale, spacing: 50, textOffset: 70 });
+            .call(sizeLegend, { sizeScale, spacing: 50, textOffset: 20, numTicks: 5, circleFill: 'rgba(0,0,0,0.5)' });
     });
     return (
         <div>
