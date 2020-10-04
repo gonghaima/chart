@@ -28,6 +28,7 @@ import { D3CLICK } from './components/d3/D3CLICK';
 import { D3HOVER } from './components/d3/D3HOVER';
 import { D3WORLDMAP } from './components/d3/D3WORLDMAP';
 import { D3WORLDMAPINTERACTION } from './components/d3/D3WORLDMAPINTERACTION';
+import { D3CHOROMAP } from './components/d3/D3CHOROMAP';
 import { D3CANVAS } from './components/d3/D3CANVAS';
 import { D3TREE } from './components/d3/D3TREE';
 import { D3ARTTREE } from './components/d3/D3ARTTREE';
@@ -102,6 +103,9 @@ function App() {
         </Route>
         <Route path="/d3-world-map-interaction">
           <D3WORLDMAPINTERACTION />
+        </Route>
+        <Route path="/d3-choropleth-map">
+          <D3CHOROMAP />
         </Route>
         <Route path="/basic-shape">
           <BasicShape />
