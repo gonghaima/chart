@@ -50,6 +50,7 @@ export const D3WORLDMAPINTERACTION = () => {
                 .enter().append('path')
                 .attr('class', 'country')
                 .attr('d', pathGenerator)
+                .attr('fill', 'lightgreen')
                 .append('title')
                 .text(d => countryName[d.id]);
         });
