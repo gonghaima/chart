@@ -30,7 +30,7 @@ circle.d3-pattern {
 }
 
 .country {
-  fill: lightgreen;
+  /* fill: lightgreen; */
   stroke: black;
   stroke-width: 0.05px;
 }

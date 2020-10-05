@@ -30,8 +30,8 @@ export const D3CHOROMAP = () => {
         ]).then(([tsvData, topoJSONdata]) => {
             console.log(tsvData);
             console.log(topoJSONdata);
-            const countryName = tsvData.reduce((accumulator, d) => {
-                accumulator[d.iso_n3] = d.name;
+            const rowById = tsvData.reduce((accumulator, d) => {
+                accumulator[d.iso_n3] = d;
                 return accumulator;
             }, {});
             const countries = feature(topoJSONdata, topoJSONdata.objects.countries);
@@ -45,13 +45,17 @@ export const D3CHOROMAP = () => {
 
 
 
+            countries.features.forEach(d => {
+                Object.assign(d.properties, rowById[d.id]);
+            });
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
                 .attr('class', 'country')
                 .attr('d', pathGenerator)
+                .attr('fill', 'red')
                 .append('title')
-                .text(d => countryName[d.id]);
+                .text(d => d.properties.name);
         });
 
         const width = '800';
