@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { loadAndProcessData } from './loadAndProcessData';
 
-import { select,   event,  geoPath, geoNaturalEarth1, zoom } from 'd3';
+import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeCategory10 } from 'd3';
 
 
 const basicSvgStyle = {
@@ -25,13 +25,19 @@ export const D3CHOROMAP = () => {
             svg.attr("transform", event.transform)
         }));
 
+        const colorScale = scaleOrdinal(schemeCategory10);
+        const colorValue = d => d.properties.economy;
+
         loadAndProcessData(svg, pathGenerator).then(countries => {
+            colorScale
+                .domain(countries.features.map(colorValue))
+                .domain(colorScale.domain().sort());
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
                 .attr('class', 'country')
                 .attr('d', pathGenerator)
-                .attr('fill', 'red')
+                .attr('fill', d => colorScale(colorValue(d)))
                 .append('title')
                 .text(d => d.properties.name);
         });
