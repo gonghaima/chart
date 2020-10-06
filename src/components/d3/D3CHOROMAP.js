@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
+import { loadAndProcessData } from './loadAndProcessData';
 
-import { select, arc, event, json, tsv, geoPath, geoMercator, geoOrthographic, geoEquirectangular, geoNaturalEarth1, zoom } from 'd3';
-import { feature } from "topojson";
+import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeCategory10 } from 'd3';
+
 
 const basicSvgStyle = {
     height: '100vh',
@@ -22,41 +23,25 @@ export const D3CHOROMAP = () => {
 
         svg.call(zoom().on("zoom", function () {
             svg.attr("transform", event.transform)
-        }))
+        }));
 
-        Promise.all([
-            tsv('https://cdn.jsdelivr.net/npm/world-atlas@1/world/50m.tsv'),
-            json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
-        ]).then(([tsvData, topoJSONdata]) => {
-            console.log(tsvData);
-            console.log(topoJSONdata);
-            const rowById = tsvData.reduce((accumulator, d) => {
-                accumulator[d.iso_n3] = d;
-                return accumulator;
-            }, {});
-            const countries = feature(topoJSONdata, topoJSONdata.objects.countries);
+        const colorScale = scaleOrdinal(schemeCategory10);
+        const colorValue = d => d.properties.economy;
 
-            console.log(countries);
-
-            const g = svg.append('g');
-            g.append('path')
-                .attr('class', 'sphere')
-                .attr('d', pathGenerator({ type: "Sphere" }));
-
-
-
-            countries.features.forEach(d => {
-                Object.assign(d.properties, rowById[d.id]);
-            });
+        loadAndProcessData(svg, pathGenerator).then(countries => {
+            colorScale
+                .domain(countries.features.map(colorValue))
+                .domain(colorScale.domain().sort());
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
                 .attr('class', 'country')
                 .attr('d', pathGenerator)
-                .attr('fill', 'red')
+                .attr('fill', d => colorScale(colorValue(d)))
                 .append('title')
                 .text(d => d.properties.name);
         });
+
 
         const width = '800';
         const height = '600';
