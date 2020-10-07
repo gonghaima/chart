@@ -40,7 +40,7 @@ export const D3CHOROMAP = () => {
                 .attr('d', pathGenerator)
                 .attr('fill', d => colorScale(colorValue(d)))
                 .append('title')
-                .text(d => d.properties.name);
+                .text(d => d.properties.name + ": " + colorValue(d));
         });
 
 
