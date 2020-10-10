@@ -95,6 +95,11 @@ text.nested-element {
   font-family: 'Playfair Display', serif, sans-serif;
 }
 
+text.nested-element-choro-map {
+  font-size: 0.8em;
+  font-family: 'Playfair Display', serif, sans-serif;
+}
+
 .tick text {
   font-size: 1.7em;
   fill: #635f5d;

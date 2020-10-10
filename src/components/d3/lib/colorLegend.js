@@ -1,5 +1,5 @@
 export const colorLegend = (selection, props) => {
-    const { colorScale, cirlcleRadius, spacing, textOffset } = props;
+    const { colorScale, cirlcleRadius, spacing, textOffset, textClass = 'nested-element' } = props;
 
     const groups = selection
         .selectAll('g')
@@ -19,7 +19,7 @@ export const colorLegend = (selection, props) => {
 
     groupsEnter.append('text')
         .merge(groups.select('text'))
-        .attr('class', 'nested-element')
+        .attr('class', textClass)
         .text(d => d)
         .attr('dy', '0.32em')
         .attr('x', textOffset);

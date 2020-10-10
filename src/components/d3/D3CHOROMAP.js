@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { loadAndProcessData } from './loadAndProcessData';
+import { colorLegend } from './lib/colorLegend';
 
 import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeSpectral } from 'd3';
 
@@ -21,6 +22,9 @@ export const D3CHOROMAP = () => {
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
+
+
+
         svg.call(zoom().on("zoom", function () {
             svg.attr("transform", event.transform)
         }));
@@ -33,6 +37,8 @@ export const D3CHOROMAP = () => {
                 .domain(countries.features.map(colorValue))
                 .domain(colorScale.domain().sort().reverse())
                 .range(schemeSpectral[colorScale.domain().length]);
+
+
             svg.selectAll('path')
                 .data(countries.features)
                 .enter().append('path')
@@ -41,6 +47,11 @@ export const D3CHOROMAP = () => {
                 .attr('fill', d => colorScale(colorValue(d)))
                 .append('title')
                 .text(d => d.properties.name + ": " + colorValue(d));
+
+            const colorLegendG = svg.append('g')
+                .attr('transform', `translate(60,200)`);
+
+            colorLegendG.call(colorLegend, { colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, textClass:'nested-element-choro-map' });
         });
 
 
