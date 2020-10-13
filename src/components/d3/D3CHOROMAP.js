@@ -30,6 +30,7 @@ export const D3CHOROMAP = () => {
         }));
 
         const colorScale = scaleOrdinal();
+        //const colorValue = d => d.properties.income_grp;
         const colorValue = d => d.properties.economy;
 
         loadAndProcessData(svg, pathGenerator).then(countries => {
