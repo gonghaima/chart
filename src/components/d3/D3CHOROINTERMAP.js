@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { loadAndProcessData } from './loadAndProcessData';
-import { colorLegendWithBG } from './lib/colorLegendWithBG';
+import { colorLegendWithInteractive } from './lib/colorLegendWithInteractive';
 
 import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeSpectral } from 'd3';
 
@@ -52,7 +52,7 @@ export const D3CHOROINTERMAP = () => {
             const colorLegendG = svg.append('g')
                 .attr('transform', `translate(10,260)`);
 
-            colorLegendG.call(colorLegendWithBG, { colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, backgroundRectWidth: 220, textClass: 'nested-element-choro-map' });
+            colorLegendG.call(colorLegendWithInteractive, { colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, backgroundRectWidth: 220, textClass: 'nested-element-choro-map' });
         });
 
 
