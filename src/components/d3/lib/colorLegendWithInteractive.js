@@ -20,9 +20,10 @@ export const colorLegendWithInteractive = (selection, props) => {
         .data(colorScale.domain().filter(c => c));
     const groupsEnter = groups.enter().append('g');
     groupsEnter.merge(groups)
+        .attr('class', 'legend-row')
         .attr('transform', (d, i) => `translate(0, ${i * spacing})`)
-        .on('click', () => {
-            console.log('clicked');
+        .on('click', (d) => {
+            console.log(d);
         });
 
     groups.exit().remove();

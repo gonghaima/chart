@@ -104,6 +104,10 @@ text.nested-element-choro-map {
   font-family: 'Playfair Display', serif, sans-serif;
 }
 
+.legend-row {
+  cursor: pointer;
+}
+
 .tick text {
   font-size: 1.7em;
   fill: #635f5d;
