@@ -33,6 +33,10 @@ export const D3CHOROINTERMAP = () => {
         //const colorValue = d => d.properties.income_grp;
         const colorValue = d => d.properties.economy;
 
+        const onClick = d => {
+            console.log(d);
+        }
+
         loadAndProcessData(svg, pathGenerator).then(countries => {
             colorScale
                 .domain(countries.features.map(colorValue))
@@ -52,7 +56,7 @@ export const D3CHOROINTERMAP = () => {
             const colorLegendG = svg.append('g')
                 .attr('transform', `translate(10,260)`);
 
-            colorLegendG.call(colorLegendWithInteractive, { colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, backgroundRectWidth: 220, textClass: 'nested-element-choro-map' });
+            colorLegendG.call(colorLegendWithInteractive, { onClick, colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, backgroundRectWidth: 220, textClass: 'nested-element-choro-map' });
         });
 
 
