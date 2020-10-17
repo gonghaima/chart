@@ -33,6 +33,8 @@ export const D3CHOROINTERMAP = () => {
         //const colorValue = d => d.properties.income_grp;
         const colorValue = d => d.properties.economy;
 
+        let selectedColorValue;
+
         const onClick = d => {
             console.log(d);
         }
