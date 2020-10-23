@@ -1,5 +1,5 @@
 export const colorLegendWithInteractive = (selection, props) => {
-    const { onClick, colorScale, cirlcleRadius, spacing, textOffset, backgroundRectWidth, textClass = 'nested-element' } = props;
+    const { onClick, colorScale, cirlcleRadius, spacing, textOffset, backgroundRectWidth, textClass = 'nested-element', selectedColorValue } = props;
 
     const backgroundRect = selection.selectAll('rect').data([null]);
     const n = colorScale.domain().length;
@@ -22,6 +22,9 @@ export const colorLegendWithInteractive = (selection, props) => {
     groupsEnter.merge(groups)
         .attr('class', 'legend-row')
         .attr('transform', (d, i) => `translate(0, ${i * spacing})`)
+        .attr('opacity', d =>
+            d === selectedColorValue ? 1 : 0.2
+        )
         .on('click', onClick);
 
     groups.exit().remove();

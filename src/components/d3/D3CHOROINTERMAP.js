@@ -34,20 +34,28 @@ export const D3CHOROINTERMAP = () => {
         const colorValue = d => d.properties.economy;
 
         let selectedColorValue;
+        let features;
 
         const onClick = d => {
-            console.log(d);
+            selectedColorValue = d;
+            render();
         }
 
         loadAndProcessData(svg, pathGenerator).then(countries => {
+            features = countries.features;
+            render();
+        });
+
+
+        const render = () => {
             colorScale
-                .domain(countries.features.map(colorValue))
+                .domain(features.map(colorValue))
                 .domain(colorScale.domain().sort().reverse())
                 .range(schemeSpectral[colorScale.domain().length]);
 
 
             svg.selectAll('path')
-                .data(countries.features)
+                .data(features)
                 .enter().append('path')
                 .attr('class', 'country')
                 .attr('d', pathGenerator)
@@ -58,8 +66,20 @@ export const D3CHOROINTERMAP = () => {
             const colorLegendG = svg.append('g')
                 .attr('transform', `translate(10,260)`);
 
-            colorLegendG.call(colorLegendWithInteractive, { onClick, colorScale, cirlcleRadius: 12, spacing: 25, textOffset: 25, backgroundRectWidth: 220, textClass: 'nested-element-choro-map' });
-        });
+            colorLegendG.call(colorLegendWithInteractive,
+                {
+                    onClick,
+                    colorScale,
+                    cirlcleRadius: 12,
+                    spacing: 25,
+                    textOffset: 25,
+                    backgroundRectWidth: 220,
+                    textClass: 'nested-element-choro-map',
+                    selectedColorValue
+                }
+            );
+        };
+
 
 
         const width = '800';
