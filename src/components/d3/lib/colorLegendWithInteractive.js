@@ -23,9 +23,12 @@ export const colorLegendWithInteractive = (selection, props) => {
         .attr('class', 'legend-row')
         .attr('transform', (d, i) => `translate(0, ${i * spacing})`)
         .attr('opacity', d =>
-            d === selectedColorValue ? 1 : 0.2
+            (!selectedColorValue || d === selectedColorValue)
+                ? 1 : 0.2
         )
-        .on('click', onClick);
+        .on('click', d => onClick(
+            d === selectedColorValue ? null : d
+        ));
 
     groups.exit().remove();
 
