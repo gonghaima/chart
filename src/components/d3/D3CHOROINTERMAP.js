@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { loadAndProcessData } from './loadAndProcessData';
+import { loadAndProcessData } from './loadAndProcessData-v1';
 import { colorLegendWithInteractive } from './lib/colorLegendWithInteractive';
 
 import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeSpectral } from 'd3';
@@ -22,8 +22,7 @@ export const D3CHOROINTERMAP = () => {
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
-
-
+        const g = svg.append('g');
 
 
 
@@ -50,7 +49,7 @@ export const D3CHOROINTERMAP = () => {
                 .domain(colorScale.domain().sort().reverse())
                 .range(schemeSpectral[colorScale.domain().length]);
 
-        
+
             const colorLegendG = svg.append('g')
                 .attr('transform', `translate(10,260)`);
             colorLegendG.call(colorLegendWithInteractive,
@@ -65,6 +64,10 @@ export const D3CHOROINTERMAP = () => {
                     selectedColorValue
                 }
             );
+
+            g.append('path')
+                .attr('class', 'sphere')
+                .attr('d', pathGenerator({ type: "Sphere" }));
 
             svg.call(zoom().on("zoom", function () {
                 svg.attr("transform", event.transform)
