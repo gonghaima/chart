@@ -25,12 +25,10 @@ export const D3CHOROINTERMAP = () => {
 
 
 
-        svg.call(zoom().on("zoom", function () {
-            svg.attr("transform", event.transform)
-        }));
+
 
         const colorScale = scaleOrdinal();
-        //const colorValue = d => d.properties.income_grp;
+
         const colorValue = d => d.properties.economy;
 
         let selectedColorValue;
@@ -46,26 +44,15 @@ export const D3CHOROINTERMAP = () => {
             render();
         });
 
-
         const render = () => {
             colorScale
                 .domain(features.map(colorValue))
                 .domain(colorScale.domain().sort().reverse())
                 .range(schemeSpectral[colorScale.domain().length]);
 
-
-            svg.selectAll('path')
-                .data(features)
-                .enter().append('path')
-                .attr('class', 'country')
-                .attr('d', pathGenerator)
-                .attr('fill', d => colorScale(colorValue(d)))
-                .append('title')
-                .text(d => d.properties.name + ": " + colorValue(d));
-
+        
             const colorLegendG = svg.append('g')
                 .attr('transform', `translate(10,260)`);
-
             colorLegendG.call(colorLegendWithInteractive,
                 {
                     onClick,
@@ -78,13 +65,26 @@ export const D3CHOROINTERMAP = () => {
                     selectedColorValue
                 }
             );
+
+            svg.call(zoom().on("zoom", function () {
+                svg.attr("transform", event.transform)
+            }));
+
+            svg.selectAll('path')
+                .data(features)
+                .enter().append('path')
+                .attr('class', 'country')
+                .attr('d', pathGenerator)
+                .attr('fill', d => colorScale(colorValue(d)))
+                .append('title')
+                .text(d => d.properties.name + ": " + colorValue(d));
+
+
+
         };
-
-
 
         const width = '800';
         const height = '600';
-
 
         svg.attr('width', width);
         svg.attr('height', height);
