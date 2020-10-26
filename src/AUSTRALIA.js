@@ -25,7 +25,7 @@ export const AUSTRALIA = () => {
             });
             echarts.registerMap('au', ausiJson);
             // console.log(JSON.stringify(ausiJson));
-            // debugger
+            // 
             // echarts.registerMap('au', mapDataAU);
             setLoaded(true);
         })

@@ -40,7 +40,7 @@ export const USA = () => {
             });
             echarts.registerMap('usa', usaJson, mapModifier);
             // console.log(JSON.stringify(usaJson));
-            // debugger
+            // 
             // echarts.registerMap('usa', mapDataUSA);
             setLoaded(true);
         })

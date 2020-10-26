@@ -3,6 +3,7 @@ export const colorLegendWithInteractive = (selection, props) => {
 
     const backgroundRect = selection.selectAll('rect').data([null]);
     const n = colorScale.domain().length;
+    ;
     backgroundRect.enter().append('rect')
         .merge(backgroundRect)
         .attr('class', 'choro')
@@ -13,12 +14,13 @@ export const colorLegendWithInteractive = (selection, props) => {
         .attr('height', spacing * n + cirlcleRadius * 2)
         .attr('fill', 'white')
         .attr('opacity', 0.8);
-
+    ;
     const groups = selection
-        .selectAll('.tick')
+        .selectAll('g')
         // work around, the undefined value should be cleaned up from data source loading
         .data(colorScale.domain().filter(c => c));
     const groupsEnter = groups.enter().append('g');
+    ;
     groupsEnter.merge(groups)
         .attr('class', 'legend-row')
         .attr('transform', (d, i) => `translate(0, ${i * spacing})`)
@@ -29,9 +31,9 @@ export const colorLegendWithInteractive = (selection, props) => {
         .on('click', d => onClick(
             d === selectedColorValue ? null : d
         ));
-
+    ;
     groups.exit().remove();
-
+    ;
     groupsEnter.append('circle')
         .merge(groups.select('circle'))
         .attr('r', cirlcleRadius)
