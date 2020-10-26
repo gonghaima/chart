@@ -1,7 +1,7 @@
 import { event, geoPath, geoNaturalEarth1, zoom } from 'd3';
 
 export const choroplethMap = (selection, props) => {
-    const { features, colorScale, colorValue } = props;
+    const { features, colorScale, colorValue, selectedColorValue } = props;
     const projection = geoNaturalEarth1();
     const pathGenerator = geoPath().projection(projection);
 
@@ -27,7 +27,10 @@ export const choroplethMap = (selection, props) => {
         .attr('fill', d => colorScale(colorValue(d)))
 
     countryPaths
-        .merge(countryPathEnter);
+        .merge(countryPathEnter)
+        .attr('opacity', d =>
+            selectedColorValue === colorValue(d) ? 1 : 0.2
+        );
 
     countryPathEnter
         .append('title')

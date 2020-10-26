@@ -14,6 +14,8 @@ const basicSvgStyle = {
 
 export const D3CHOROINTERMAP = () => {
     const visEl = useRef(null);
+    let choroplethMapG;
+    let colorLegendG;
 
 
     useEffect(() => {
@@ -21,9 +23,9 @@ export const D3CHOROINTERMAP = () => {
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
-        const choroplethMapG = svg.append('g');
+        choroplethMapG = svg.append('g');
 
-        const colorLegendG = svg.append('g')
+        colorLegendG = svg.append('g')
             .attr('transform', `translate(10,260)`);
 
         const colorScale = scaleOrdinal();
@@ -38,19 +40,21 @@ export const D3CHOROINTERMAP = () => {
             render();
         }
 
-        loadAndProcessData().then(countries => {
+        !selectedColorValue && loadAndProcessData().then(countries => {
             features = countries.features;
+
             render();
         });
 
         const render = () => {
+            ;
             colorScale
                 .domain(features.map(colorValue))
                 .domain(colorScale.domain().sort().reverse())
                 .range(schemeSpectral[colorScale.domain().length]);
 
 
-
+            ;
             colorLegendG.call(colorLegendWithInteractive,
                 {
                     onClick,
@@ -64,7 +68,7 @@ export const D3CHOROINTERMAP = () => {
                 }
             );
 
-            choroplethMapG.call(choroplethMap, { features, colorScale, colorValue });
+            choroplethMapG.call(choroplethMap, { features, colorScale, colorValue, selectedColorValue });
 
         };
 
