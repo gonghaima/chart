@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { loadAndProcessData } from './loadAndProcessData-v1';
 import { colorLegendWithInteractive } from './lib/colorLegendWithInteractive';
-
+import { choroplethMap } from './lib/choroplethMap';
 import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeSpectral } from 'd3';
 
 
@@ -14,17 +14,17 @@ const basicSvgStyle = {
 
 export const D3CHOROINTERMAP = () => {
     const visEl = useRef(null);
-    const projection = geoNaturalEarth1();
-    const pathGenerator = geoPath().projection(projection);
+
 
     useEffect(() => {
         const svg = select(visEl.current)
             .append('svg')
             .attr('class', 'd3-world-map-svg');
 
-        const g = svg.append('g');
+        const choroplethMapG = svg.append('g');
 
-
+        const colorLegendG = svg.append('g')
+            .attr('transform', `translate(10,260)`);
 
         const colorScale = scaleOrdinal();
 
@@ -38,7 +38,7 @@ export const D3CHOROINTERMAP = () => {
             render();
         }
 
-        loadAndProcessData(svg, pathGenerator).then(countries => {
+        loadAndProcessData().then(countries => {
             features = countries.features;
             render();
         });
@@ -50,8 +50,7 @@ export const D3CHOROINTERMAP = () => {
                 .range(schemeSpectral[colorScale.domain().length]);
 
 
-            const colorLegendG = svg.append('g')
-                .attr('transform', `translate(10,260)`);
+
             colorLegendG.call(colorLegendWithInteractive,
                 {
                     onClick,
@@ -65,24 +64,7 @@ export const D3CHOROINTERMAP = () => {
                 }
             );
 
-            g.append('path')
-                .attr('class', 'sphere')
-                .attr('d', pathGenerator({ type: "Sphere" }));
-
-            svg.call(zoom().on("zoom", function () {
-                svg.attr("transform", event.transform)
-            }));
-
-            svg.selectAll('path')
-                .data(features)
-                .enter().append('path')
-                .attr('class', 'country')
-                .attr('d', pathGenerator)
-                .attr('fill', d => colorScale(colorValue(d)))
-                .append('title')
-                .text(d => d.properties.name + ": " + colorValue(d));
-
-
+            choroplethMapG.call(choroplethMap, { features, colorScale, colorValue });
 
         };
 
