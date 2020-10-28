@@ -11,7 +11,9 @@ export const choroplethMap = (selection, props) => {
     const g = gUpdate.merge(gEnter);
     gEnter.append('path')
         .attr('class', 'sphere')
-        .attr('d', pathGenerator({ type: "Sphere" }));
+        .attr('d', pathGenerator({ type: "Sphere" }))
+        .merge(gUpdate.select('.sphere'))
+        .attr('opacity', selectedColorValue ? 0.05 : 1)
 
     selection.call(zoom().on("zoom", function () {
         g.attr("transform", event.transform)
@@ -29,8 +31,9 @@ export const choroplethMap = (selection, props) => {
     countryPaths
         .merge(countryPathEnter)
         .attr('opacity', d =>
-            selectedColorValue === colorValue(d) ? 1 : 0.2
-        );
+            !selectedColorValue || selectedColorValue === colorValue(d) ? 1 : 0.2
+        )
+        .classed('highlighted', d => selectedColorValue && selectedColorValue === colorValue(d));
 
     countryPathEnter
         .append('title')
