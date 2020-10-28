@@ -35,6 +35,10 @@ circle.d3-pattern {
   stroke-width: 0.05px;
 }
 
+.country.highlighted {
+  stroke-width: 1px;
+}
+
 .country:hover {
   fill: red;
 }
