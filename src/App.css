@@ -11,6 +11,16 @@ html, body, #root, #root div {
   pointer-events: none;
 }
 
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav ul li {
+  width: 25%;
+  box-sizing: border-box;
+}
+
 /* include cicle for scatter plot */
 
 /* rect, circle {

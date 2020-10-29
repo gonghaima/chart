@@ -41,92 +41,125 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/basic-chart">
-          <BasicChart />
-        </Route>
-        <Route path="/pie">
-          <Pie />
-        </Route>
-        <Route path="/summary-v1">
-          <SummaryV1 />
-        </Route>
-        <Route path="/world">
-          <World />
-        </Route>
-        <Route path="/usa">
-          <USA />
-        </Route>
-        <Route path="/australia">
-          <AUSTRALIA />
-        </Route>
-        <Route path="/d3">
-          <D3 />
-        </Route>
-        <Route path="/d3-bar">
-          <D3BAR />
-        </Route>
-        <Route path="/d3-scatter-plot">
-          <D3SCATTERPLOT />
-        </Route>
-        <Route path="/d3-scatter-plot-car">
-          <D3SCATTERPLOTCAR />
-        </Route>
-        <Route path="/d3-line">
-          <D3LINE />
-        </Route>
-        <Route path="/d3-line-scatter-plot">
-          <D3LINESCATTERPLOT />
-        </Route>
-        <Route path="/d3-area">
-          <D3AREA />
-        </Route>
-        <Route path="/d3-area-population">
-          <D3AREAPOPULATION />
-        </Route>
-        <Route path="/d3-general-update-pattern">
-          <D3GENERALUPDATEPATTERN />
-        </Route>
-        <Route path="/d3-legend">
-          <D3LEGEND />
-        </Route>
-        <Route path="/d3-click">
-          <D3CLICK />
-        </Route>
-        <Route path="/d3-hover">
-          <D3HOVER />
-        </Route>
-        <Route path="/d3-world">
-          <D3World />
-        </Route>
-        <Route path="/d3-world-map">
-          <D3WORLDMAP />
-        </Route>
-        <Route path="/d3-world-map-interaction">
-          <D3WORLDMAPINTERACTION />
-        </Route>
-        <Route path="/d3-choropleth-map">
-          <D3CHOROMAP />
-        </Route>
-        <Route path="/d3-choropleth-interactive-map">
-          <D3CHOROINTERMAP />
-        </Route>
-        <Route path="/basic-shape">
-          <BasicShape />
-        </Route>
-        <Route path="/d3-canvas">
-          <D3CANVAS />
-        </Route>
-        <Route path="/d3-tree">
-          <D3TREE />
-        </Route>
-        <Route path="/d3-art-tree">
-          <D3ARTTREE />
-        </Route>
-        <Route path="/">
-          <Summary />
-        </Route>
-      </Switch>
+      <>
+        <nav>
+          <ul>
+            <li><Link to="/basic-chart">basic-chart</Link></li>
+            <li><Link to="/pie">pie</Link></li>
+            <li><Link to="/summary-v1">summary-v1</Link></li>
+            <li><Link to="/world">world</Link></li>
+            <li><Link to="/usa">usa</Link></li>
+            <li><Link to="/australia">australia</Link></li>
+            <li><Link to="/d3">d3</Link></li>
+            <li><Link to="/d3-bar">d3-bar</Link></li>
+            <li><Link to="/d3-scatter-plot">d3-scatter-plot</Link></li>
+            <li><Link to="/d3-scatter-plot-car">d3-scatter-plot-car</Link></li>
+            <li><Link to="/d3-line">d3-line</Link></li>
+            <li><Link to="/d3-line-scatter-plot">d3-line-scatter-plot</Link></li>
+            <li><Link to="/d3-area">d3-area</Link></li>
+            <li><Link to="/d3-area-population">d3-area-population</Link></li>
+            <li><Link to="/d3-general-update-pattern">d3-general-update-pattern</Link></li>
+            <li><Link to="/d3-legend">d3-legend</Link></li>
+            <li><Link to="/d3-click">d3-click</Link></li>
+            <li><Link to="/d3-hover">d3-hover</Link></li>
+            <li><Link to="/d3-world">d3-world</Link></li>
+            <li><Link to="/d3-world-map">d3-world-map</Link></li>
+            <li><Link to="/d3-world-map-interaction">d3-world-map-interaction</Link></li>
+            <li><Link to="/d3-choropleth-map">d3-choropleth-map</Link></li>
+            <li><Link to="/d3-choropleth-interactive-map">d3-choropleth-interactive-map</Link></li>
+            <li><Link to="/basic-shape">basic-shape</Link></li>
+            <li><Link to="/d3-canvas">d3-canvas</Link></li>
+            <li><Link to="/d3-tree">d3-tree</Link></li>
+            <li><Link to="/d3-art-tree">d3-art-tree</Link></li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/basic-chart">
+            <BasicChart />
+          </Route>
+          <Route path="/pie">
+            <Pie />
+          </Route>
+          <Route path="/summary-v1">
+            <SummaryV1 />
+          </Route>
+          <Route path="/world">
+            <World />
+          </Route>
+          <Route path="/usa">
+            <USA />
+          </Route>
+          <Route path="/australia">
+            <AUSTRALIA />
+          </Route>
+          <Route path="/d3">
+            <D3 />
+          </Route>
+          <Route path="/d3-bar">
+            <D3BAR />
+          </Route>
+          <Route path="/d3-scatter-plot">
+            <D3SCATTERPLOT />
+          </Route>
+          <Route path="/d3-scatter-plot-car">
+            <D3SCATTERPLOTCAR />
+          </Route>
+          <Route path="/d3-line">
+            <D3LINE />
+          </Route>
+          <Route path="/d3-line-scatter-plot">
+            <D3LINESCATTERPLOT />
+          </Route>
+          <Route path="/d3-area">
+            <D3AREA />
+          </Route>
+          <Route path="/d3-area-population">
+            <D3AREAPOPULATION />
+          </Route>
+          <Route path="/d3-general-update-pattern">
+            <D3GENERALUPDATEPATTERN />
+          </Route>
+          <Route path="/d3-legend">
+            <D3LEGEND />
+          </Route>
+          <Route path="/d3-click">
+            <D3CLICK />
+          </Route>
+          <Route path="/d3-hover">
+            <D3HOVER />
+          </Route>
+          <Route path="/d3-world">
+            <D3World />
+          </Route>
+          <Route path="/d3-world-map">
+            <D3WORLDMAP />
+          </Route>
+          <Route path="/d3-world-map-interaction">
+            <D3WORLDMAPINTERACTION />
+          </Route>
+          <Route path="/d3-choropleth-map">
+            <D3CHOROMAP />
+          </Route>
+          <Route path="/d3-choropleth-interactive-map">
+            <D3CHOROINTERMAP />
+          </Route>
+          <Route path="/basic-shape">
+            <BasicShape />
+          </Route>
+          <Route path="/d3-canvas">
+            <D3CANVAS />
+          </Route>
+          <Route path="/d3-tree">
+            <D3TREE />
+          </Route>
+          <Route path="/d3-art-tree">
+            <D3ARTTREE />
+          </Route>
+          <Route path="/">
+            <Summary />
+          </Route>
+        </Switch>
+      </>
     </Router>
   );
 }
