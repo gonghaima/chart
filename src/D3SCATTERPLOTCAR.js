@@ -85,6 +85,8 @@ export const D3SCATTERPLOTCAR = () => {
                 .text(xAxisLabel);
 
             g.selectAll().data(data).enter().append('circle')
+                .attr('fill', 'red')
+                .attr('opacity',0.5)
                 .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
                 .attr('r', circleRadius)
