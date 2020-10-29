@@ -142,6 +142,10 @@ text.nested-element-choro-map {
   text-anchor: middle;
 }
 
+.d3-scatter-plot-car-circle {
+  color: red;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
