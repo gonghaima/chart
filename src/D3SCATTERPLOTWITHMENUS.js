@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
 import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format } from 'd3'
-import data from './data/d3/worldPopulation.csv'
+//import data from './data/d3/worldPopulation.csv'
+import dataFile from './data/d3/auto-mpg.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
 
@@ -19,10 +20,8 @@ export const D3SCATTERPLOTWITHMENUS = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
-        // svg.attr('viewBox', "0 0 20 20");
 
-
-        csv('https://vizhub.com/curran/datasets/auto-mpg.csv').then(data => {
+        csv(dataFile).then(data => {
             data.forEach(d => {
                 d.mpg = +d.mpg;
                 d.cylinders = +d.cylinders;
@@ -86,7 +85,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
 
             g.selectAll().data(data).enter().append('circle')
                 .attr('fill', 'red')
-                .attr('opacity',0.5)
+                .attr('opacity', 0.5)
                 .attr('cy', yValue(yScale))
                 .attr('cx', xValue(xScale))
                 .attr('r', circleRadius)
