@@ -2,11 +2,14 @@ import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
 import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format } from 'd3'
+//import data from './data/d3/worldPopulation.csv'
 import dataFile from './data/d3/auto-mpg.csv'
 
+// import *  as dd from './data/d3/worldPopulation.csv'
 
 
-export const D3SCATTERPLOTCAR = () => {
+
+export const D3SCATTERPLOTWITHMENUS = () => {
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
@@ -17,7 +20,6 @@ export const D3SCATTERPLOTCAR = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
-
 
         csv(dataFile).then(data => {
             data.forEach(d => {

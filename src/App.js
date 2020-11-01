@@ -22,6 +22,7 @@ import { D3AREA } from './D3AREA';
 import { D3AREAPOPULATION } from './D3AREAPOPULATION';
 import { D3SCATTERPLOT } from './D3SCATTERPLOT';
 import { D3SCATTERPLOTCAR } from './D3SCATTERPLOTCAR';
+import { D3SCATTERPLOTWITHMENUS } from './D3SCATTERPLOTWITHMENUS';
 import { D3GENERALUPDATEPATTERN } from './components/d3/D3GENERALUPDATEPATTERN';
 import { D3LEGEND } from './components/d3/D3LEGEND';
 import { D3CLICK } from './components/d3/D3CLICK';
@@ -54,6 +55,7 @@ function App() {
             <li><Link to="/d3-bar">d3-bar</Link></li>
             <li><Link to="/d3-scatter-plot">d3-scatter-plot</Link></li>
             <li><Link to="/d3-scatter-plot-car">d3-scatter-plot-car</Link></li>
+            <li><Link to="/d3-scatter-plot-with-menus">d3-scatter-plot-with-menus</Link></li>
             <li><Link to="/d3-line">d3-line</Link></li>
             <li><Link to="/d3-line-scatter-plot">d3-line-scatter-plot</Link></li>
             <li><Link to="/d3-area">d3-area</Link></li>
@@ -103,6 +105,9 @@ function App() {
           </Route>
           <Route path="/d3-scatter-plot-car">
             <D3SCATTERPLOTCAR />
+          </Route>
+          <Route path="/d3-scatter-plot-with-menus">
+            <D3SCATTERPLOTWITHMENUS />
           </Route>
           <Route path="/d3-line">
             <D3LINE />
