@@ -48,7 +48,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
 
             const yScale = scaleLinear()
                 .domain(extent(data, d => d.weight))
-                .range([0, innerHeight]).nice();
+                .range([innerHeight, 0]).nice();
 
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`);
