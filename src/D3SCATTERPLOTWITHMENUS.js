@@ -1,18 +1,23 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
 
-import * as d3 from 'd3'
-import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format } from 'd3'
-//import data from './data/d3/worldPopulation.csv'
-import dataFile from './data/d3/auto-mpg.csv'
+import * as d3 from 'd3';
+import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format, select } from 'd3';
+import dataFile from './data/d3/auto-mpg.csv';
+import { dropdownMenu } from './components/d3/lib/dropdownMenu';
 
-// import *  as dd from './data/d3/worldPopulation.csv'
-
-
+dropdownMenu(select('body'), {
+    options: ['A', 'B', 'C']
+});
 
 export const D3SCATTERPLOTWITHMENUS = () => {
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
+
+
+    dropdownMenu(select('body'), {
+        options: ['A', 'B', 'C']
+    });
 
     useEffect(() => {
         const svg = d3
