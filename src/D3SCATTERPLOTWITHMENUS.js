@@ -5,21 +5,23 @@ import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format, select } f
 import dataFile from './data/d3/auto-mpg.csv';
 import { dropdownMenu } from './components/d3/lib/dropdownMenu';
 
-dropdownMenu(select('body'), {
-    options: ['A', 'B', 'C']
-});
+// dropdownMenu(select('body'), {
+//     options: ['A', 'B', 'C']
+// });
 
 export const D3SCATTERPLOTWITHMENUS = () => {
+    const mn = useRef(null);
+  
+   
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
 
-
-    dropdownMenu(select('body'), {
-        options: ['A', 'B', 'C']
-    });
-
     useEffect(() => {
+        dropdownMenu(select(mn.current), {
+            options: ['A', 'B', 'C']
+        });
+   
         const svg = d3
             .select(visEl.current)
             .append('svg');
@@ -103,6 +105,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
     });
     return (
         <div>
+            <div ref={mn}></div>
             <div ref={visEl}></div>
         </div>
     );
