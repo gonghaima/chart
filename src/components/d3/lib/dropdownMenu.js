@@ -11,7 +11,8 @@ export const dropdownMenu = (selection, props) => {
 
     let select = selection.selectAll('select').data([null]);
     select = select.enter().append('select')
-        .merge(select);
+        .merge(select)
+        .attr('class', 'select-menu');
 
     const option = select.selectAll('option').data(options);
 
