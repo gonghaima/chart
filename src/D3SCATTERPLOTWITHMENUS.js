@@ -18,10 +18,10 @@ export const D3SCATTERPLOTWITHMENUS = () => {
     const height = '450';
 
     useEffect(() => {
-        dropdownMenu(select(mn.current), {
+        select(mn.current).call( dropdownMenu, {
             options: ['A', 'B', 'C']
-        });
-   
+        })
+      
         const svg = d3
             .select(visEl.current)
             .append('svg');
