@@ -97,7 +97,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
                 .attr('cx', xValue(xScale))
                 .attr('r', circleRadius)
             g.append('text')
-                .attr('class', 'title')
+                .attr('class', 'scatter-plot-with-menus-title')
                 .attr('y', -10)
                 .text(title);
         }).catch(err => {
