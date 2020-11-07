@@ -7,17 +7,17 @@ import { dropdownMenu } from './components/d3/lib/dropdownMenu';
 
 export const D3SCATTERPLOTWITHMENUS = () => {
     const mn = useRef(null);
-  
-   
+
+
     const visEl = useRef(null);
     const width = '850';
     const height = '450';
 
     useEffect(() => {
-        select(mn.current).call( dropdownMenu, {
-            options: ['A', 'B', 'C']
-        })
-      
+        // select(mn.current).call( dropdownMenu, {
+        //     options: ['A', 'B', 'C']
+        // })
+
         const svg = d3
             .select(visEl.current)
             .append('svg');
@@ -26,6 +26,9 @@ export const D3SCATTERPLOTWITHMENUS = () => {
 
         csv(dataFile).then(data => {
             console.log(data.columns);
+            select(mn.current).call(dropdownMenu, {
+                options: data.columns
+            })
             data.forEach(d => {
                 d.mpg = +d.mpg;
                 d.cylinders = +d.cylinders;
