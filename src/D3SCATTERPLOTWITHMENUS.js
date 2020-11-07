@@ -27,7 +27,10 @@ export const D3SCATTERPLOTWITHMENUS = () => {
         csv(dataFile).then(data => {
             console.log(data.columns);
             select(mn.current).call(dropdownMenu, {
-                options: data.columns
+                options: data.columns,
+                onOptionClicked: column => {
+                    console.log(column);
+                }
             })
             data.forEach(d => {
                 d.mpg = +d.mpg;
