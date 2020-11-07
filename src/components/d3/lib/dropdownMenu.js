@@ -7,11 +7,14 @@
 
 
 export const dropdownMenu = (selection, props) => {
-    const { options } = props;
+    const { options, onOptionClicked } = props;
 
     let select = selection.selectAll('select').data([null]);
     select = select.enter().append('select')
         .merge(select)
+        .on('change', function () {
+            console.log(this.value);
+        })
         .attr('class', 'select-menu');
 
     const option = select.selectAll('option').data(options);
