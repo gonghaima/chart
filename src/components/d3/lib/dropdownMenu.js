@@ -13,7 +13,7 @@ export const dropdownMenu = (selection, props) => {
     select = select.enter().append('select')
         .merge(select)
         .on('change', function () {
-            console.log(this.value);
+            onOptionClicked(this.value);
         })
         .attr('class', 'select-menu');
 
