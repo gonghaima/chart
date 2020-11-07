@@ -152,7 +152,11 @@ text.nested-element-choro-map {
 }
 
 .select-menu{
-  font-size: 3.7em;
+  font-size: 1em;
+}
+
+.select-menu option{
+  font-size: 1em;
 }
 
 @media (prefers-reduced-motion: no-preference) {

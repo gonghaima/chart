@@ -5,10 +5,6 @@ import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format, select } f
 import dataFile from './data/d3/auto-mpg.csv';
 import { dropdownMenu } from './components/d3/lib/dropdownMenu';
 
-// dropdownMenu(select('body'), {
-//     options: ['A', 'B', 'C']
-// });
-
 export const D3SCATTERPLOTWITHMENUS = () => {
     const mn = useRef(null);
   
@@ -29,6 +25,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
         svg.attr('height', height);
 
         csv(dataFile).then(data => {
+            console.log(data.columns);
             data.forEach(d => {
                 d.mpg = +d.mpg;
                 d.cylinders = +d.cylinders;
