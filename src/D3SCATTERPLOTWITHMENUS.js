@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
 import * as d3 from 'd3';
-import { csv, extent, scaleLinear, max, axisLeft, axisBottom, format, select } from 'd3';
+import { csv, extent, scaleLinear, max, axisLeft, axisBottom, select } from 'd3';
 import dataFile from './data/d3/auto-mpg.csv';
 import { dropdownMenu } from './components/d3/lib/dropdownMenu';
 
@@ -14,6 +14,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
     const height = '450';
     let data;
     let svg;
+    let xColumn;
 
     const render = () => {
         data.forEach(d => {
@@ -44,6 +45,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
             .domain(extent(data, d => d.weight))
             .range([innerHeight, 0]).nice();
 
+        svg.selectAll("g").remove();
         const g = svg.append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -89,6 +91,11 @@ export const D3SCATTERPLOTWITHMENUS = () => {
             .text(title);
     };
 
+    const onXcolumnClicked = column => {
+        xColumn = column;
+        render();
+    };
+
     useEffect(() => {
         svg = d3
             .select(visEl.current)
@@ -101,9 +108,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
             console.log(data.columns);
             select(mn.current).call(dropdownMenu, {
                 options: data.columns,
-                onOptionClicked: column => {
-                    console.log(column);
-                }
+                onOptionClicked: onXcolumnClicked
             });
             render();
         }).catch(err => {
