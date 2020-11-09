@@ -28,7 +28,7 @@ export const D3SCATTERPLOTWITHMENUS = () => {
         });
 
         const title = "Cars: Horsepower vs. Weight";
-        const xValue = xs => d => xs(d.horsepower);
+        const xValue = xs => d => xs(d[xColumn]);
         const yValue = ys => d => ys(d.weight);
         const circleRadius = 10;
         const xAxisLabel = "Horsepower";
