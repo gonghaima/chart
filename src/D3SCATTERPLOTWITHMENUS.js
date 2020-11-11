@@ -27,6 +27,11 @@ export const D3SCATTERPLOTWITHMENUS = () => {
             d.year = +d.year;
         });
 
+        select(mn.current).call(dropdownMenu, {
+            options: data.columns,
+            onOptionClicked: onXcolumnClicked
+        });
+
         const title = "Cars: Horsepower vs. Weight";
         const xValue = xs => d => xs(d[xColumn]);
         const yValue = ys => d => ys(d.weight);
@@ -106,10 +111,6 @@ export const D3SCATTERPLOTWITHMENUS = () => {
         csv(dataFile).then(loadedData => {
             data = loadedData;
             console.log(data.columns);
-            select(mn.current).call(dropdownMenu, {
-                options: data.columns,
-                onOptionClicked: onXcolumnClicked
-            });
             render();
         }).catch(err => {
         })
