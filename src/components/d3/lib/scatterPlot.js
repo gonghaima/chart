@@ -15,14 +15,14 @@ export default (selection, props) => {
     const xValue = xs => d => xs(d[xColumn]);
     const yValue = ys => d => ys(d.weight);
     const circleRadius = 10;
-    const xAxisLabel = "Horsepower";
+    const xAxisLabel = xColumn;
     const yAxisLabel = "Weight";
     const margin = { top: 60, right: 40, bottom: 90, left: 200 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
     const xScale = scaleLinear()
-        .domain(extent(data, d => d.horsepower))
+        .domain(extent(data, d => d[xColumn]))
         .range([0, innerWidth]).nice();
 
     const yScale = scaleLinear()
