@@ -1,4 +1,4 @@
-html, body, #root, #root div:not(:first-child) {
+html, body, #root, #root div:last-child {
   height: 100%;
 }
 
@@ -142,7 +142,7 @@ text.nested-element-choro-map {
   text-anchor: middle;
 }
 
-.scatter-plot-with-menus-title{
+.scatter-plot-with-menus-title {
   font-size: 2.2em;
   fill: #615F5D;
 }
@@ -151,11 +151,16 @@ text.nested-element-choro-map {
   color: red;
 }
 
-.select-menu{
+.menuwrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.select-menu {
   font-size: 1em;
 }
 
-.select-menu option{
+.select-menu option {
   font-size: 1em;
 }
 

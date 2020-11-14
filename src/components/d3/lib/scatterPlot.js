@@ -1,6 +1,7 @@
 export default (selection, props) => {
     const {
         xColumn,
+        yColumn,
         width,
         height,
         scaleLinear,
@@ -11,12 +12,12 @@ export default (selection, props) => {
         axisLeft
     } = props;
 
-    const title = "Cars: Horsepower vs. Weight";
     const xValue = xs => d => xs(d[xColumn]);
-    const yValue = ys => d => ys(d.weight);
+    const yValue = ys => d => ys(yColumn ? d[yColumn] : d.weight);
     const circleRadius = 10;
-    const xAxisLabel = xColumn;
-    const yAxisLabel = "Weight";
+    const xAxisLabel = xColumn ? xColumn : '?';
+    const yAxisLabel = yColumn ? yColumn : "Weight";
+    const title = `Cars: ${xAxisLabel} vs. ${yAxisLabel}`;
     const margin = { top: 60, right: 40, bottom: 90, left: 200 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -26,7 +27,7 @@ export default (selection, props) => {
         .range([0, innerWidth]).nice();
 
     const yScale = scaleLinear()
-        .domain(extent(data, d => d.weight))
+        .domain(extent(data, d => yColumn ? d[yColumn] : d.weight))
         .range([innerHeight, 0]).nice();
 
     svg.selectAll("g").remove();
