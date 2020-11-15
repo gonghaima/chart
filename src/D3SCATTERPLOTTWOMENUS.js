@@ -48,7 +48,6 @@ export const D3SCATTERPLOTTWOMENUS = () => {
             scaleLinear,
             extent,
             data,
-            svg,
             axisBottom,
             axisLeft
         });
@@ -65,7 +64,7 @@ export const D3SCATTERPLOTTWOMENUS = () => {
     };
 
     useEffect(() => {
-        svg = d3
+        svg = svg ? svg : d3
             .select(visEl.current)
             .append('svg');
         svg.attr('width', width);
@@ -73,11 +72,11 @@ export const D3SCATTERPLOTTWOMENUS = () => {
 
         csv(dataFile).then(loadedData => {
             data = loadedData;
-            console.log(data.columns);
+            console.log(`effect triggered`);
             render();
         }).catch(err => {
         })
-    });
+    }, [svg]);
     return (
         <div>
             <div className={'menuwrapper'}>

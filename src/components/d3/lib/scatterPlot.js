@@ -7,7 +7,6 @@ export default (selection, props) => {
         scaleLinear,
         extent,
         data,
-        svg,
         axisBottom,
         axisLeft
     } = props;
@@ -30,9 +29,15 @@ export default (selection, props) => {
         .domain(extent(data, d => yColumn ? d[yColumn] : d.weight))
         .range([innerHeight, 0]).nice();
 
-    svg.selectAll("g").remove();
-    const g = svg.append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
+    const g = selection.selectAll('.container').data([null]);
+    const gEnter = g
+        .enter().append('g')
+        .attr('class', 'container');
+    gEnter
+        .merge(g)
+        .attr('transform',
+            `translate(${margin.left},${margin.top})`
+        );
 
     const xAxis = axisBottom(xScale)
         .tickSize(-innerHeight)
@@ -40,38 +45,60 @@ export default (selection, props) => {
 
     const yAxis = axisLeft(yScale).tickSize(-innerWidth).tickPadding(10);
 
-    g.append('g').call(yAxis).selectAll('.domain').remove();
+    const yAxisG = g.select('.y-axis');
+    const yAxisGEnter = gEnter
+        .append('g')
+        .attr('class', 'y-axis');
 
-    const yAxisG = g.append('g').call(yAxis);
-    yAxisG.select('.domain').remove();
+    yAxisG
+        .merge(yAxisGEnter)
+        .call(yAxis)
+        .selectAll('.domain').remove();
 
-    yAxisG.append('text')
+    const yAxisLabelText = yAxisGEnter
+        .append('text')
         .attr('class', 'axis-label')
-        .attr('y', -80)
-        .attr('x', -innerHeight / 2)
+        .attr('y', -93)
         .attr('fill', 'black')
         .attr('transform', `rotate(-90)`)
         .attr('text-anchor', 'middle')
+        .merge(yAxisG.select('.axis-label'))
+        .attr('x', -innerHeight / 2)
         .text(yAxisLabel);
 
-    const xAxisG = g.append('g').call(xAxis)
-        .attr('transform', `translate(0,${innerHeight})`);
-    xAxisG.select('.domain').remove();
-    xAxisG.append('text')
-        .attr('class', 'axis-label')
-        .attr('y', 60)
-        .attr('x', innerWidth / 2)
-        .attr('fill', 'black')
-        .text(xAxisLabel);
+    const xAxisG = g.select('.x-axis');
+    const xAxisGEnter = gEnter
+        .append('g')
+        .attr('class', 'x-axis');
 
-    g.selectAll().data(data).enter().append('circle')
+    xAxisG
+        .merge(xAxisGEnter)
+        .attr('transform', `translate(0,${innerHeight})`)
+        .call(xAxis)
+        .selectAll('.domain').remove();
+
+    const xAxisLabelText = xAxisGEnter
+        .append('text')
+        .attr('class', 'axis-label')
+        .attr('y', 75)
+        .attr('fill', 'black')
+        .merge(xAxisG.select('.axis-label'))
+        .attr('x', innerWidth / 2)
+        .text(xAxisLabel);
+    const circles = g.merge(gEnter)
+        .selectAll('circle').data(data);
+
+    circles
+        .enter().append('circle')
         .attr('fill', 'red')
         .attr('opacity', 0.5)
+        .attr('cx', innerWidth / 2)
+        .attr('cy', innerHeight / 2)
+        .attr('r', 0)
+        .merge(circles)
+        .transition().duration(2000)
+        .delay((d, i) => i * 10)
         .attr('cy', yValue(yScale))
         .attr('cx', xValue(xScale))
-        .attr('r', circleRadius)
-    g.append('text')
-        .attr('class', 'scatter-plot-with-menus-title')
-        .attr('y', -10)
-        .text(title);
+        .attr('r', circleRadius);
 }
