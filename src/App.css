@@ -102,7 +102,7 @@ rect.choro {
   fill: white;
 }
 
-text {
+text, .select-menu {
   /* font-size: 2em; */
   font-family: 'Playfair Display', serif, sans-serif;
 }
