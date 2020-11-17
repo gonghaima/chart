@@ -32,12 +32,13 @@ import { D3WORLDMAP } from './components/d3/D3WORLDMAP';
 import { D3WORLDMAPINTERACTION } from './components/d3/D3WORLDMAPINTERACTION';
 import { D3CHOROMAP } from './components/d3/D3CHOROMAP';
 import { D3CHOROINTERMAP } from './components/d3/D3CHOROINTERMAP';
+import { D3CIRCLEMAP } from './components/d3/D3CIRCLEMAP';
 import { D3CANVAS } from './components/d3/D3CANVAS';
 import { D3TREE } from './components/d3/D3TREE';
 import { D3ARTTREE } from './components/d3/D3ARTTREE';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
-import { Pie } from './Pie';
+import { Pie } from './Pie'; 
 
 function App() {
 
@@ -70,6 +71,7 @@ function App() {
             <li><Link to="/d3-world-map">d3-world-map</Link></li>
             <li><Link to="/d3-world-map-interaction">d3-world-map-interaction</Link></li>
             <li><Link to="/d3-choropleth-map">d3-choropleth-map</Link></li>
+            <li><Link to="/d3-circle-map">d3-circle-map</Link></li>
             <li><Link to="/d3-choropleth-interactive-map">d3-choropleth-interactive-map</Link></li>
             <li><Link to="/basic-shape">basic-shape</Link></li>
             <li><Link to="/d3-canvas">d3-canvas</Link></li>
@@ -152,6 +154,9 @@ function App() {
           </Route>
           <Route path="/d3-choropleth-interactive-map">
             <D3CHOROINTERMAP />
+          </Route>
+          <Route path="/d3-circle-map">
+            <D3CIRCLEMAP />
           </Route>
           <Route path="/basic-shape">
             <BasicShape />
