@@ -21,18 +21,6 @@ nav ul li {
   box-sizing: border-box;
 }
 
-/* include cicle for scatter plot */
-
-/* rect, circle {
-  fill: red;
-  opacity: 1;
-}
-
-circle.d3-pattern {
-  fill: #c11d1d;
-  opacity: 1;
-} */
-
 .sphere {
   fill: #4242e4;
   stroke: black;
@@ -53,8 +41,13 @@ circle.d3-pattern {
   fill: red;
 }
 
-.d3-world-map-svg {
+.d3-world-map-svg, .d3-circle-map {
   background-color: lightgrey;
+}
+
+.d3-circle-map {
+  height: 100vh;
+  width: 100%;
 }
 
 .d3-tree-svg path {
