@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import { loadAndProcessData } from './loadAndProcessData-v1';
-import { colorLegendWithInteractive } from './lib/colorLegendWithInteractive';
-import { choroplethMap } from './lib/choroplethMap';
-import { select, event, geoPath, geoNaturalEarth1, zoom, scaleOrdinal, schemeSpectral } from 'd3';
+import { loadAndProcessData } from './loadAndProcessCircleMapData';
+
+import { select, event, geoPath, geoNaturalEarth1, geoCentroid, zoom, format, scaleSqrt, max } from 'd3';
 
 
 const basicSvgStyle = {
@@ -21,66 +20,73 @@ export const D3CIRCLEMAP = () => {
     useEffect(() => {
         const svg = select(visEl.current)
             .append('svg')
-            .attr('class', 'd3-world-map-svg');
+            .attr('class', 'd3-circle-map');
 
-        choroplethMapG = svg.append('g');
+        const projection = geoNaturalEarth1();
+        const pathGenerator = geoPath().projection(projection);
+        const radiusValue = d => d.properties['2018'];
 
-        colorLegendG = svg.append('g')
-            .attr('transform', `translate(10,260)`);
 
-        const colorScale = scaleOrdinal();
+        const g = svg.append('g');
 
-        const colorValue = d => d.properties.economy;
+        const colorLegendG = svg.append('g').attr('transform', `translate(10,260)`);
 
-        let selectedColorValue;
-        let features;
+        // choroplethMapG = svg.append('g');
 
-        const onClick = d => {
-            selectedColorValue = d;
-            render();
-        }
+        // colorLegendG = svg.append('g')
+        //     .attr('transform', `translate(10,260)`);
 
-        !selectedColorValue && loadAndProcessData().then(countries => {
-            features = countries.features;
+        g.append('path')
+            .attr('class', 'sphere')
+            .attr('d', pathGenerator({ type: 'Sphere' }));
 
-            render();
+        svg.call(
+            zoom().on('zoom', () => {
+                g.attr('transform', event.transform);
+            })
+        );
+
+        const populationFormat = format(',');
+
+
+        loadAndProcessData().then(countries => {
+            const sizeScale = scaleSqrt()
+                .domain([0, max(countries.features, radiusValue)])
+                .range([0, 33]);
+
+            g.selectAll('path')
+                .data(countries.features)
+                .enter()
+                .append('path')
+                .attr('class', 'country')
+                .attr('d', pathGenerator)
+                .attr('fill', d => (d.properties['2018'] ? '#e8e8e8' : '#fecccc'))
+                .append('title')
+                .text(d =>
+                    isNaN(radiusValue(d))
+                        ? 'Missing data'
+                        : [
+                            d.properties['Region, subregion, country or area *'],
+                            populationFormat(radiusValue(d))
+                        ].join(': ')
+                );
+
+            countries.featuresWithPopulation.forEach(d => {
+                d.properties.projected = projection(geoCentroid(d));
+            });
+
+            g.selectAll('circle')
+                .data(countries.featuresWithPopulation)
+                .enter()
+                .append('circle')
+                .attr('class', 'country-circle')
+                .attr('cx', d => d.properties.projected[0])
+                .attr('cy', d => d.properties.projected[1])
+                .attr('r', d => sizeScale(radiusValue(d)));
+
         });
 
-        const render = () => {
-            ;
-            colorScale
-                .domain(features.map(colorValue))
-                .domain(colorScale.domain().sort().reverse())
-                .range(schemeSpectral[colorScale.domain().length]);
 
-
-            ;
-            colorLegendG.call(colorLegendWithInteractive,
-                {
-                    onClick,
-                    colorScale,
-                    cirlcleRadius: 12,
-                    spacing: 25,
-                    textOffset: 25,
-                    backgroundRectWidth: 220,
-                    textClass: 'nested-element-choro-map',
-                    selectedColorValue
-                }
-            );
-
-            choroplethMapG.call(choroplethMap, { features, colorScale, colorValue, selectedColorValue });
-
-        };
-
-        const width = '800';
-        const height = '600';
-
-        svg.attr('width', width);
-        svg.attr('height', height);
-        svg.attr('viewBox', "0 0 1000 800");
-
-        const group = svg.append('g');
-        group.attr("transform", "translate(200, 200)");
 
 
     });
