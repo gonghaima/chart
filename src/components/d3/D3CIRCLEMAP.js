@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { loadAndProcessData } from './loadAndProcessCircleMapData';
-
+import { sizeLegend } from './lib/sizeLegend';
 import { select, event, geoPath, geoNaturalEarth1, geoCentroid, zoom, format, scaleSqrt, max } from 'd3';
 
 
@@ -31,13 +31,8 @@ export const D3CIRCLEMAP = () => {
 
         const colorLegendG = svg.append('g').attr('transform', `translate(10,260)`);
 
-        // choroplethMapG = svg.append('g');
-
-        // colorLegendG = svg.append('g')
-        //     .attr('transform', `translate(10,260)`);
-
         g.append('path')
-            .attr('class', 'sphere')
+            .attr('class', 'spherelight')
             .attr('d', pathGenerator({ type: 'Sphere' }));
 
         svg.call(
@@ -84,6 +79,20 @@ export const D3CIRCLEMAP = () => {
                 .attr('cy', d => d.properties.projected[1])
                 .attr('r', d => sizeScale(radiusValue(d)));
 
+            g.append('g')
+                .attr('transform', `translate(45,215)`)
+                .call(sizeLegend, {
+                    sizeScale,
+                    spacing: 45,
+                    textOffset: 10,
+                    numTicks: 5,
+                    tickFormat: populationFormat
+                })
+                .append('text')
+                .attr('class', 'legend-title')
+                .text('Population')
+                .attr('y', -45)
+                .attr('x', -30);
         });
 
 
