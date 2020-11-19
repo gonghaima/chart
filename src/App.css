@@ -27,6 +27,12 @@ nav ul li {
   stroke-opacity: 0.1;
 }
 
+.spherelight {
+  fill: #9e9ead;
+  stroke: black;
+  stroke-opacity: 0.1;
+}
+
 .country {
   /* fill: lightgreen; */
   stroke: black;
@@ -66,6 +72,14 @@ circle.d3-pattern-exit {
 
 circle.d3line-circle {
   fill: steelblue;
+}
+
+circle.country-circle, circle.legendtick, .sizecircle {
+  fill: #00d1bf;
+  fill-opacity: 0.489216;
+  stroke: black;
+  stroke-width: 0.3;
+  pointer-events: none;
 }
 
 circle.basic-circle {
@@ -120,6 +134,11 @@ text.nested-element-choro-map {
   fill: #635f5d;
 }
 
+.tick text.textblack {
+  font-size: 1.7em;
+  fill: #000;
+}
+
 .tick line {
   stroke: #C0C0BB
 }
@@ -133,6 +152,10 @@ text.nested-element-choro-map {
   font-size: 2.2em;
   fill: #615F5D;
   text-anchor: middle;
+}
+
+.legend-title {
+  font-size: 1.7em;
 }
 
 .scatter-plot-with-menus-title {
