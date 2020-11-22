@@ -17,6 +17,7 @@ import { AUSTRALIA } from './AUSTRALIA';
 import { D3 } from './D3';
 import { D3BAR } from './D3BAR';
 import { D3LINE } from './D3LINE';
+import { D3MULTILINE } from './D3MULTILINE';
 import { D3LINESCATTERPLOT } from './D3LINESCATTERPLOT';
 import { D3AREA } from './D3AREA';
 import { D3AREAPOPULATION } from './D3AREAPOPULATION';
@@ -60,6 +61,7 @@ function App() {
             <li><Link to="/d3-scatter-plot-with-menus">d3-scatter-plot-with-menus</Link></li>
             <li><Link to="/d3-scatter-plot-two-menus">d3-scatter-plot-two-menus</Link></li>
             <li><Link to="/d3-line">d3-line</Link></li>
+            <li><Link to="/d3-multi-line">d3-multi-line</Link></li>
             <li><Link to="/d3-line-scatter-plot">d3-line-scatter-plot</Link></li>
             <li><Link to="/d3-area">d3-area</Link></li>
             <li><Link to="/d3-area-population">d3-area-population</Link></li>
@@ -118,6 +120,9 @@ function App() {
           </Route>
           <Route path="/d3-line">
             <D3LINE />
+          </Route>
+          <Route path="/d3-multi-line">
+            <D3MULTILINE />
           </Route>
           <Route path="/d3-line-scatter-plot">
             <D3LINESCATTERPLOT />
