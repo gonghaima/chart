@@ -19,11 +19,9 @@ export const D3MULTILINE = () => {
             .append('svg');
         svg.attr('width', width);
         svg.attr('height', height);
-        // svg.attr('viewBox', "0 0 20 20");
 
-        //https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv
 
-        csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(data => {
+        csv('https://vizhub.com/curran/datasets/data-canvas-sense-your-city-one-week.csv').then(data => {
             data.forEach(d => {
                 d.temperature = +d.temperature;
                 d.timestamp = new Date(d.timestamp);
