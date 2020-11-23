@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, extent, line, scaleLinear, scaleTime, axisLeft, axisBottom } from 'd3'
+import { csv, curveBasis, extent, line, scaleLinear, scaleTime, axisLeft, axisBottom, nest } from 'd3'
 import data from './data/d3/worldPopulation.csv'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
@@ -84,6 +84,9 @@ export const D3MULTILINE = () => {
                 .x(xValue(xScale))
                 .y(yValue(yScale))
                 .curve(curveBasis);
+
+            const nested = nest().key(d => d.city).entries(data);
+            console.log(nested);
             g.append('path')
                 .attr('class', 'line-path')
                 .attr('d', lineGenerator(data));
