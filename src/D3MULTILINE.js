@@ -87,9 +87,10 @@ export const D3MULTILINE = () => {
 
             const nested = nest().key(d => d.city).entries(data);
             console.log(nested);
-            g.append('path')
+            g.selectAll('.line-path').data(nested).enter()
+                .append('path')
                 .attr('class', 'line-path')
-                .attr('d', lineGenerator(data));
+                .attr('d', d => lineGenerator(d.values));
 
             g.append('text')
                 .attr('class', 'title')
