@@ -90,11 +90,19 @@ circle.eye, rect.eye-brow {
   fill: black !important;
 }
 
-.line-path {
+.line-path, .line-path-multi {
   fill: none;
-  stroke: maroon;
   stroke-width: 5;
   stroke-linejoin: round;
+}
+
+.line-path {
+  stroke: maroon;
+}
+
+.line-path-multi {
+  stroke-linecap: round;
+  mix-blend-mode: multiply;
 }
 
 .area-path {

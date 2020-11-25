@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, extent, line, scaleLinear, scaleTime, axisLeft, axisBottom, nest } from 'd3'
+import { csv, curveBasis, extent, line, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10 } from 'd3'
 import data from './data/d3/worldPopulation.csv'
+import { color } from 'echarts/lib/export'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
 
@@ -35,6 +36,7 @@ export const D3MULTILINE = () => {
             const circleRadius = 6;
             const xAxisLabel = "Time";
             const yAxisLabel = "Temperature";
+            const colorValue = d => d.city;
             const margin = { top: 60, right: 40, bottom: 90, left: 105 };
             const innerWidth = width - margin.left - margin.right;
             const innerHeight = height - margin.top - margin.bottom;
@@ -46,6 +48,9 @@ export const D3MULTILINE = () => {
             const yScale = scaleLinear()
                 .domain(extent(data, d => d.temperature))
                 .range([innerHeight, 0]).nice();
+
+            const colorScale = scaleOrdinal(schemeCategory10);
+
 
             const g = svg.append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -85,12 +90,15 @@ export const D3MULTILINE = () => {
                 .y(yValue(yScale))
                 .curve(curveBasis);
 
-            const nested = nest().key(d => d.city).entries(data);
-            console.log(nested);
-            g.selectAll('.line-path').data(nested).enter()
+            const nested = nest().key(colorValue).entries(data);
+
+            colorScale.domain(nested.map(d => d.key));
+
+            g.selectAll('.line-path-multi').data(nested).enter()
                 .append('path')
-                .attr('class', 'line-path')
-                .attr('d', d => lineGenerator(d.values));
+                .attr('class', 'line-path-multi')
+                .attr('d', d => lineGenerator(d.values))
+                .attr('stroke', d => colorScale(d.key));
 
             g.append('text')
                 .attr('class', 'title')
