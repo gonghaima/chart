@@ -99,8 +99,10 @@ circle.eye, rect.eye-brow {
 .line-path {
   stroke: maroon;
 }
+
 .line-path-multi {
   stroke-linecap: round;
+  mix-blend-mode: multiply;
 }
 
 .area-path {
