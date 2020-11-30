@@ -28,7 +28,7 @@ export const D3MULTILINE = () => {
                 d.timestamp = new Date(d.timestamp);
             });
 
-            const title = "A Week in San Francisco";
+            const title = "A Week of Temperature Around the world";
             const x = d => d.timestamp;
             const y = d => d.temperature;
             const xValue = xs => d => xs(d.timestamp);
@@ -102,6 +102,7 @@ export const D3MULTILINE = () => {
 
             g.append('text')
                 .attr('class', 'title')
+                .attr('x', innerWidth / 2)
                 .attr('y', -10)
                 .text(title);
         }).catch(err => {
