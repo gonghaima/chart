@@ -11,13 +11,14 @@ import { color } from 'echarts/lib/export'
 export const D3MULTILINE = () => {
     const visEl = useRef(null);
     const width = '850';
+    const containerWidth = '1050';
     const height = '450';
 
     useEffect(() => {
         const svg = d3
             .select(visEl.current)
             .append('svg');
-        svg.attr('width', width);
+        svg.attr('width', containerWidth);
         svg.attr('height', height);
 
 
@@ -105,7 +106,7 @@ export const D3MULTILINE = () => {
                 .attr('y', -10)
                 .text(title);
             svg.append('g')
-                .attr('transform', `translate(40,${height / 2})`)
+                .attr('transform', `translate(880,${height / 2 - 150})`)
                 .call(colorLegend, { colorScale, cirlcleRadius: 20, spacing: 50, textOffset: 70 });
         }).catch(err => {
         })
