@@ -2,12 +2,11 @@ import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
 import { csv, curveBasis, extent, line, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10 } from 'd3'
+import { colorLegend } from './components/d3/lib/colorLegendForLines';
 import data from './data/d3/worldPopulation.csv'
 import { color } from 'echarts/lib/export'
 
 // import *  as dd from './data/d3/worldPopulation.csv'
-
-
 
 export const D3MULTILINE = () => {
     const visEl = useRef(null);
@@ -105,6 +104,9 @@ export const D3MULTILINE = () => {
                 .attr('x', innerWidth / 2)
                 .attr('y', -10)
                 .text(title);
+            svg.append('g')
+                .attr('transform', `translate(40,${height / 2})`)
+                .call(colorLegend, { colorScale, cirlcleRadius: 20, spacing: 50, textOffset: 70 });
         }).catch(err => {
         })
     });
