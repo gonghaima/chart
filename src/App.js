@@ -39,18 +39,20 @@ import { D3TREE } from './components/d3/D3TREE';
 import { D3ARTTREE } from './components/d3/D3ARTTREE';
 import { D3World } from './D3World';
 import BasicShape from './BasicShape';
-import { Pie } from './Pie'; 
+import { Pie } from './Pie';
 
 function App() {
-
+  const navItems = [
+    { key: "basic-chart", component: BasicChart },
+    { key: "pie", component: Pie },
+    { key: "summary-v1", component: SummaryV1 },
+  ];
   return (
     <Router>
       <>
         <nav>
           <ul>
-            <li><Link to="/basic-chart">basic-chart</Link></li>
-            <li><Link to="/pie">pie</Link></li>
-            <li><Link to="/summary-v1">summary-v1</Link></li>
+            {navItems.map(({ key, component }) => <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
             <li><Link to="/world">world</Link></li>
             <li><Link to="/usa">usa</Link></li>
             <li><Link to="/australia">australia</Link></li>
@@ -82,15 +84,7 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/basic-chart">
-            <BasicChart />
-          </Route>
-          <Route path="/pie">
-            <Pie />
-          </Route>
-          <Route path="/summary-v1">
-            <SummaryV1 />
-          </Route>
+          {navItems.map(({ key, component }) => <Route path={`/${key}`}>{component}</Route>)}
           <Route path="/world">
             <World />
           </Route>
