@@ -46,6 +46,7 @@ function App() {
     { key: "basic-chart", component: BasicChart },
     { key: "pie", component: Pie },
     { key: "summary-v1", component: SummaryV1 },
+    { key: "world", component: World },
   ];
   return (
     <Router>
@@ -53,7 +54,6 @@ function App() {
         <nav>
           <ul>
             {navItems.map(({ key, component }) => <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
-            <li><Link to="/world">world</Link></li>
             <li><Link to="/usa">usa</Link></li>
             <li><Link to="/australia">australia</Link></li>
             <li><Link to="/d3">d3</Link></li>
@@ -85,9 +85,6 @@ function App() {
         </nav>
         <Switch>
           {navItems.map(({ key, component }) => <Route path={`/${key}`}>{component}</Route>)}
-          <Route path="/world">
-            <World />
-          </Route>
           <Route path="/usa">
             <USA />
           </Route>
