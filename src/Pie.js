@@ -27,11 +27,13 @@ export const Pie = () => {
         }
     }
 
-    return (
-        <ReactEcharts
+    const Chart = () => <ReactEcharts
             option={getOption()}
             style={{ height: "80vh", left: 50, top: 50, width: "90vw" }}
             opts={{ renderer: "svg" }}
         />
+
+    return (
+        <Chart />
     );
 }

@@ -6,7 +6,6 @@ import { summaryData } from "./data/DataSummary";
 export const SummaryV1 = () => {
     const getOption = () => {
         let countries = [];
-        let confirmedNumbers = [];
         let existingNumbers = [];
         let newConfirmedNumbers = [];
         const topCountries = summaryData.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed).slice(0, 26);
@@ -15,43 +14,6 @@ export const SummaryV1 = () => {
             existingNumbers.push(d.TotalConfirmed - d.NewConfirmed);
             newConfirmedNumbers.push(d.NewConfirmed);
         })
-
-        const years = [0];
-        // let options = years.map(year => {
-        //     let obj = {};
-
-        //     obj["series"] = [
-        //         {
-        //             stack: "group",
-        //             data: existingNumbers
-        //         },
-        //         {
-        //             stack: "group",
-        //             data: newConfirmedNumbers
-        //         }
-        //     ];
-
-        //     obj["title"] = {
-        //         text: `Population of Singapore by District, ${year}`
-        //     };
-
-        //     return obj;
-        // });
-
-        let options = [
-            {
-                series: {
-                    stack: "group",
-                    data: existingNumbers
-                }
-            },
-            {
-                series: {
-                    stack: "group",
-                    data: newConfirmedNumbers
-                }
-            }
-        ];
 
         return {
             baseOption: {
