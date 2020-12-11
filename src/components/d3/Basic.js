@@ -99,4 +99,8 @@ const Basic = () => {
     )
 }
 
-export default Basic
+export default () => {
+    return (
+        <Basic />
+    )
+}

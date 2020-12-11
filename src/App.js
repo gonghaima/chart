@@ -15,7 +15,7 @@ import { World } from './World';
 import { USA } from './USA';
 import { AUSTRALIA } from './AUSTRALIA';
 import { D3 } from './D3';
-import { D3BAR } from './D3BAR';
+import D3BAR from './D3BAR';
 import { D3LINE } from './D3LINE';
 import { D3MULTILINE } from './D3MULTILINE';
 import { D3LINESCATTERPLOT } from './D3LINESCATTERPLOT';
@@ -49,6 +49,8 @@ function App() {
     { key: "world", component: World },
     { key: "usa", component: USA },
     { key: "australia", component: AUSTRALIA },
+    { key: "d3", component: <D3 /> },
+    { key: "d3-bar", component: <D3BAR /> },
   ];
   return (
     <Router>
@@ -56,8 +58,6 @@ function App() {
         <nav>
           <ul>
             {navItems.map(({ key, component }) => <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
-            <li><Link to="/d3">d3</Link></li>
-            <li><Link to="/d3-bar">d3-bar</Link></li>
             <li><Link to="/d3-scatter-plot">d3-scatter-plot</Link></li>
             <li><Link to="/d3-scatter-plot-car">d3-scatter-plot-car</Link></li>
             <li><Link to="/d3-scatter-plot-with-menus">d3-scatter-plot-with-menus</Link></li>
@@ -85,12 +85,6 @@ function App() {
         </nav>
         <Switch>
           {navItems.map(({ key, component }) => <Route path={`/${key}`}>{component}</Route>)}
-          <Route path="/d3">
-            <D3 />
-          </Route>
-          <Route path="/d3-bar">
-            <D3BAR />
-          </Route>
           <Route path="/d3-scatter-plot">
             <D3SCATTERPLOT />
           </Route>
