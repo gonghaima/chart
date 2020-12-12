@@ -9,7 +9,7 @@ import { ascend } from 'ramda';
 
 // import *  as dd from './data/d3/worldPopulation.csv'
 
-export const D3MULTILINE = () => {
+export const D3LINEMELTINGDATA = () => {
     const visEl = useRef(null);
     const width = '850';
     const containerWidth = '1050';
@@ -21,6 +21,7 @@ export const D3MULTILINE = () => {
             .append('svg');
         svg.attr('width', containerWidth);
         svg.attr('height', height);
+
 
         // https://vizhub.com/curran/datasets/data-canvas-sense-your-city-one-week.csv
         csv('https://raw.githubusercontent.com/gonghaima/data/master/data-canvas-sense-your-city-one-week.csv').then(data => {
