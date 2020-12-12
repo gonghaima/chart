@@ -51,112 +51,41 @@ function App() {
     { key: "australia", component: AUSTRALIA },
     { key: "d3", component: <D3 /> },
     { key: "d3-bar", component: <D3BAR /> },
+    { key: "d3-scatter-plot", component: <D3SCATTERPLOT /> },
+    { key: "d3-scatter-plot-car", component: <D3SCATTERPLOTCAR /> },
+    { key: "d3-scatter-plot-with-menus", component: <D3SCATTERPLOTWITHMENUS /> },
+    { key: "d3-scatter-plot-two-menus", component: <D3SCATTERPLOTTWOMENUS /> },
+    { key: "d3-line", component: <D3LINE /> },
+    { key: "d3-multi-line", component: <D3MULTILINE /> },
+    { key: "d3-line-scatter-plot", component: <D3LINESCATTERPLOT /> },
+    { key: "d3-area", component: <D3AREA /> },
+    { key: "d3-area-population", component: <D3AREAPOPULATION /> },
+    { key: "d3-general-update-pattern", component: <D3GENERALUPDATEPATTERN /> },
+    { key: "d3-legend", component: <D3LEGEND /> },
+    { key: "d3-click", component: <D3CLICK /> },
+    { key: "d3-hover", component: <D3HOVER /> },
+    { key: "d3-world", component: <D3World /> },
+    { key: "d3-world-map", component: <D3WORLDMAP /> },
+    { key: "d3-world-map-interaction", component: <D3WORLDMAPINTERACTION /> },
+    { key: "d3-choropleth-map", component: <D3CHOROMAP /> },
+    { key: "d3-circle-map", component: <D3CIRCLEMAP /> },
+    { key: "d3-choropleth-interactive-map", component: <D3CHOROINTERMAP /> },
+    { key: "basic-shape", component: <BasicShape /> },
+    { key: "d3-canvas", component: <D3CANVAS /> },
+    { key: "d3-tree", component: <D3TREE /> },
+    { key: "d3-art-tree", component: <D3ARTTREE /> },
+    { key: "", component: <Summary /> },
   ];
   return (
     <Router>
       <>
         <nav>
           <ul>
-            {navItems.map(({ key, component }) => <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
-            <li><Link to="/d3-scatter-plot">d3-scatter-plot</Link></li>
-            <li><Link to="/d3-scatter-plot-car">d3-scatter-plot-car</Link></li>
-            <li><Link to="/d3-scatter-plot-with-menus">d3-scatter-plot-with-menus</Link></li>
-            <li><Link to="/d3-scatter-plot-two-menus">d3-scatter-plot-two-menus</Link></li>
-            <li><Link to="/d3-line">d3-line</Link></li>
-            <li><Link to="/d3-multi-line">d3-multi-line</Link></li>
-            <li><Link to="/d3-line-scatter-plot">d3-line-scatter-plot</Link></li>
-            <li><Link to="/d3-area">d3-area</Link></li>
-            <li><Link to="/d3-area-population">d3-area-population</Link></li>
-            <li><Link to="/d3-general-update-pattern">d3-general-update-pattern</Link></li>
-            <li><Link to="/d3-legend">d3-legend</Link></li>
-            <li><Link to="/d3-click">d3-click</Link></li>
-            <li><Link to="/d3-hover">d3-hover</Link></li>
-            <li><Link to="/d3-world">d3-world</Link></li>
-            <li><Link to="/d3-world-map">d3-world-map</Link></li>
-            <li><Link to="/d3-world-map-interaction">d3-world-map-interaction</Link></li>
-            <li><Link to="/d3-choropleth-map">d3-choropleth-map</Link></li>
-            <li><Link to="/d3-circle-map">d3-circle-map</Link></li>
-            <li><Link to="/d3-choropleth-interactive-map">d3-choropleth-interactive-map</Link></li>
-            <li><Link to="/basic-shape">basic-shape</Link></li>
-            <li><Link to="/d3-canvas">d3-canvas</Link></li>
-            <li><Link to="/d3-tree">d3-tree</Link></li>
-            <li><Link to="/d3-art-tree">d3-art-tree</Link></li>
+            {navItems.map(({ key, component }) => key && <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
           </ul>
         </nav>
         <Switch>
           {navItems.map(({ key, component }) => <Route path={`/${key}`}>{component}</Route>)}
-          <Route path="/d3-scatter-plot">
-            <D3SCATTERPLOT />
-          </Route>
-          <Route path="/d3-scatter-plot-car">
-            <D3SCATTERPLOTCAR />
-          </Route>
-          <Route path="/d3-scatter-plot-with-menus">
-            <D3SCATTERPLOTWITHMENUS />
-          </Route>
-          <Route path="/d3-scatter-plot-two-menus">
-            <D3SCATTERPLOTTWOMENUS />
-          </Route>
-          <Route path="/d3-line">
-            <D3LINE />
-          </Route>
-          <Route path="/d3-multi-line">
-            <D3MULTILINE />
-          </Route>
-          <Route path="/d3-line-scatter-plot">
-            <D3LINESCATTERPLOT />
-          </Route>
-          <Route path="/d3-area">
-            <D3AREA />
-          </Route>
-          <Route path="/d3-area-population">
-            <D3AREAPOPULATION />
-          </Route>
-          <Route path="/d3-general-update-pattern">
-            <D3GENERALUPDATEPATTERN />
-          </Route>
-          <Route path="/d3-legend">
-            <D3LEGEND />
-          </Route>
-          <Route path="/d3-click">
-            <D3CLICK />
-          </Route>
-          <Route path="/d3-hover">
-            <D3HOVER />
-          </Route>
-          <Route path="/d3-world">
-            <D3World />
-          </Route>
-          <Route path="/d3-world-map">
-            <D3WORLDMAP />
-          </Route>
-          <Route path="/d3-world-map-interaction">
-            <D3WORLDMAPINTERACTION />
-          </Route>
-          <Route path="/d3-choropleth-map">
-            <D3CHOROMAP />
-          </Route>
-          <Route path="/d3-choropleth-interactive-map">
-            <D3CHOROINTERMAP />
-          </Route>
-          <Route path="/d3-circle-map">
-            <D3CIRCLEMAP />
-          </Route>
-          <Route path="/basic-shape">
-            <BasicShape />
-          </Route>
-          <Route path="/d3-canvas">
-            <D3CANVAS />
-          </Route>
-          <Route path="/d3-tree">
-            <D3TREE />
-          </Route>
-          <Route path="/d3-art-tree">
-            <D3ARTTREE />
-          </Route>
-          <Route path="/">
-            <Summary />
-          </Route>
         </Switch>
       </>
     </Router>
