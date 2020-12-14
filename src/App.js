@@ -83,14 +83,16 @@ function App() {
       <>
         <nav>
           <ul>
-            {navItems.map(({ key, component }) => key && <li><Link to={`/${key}`}>{`${key}`}</Link></li>)}
+            {navItems.map(({ key, _ }) => key && <li key={`nav_${key}`}><Link to={`/${key}`}>{`${key}`}</Link></li>)}
           </ul>
         </nav>
         <Switch>
-          {navItems.map(({ key, component }) => <Route path={`/${key}`}>{component}</Route>)}
+          {navItems.map(({ key, component }) =>
+            <Route key={`route_${key}`} path={`/${key}`}>{component}</Route>
+          )}
         </Switch>
       </>
-    </Router>
+    </Router >
   );
 }
 
