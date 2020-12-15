@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
 import { csv, curveBasis, descending, extent, format, line, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10 } from 'd3'
-import { colorLegend } from './components/d3/lib/colorLegendForLines';
+import { colorLegend } from './components/d3/lib/colorLegendMeltingData';
 import { loadAndProcessData } from './components/d3/loadAndProcessData-v2';
 import data from './data/d3/worldPopulation.csv'
 import { color } from 'echarts/lib/export'
@@ -15,8 +15,9 @@ import { ascend } from 'ramda';
 export const D3LINEMELTINGDATA = () => {
     const visEl = useRef(null);
     const width = '850';
-    const containerWidth = '1050';
+    const containerWidth = '100%';
     const height = '450';
+
     const render = (data, svg) => {
         const title = 'Population over Time by Region';
 
@@ -30,8 +31,8 @@ export const D3LINEMELTINGDATA = () => {
         const colorValue = d => d.name;
 
         const margin = { top: 60, right: 280, bottom: 88, left: 105 };
-        const innerWidth = width - margin.left - margin.right;
-        const innerHeight = height - margin.top - margin.bottom;
+        const innerWidth = width - margin.left - margin.right + 50;
+        const innerHeight = height - margin.top - margin.bottom + 50;
 
         const xScale = scaleTime()
             .domain(extent(data, xValue))
@@ -45,7 +46,7 @@ export const D3LINEMELTINGDATA = () => {
         const colorScale = scaleOrdinal(schemeCategory10);
 
         const g = svg.append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+            .attr('transform', `translate(${margin.left + 40},${margin.top})`);
 
         const xAxis = axisBottom(xScale)
             .tickSize(-innerHeight)
@@ -106,12 +107,13 @@ export const D3LINEMELTINGDATA = () => {
 
         g.selectAll('.line-path').data(nested)
             .enter().append('path')
-            .attr('class', 'line-path')
+            .attr('class', 'line-path-melting-data')
             .attr('d', d => lineGenerator(d.values))
             .attr('stroke', d => colorScale(d.key));
 
         g.append('text')
             .attr('class', 'title')
+            .attr('x', 240)
             .attr('y', -10)
             .text(title);
 

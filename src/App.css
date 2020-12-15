@@ -100,6 +100,14 @@ circle.eye, rect.eye-brow {
   stroke: maroon;
 }
 
+.line-path-melting-data {
+  fill: none;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  mix-blend-mode: multiply;
+}
+
 .line-path-multi {
   stroke-linecap: round;
   mix-blend-mode: multiply;
