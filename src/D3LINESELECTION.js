@@ -132,7 +132,9 @@ export const D3LINESELECTION = () => {
             .attr('height', innerHeight)
             .attr('pointer-events', 'all')
             .on('mousemove', () => {
-                console.log(mouse(g.node()));
+                const x = mouse(g.node())[0];
+                const hoveredDate = xScale.invert(x);
+                console.log(hoveredDate);
             })
 
         svg.append('g')
