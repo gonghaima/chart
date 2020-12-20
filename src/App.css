@@ -126,6 +126,10 @@ rect {
   fill: #e5ddbc;
 }
 
+.mouse-event-rect {
+  fill: none;
+}
+
 rect.choro {
   fill: white;
 }

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import * as d3 from 'd3'
-import { csv, curveBasis, descending, extent, format, line, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10 } from 'd3'
+import { csv, curveBasis, descending, event, extent, format, line, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10 } from 'd3'
 import { colorLegend } from './components/d3/lib/colorLegendMeltingData';
 import { loadAndProcessData, parseYear } from './components/d3/loadAndProcessData-v2';
 import data from './data/d3/worldPopulation.csv'
@@ -125,6 +125,15 @@ export const D3LINESELECTION = () => {
             .attr('x', 240)
             .attr('y', -10)
             .text(title);
+
+        g.append('rect')
+            .attr('class', 'mouse-event-rect')
+            .attr('width', innerWidth)
+            .attr('height', innerHeight)
+            .attr('pointer-events', 'all')
+            .on('mousemove', () => {
+                console.log(event);
+            })
 
         svg.append('g')
             .attr('transform', `translate(700,110)`)
