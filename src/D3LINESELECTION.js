@@ -134,7 +134,7 @@ export const D3LINESELECTION = () => {
             .on('mousemove', () => {
                 const x = mouse(g.node())[0];
                 const hoveredDate = xScale.invert(x);
-                console.log(hoveredDate);
+                console.log(hoveredDate.getFullYear());
             })
 
         svg.append('g')
