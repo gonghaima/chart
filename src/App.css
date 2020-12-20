@@ -113,6 +113,11 @@ circle.eye, rect.eye-brow {
   mix-blend-mode: multiply;
 }
 
+.selected-year-line {
+  stroke: black;
+  stroke-width: 5;
+}
+
 .area-path {
   fill: maroon;
 }

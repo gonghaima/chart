@@ -114,11 +114,11 @@ export const D3LINESELECTION = () => {
         // selectedYear
         const selectedYearDate = parseYear(selectedYear);
         g.append('line')
+            .attr('class', 'selected-year-line')
             .attr('x1', xScale(selectedYearDate))
             .attr('x2', xScale(selectedYearDate))
             .attr('y1', 0)
-            .attr('y2', innerHeight)
-            .attr('stroke', 'black');
+            .attr('y2', innerHeight);
 
         g.append('text')
             .attr('class', 'title')
