@@ -41,4 +41,4 @@ const loadAndProcessData = () =>
                 .concat(melt(unDataMediumVariant, 2015, 2100));
         });
 
-export { loadAndProcessData }
+export { loadAndProcessData, parseYear }

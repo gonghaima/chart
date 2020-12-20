@@ -19,6 +19,7 @@ import D3BAR from './D3BAR';
 import { D3LINE } from './D3LINE';
 import { D3MULTILINE } from './D3MULTILINE';
 import { D3LINEMELTINGDATA } from './D3LINEMELTINGDATA';
+import { D3LINESELECTION } from './D3LINESELECTION';
 import { D3LINESCATTERPLOT } from './D3LINESCATTERPLOT';
 import { D3AREA } from './D3AREA';
 import { D3AREAPOPULATION } from './D3AREAPOPULATION';
@@ -59,6 +60,7 @@ function App() {
     { key: "d3-line", component: <D3LINE /> },
     { key: "d3-multi-line", component: <D3MULTILINE /> },
     { key: "d3-line-melting-data", component: <D3LINEMELTINGDATA /> },
+    { key: "d3-line-selection", component: <D3LINESELECTION /> },
     { key: "d3-line-scatter-plot", component: <D3LINESCATTERPLOT /> },
     { key: "d3-area", component: <D3AREA /> },
     { key: "d3-area-population", component: <D3AREAPOPULATION /> },
