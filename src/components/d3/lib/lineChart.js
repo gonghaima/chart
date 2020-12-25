@@ -1,10 +1,10 @@
 import { csv, curveBasis, descending, extent, format, line, mouse, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10, timeParse } from 'd3';
 import { colorLegend } from './colorLegendMeltingData';
 
-export const lineChart = (width, height, data, svg) => {
+export const lineChart = (width, height, data, svg, selectedYear, setYr) => {
 
     const title = 'Population over Time by Region';
-    const selectedYear = 2018;
+
 
     const xValue = d => d.year;
     const xAxisLabel = 'Time';
@@ -20,6 +20,7 @@ export const lineChart = (width, height, data, svg) => {
     const innerWidth = width - margin.left - margin.right + 50;
     const innerHeight = height - margin.top - margin.bottom + 50;
 
+
     const xScale = scaleTime()
         .domain(extent(data, xValue))
         .range([0, innerWidth]);
@@ -30,7 +31,7 @@ export const lineChart = (width, height, data, svg) => {
         .nice();
 
     const colorScale = scaleOrdinal(schemeCategory10);
-
+    svg.selectAll('g').remove();
     const g = svg.append('g')
         .attr('transform', `translate(${margin.left + 40},${margin.top})`);
 
@@ -119,7 +120,9 @@ export const lineChart = (width, height, data, svg) => {
         .on('mousemove', () => {
             const x = mouse(g.node())[0];
             const hoveredDate = xScale.invert(x);
-            console.log(hoveredDate.getFullYear());
+            const hoverYr = hoveredDate.getFullYear();
+            console.log(hoverYr);
+            setYr(hoverYr);
         })
 
     svg.append('g')
