@@ -1,7 +1,7 @@
 import { csv, curveBasis, descending, extent, format, line, mouse, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10, timeParse } from 'd3';
 import { colorLegend } from './colorLegendMeltingData';
 
-export const lineChart = (width, height, data, svg, selectedYear, setYr) => {
+export const lineChart = (width, height, data, svg, selectedYear, setYr, selection) => {
 
     const title = 'Population over Time by Region';
 
@@ -30,10 +30,17 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr) => {
         .range([innerHeight, 0])
         .nice();
 
-    const colorScale = scaleOrdinal(schemeCategory10);
-    svg.selectAll('g').remove();
-    const g = svg.append('g')
+    const g = selection.selectAll('.container').data([null]);
+    const gEnter = g.enter()
+        .append('g')
+        .attr('class', 'container');
+    gEnter.merge(g)
         .attr('transform', `translate(${margin.left + 40},${margin.top})`);
+
+    const colorScale = scaleOrdinal(schemeCategory10);
+    // svg.selectAll('g').remove();
+    // const g = svg.append('g')//
+    //     .attr('transform', `translate(${margin.left + 40},${margin.top})`);
 
     const xAxis = axisBottom(xScale)
         .tickSize(-innerHeight)
@@ -49,29 +56,58 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr) => {
         .tickFormat(yAxisTickFormat)
         .tickPadding(10);
 
-    const yAxisG = g.append('g').call(yAxis);
-    yAxisG.selectAll('.domain').remove();
+    // const yAxisG = g.append('g').call(yAxis);
 
-    yAxisG.append('text')
+    // yAxisG.selectAll('.domain').remove();
+
+    // yAxisG.append('text')
+    // yAxisGEnter.append('text')
+    //     .attr('class', 'axis-label')
+    //     .attr('y', -60)
+    //     .attr('x', -innerHeight / 2)
+    //     .attr('fill', 'black')
+    //     .attr('transform', `rotate(-90)`)
+    //     .attr('text-anchor', 'middle')
+    //     .text(yAxisLabel);
+    const yAxisGEnter = gEnter
+        .append('g')
+        .attr('class', 'y-axis');
+    const yAxisG = g.select('.y-axis');
+    yAxisGEnter
+        .merge(yAxisG)
+        .call(yAxis)
+        .selectAll('.domain').remove();
+
+    // const xAxisG = g.append('g').call(xAxis)
+    //     .attr('transform', `translate(0,${innerHeight})`);
+
+    // xAxisG.select('.domain').remove();
+
+    // xAxisG.append('text')
+    //     .attr('class', 'axis-label')
+    //     .attr('y', 80)
+    //     .attr('x', innerWidth / 2)
+    //     .attr('fill', 'black')
+    //     .text(xAxisLabel);
+
+    const xAxisGEnter = gEnter
+        .append('g')
+        .attr('class', 'x-axis');
+    const xAxisG = g.select('.x-axis');
+    xAxisGEnter
+        .merge(xAxisG)
+        .call(xAxis)
+        .attr('transform', `translate(0, ${innerHeight})`)
+        .select('.domain').remove();
+    xAxisGEnter
+        .append('text')
         .attr('class', 'axis-label')
-        .attr('y', -60)
-        .attr('x', -innerHeight / 2)
+        .attr('y', 75)
         .attr('fill', 'black')
-        .attr('transform', `rotate(-90)`)
-        .attr('text-anchor', 'middle')
-        .text(yAxisLabel);
-
-    const xAxisG = g.append('g').call(xAxis)
-        .attr('transform', `translate(0,${innerHeight})`);
-
-    xAxisG.select('.domain').remove();
-
-    xAxisG.append('text')
-        .attr('class', 'axis-label')
-        .attr('y', 80)
+        .merge(xAxisG.select('.axis-label'))
         .attr('x', innerWidth / 2)
-        .attr('fill', 'black')
         .text(xAxisLabel);
+
 
     const lineGenerator = line()
         .x(d => xScale(xValue(d)))
@@ -91,46 +127,82 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr) => {
 
     colorScale.domain(nested.map(d => d.key));
 
-    g.selectAll('.line-path').data(nested)
+    // g.selectAll('.line-path').data(nested)
+    //     .enter().append('path')
+    //     .attr('class', 'line-path-melting-data')
+    //     .attr('d', d => lineGenerator(d.values))
+    //     .attr('stroke', d => colorScale(d.key));
+
+    const linePaths = g.merge(gEnter)
+        .selectAll('.line-path').data(nested);
+    linePaths
         .enter().append('path')
-        .attr('class', 'line-path-melting-data')
+        .attr('class', 'line-path')
+        .merge(linePaths)
         .attr('d', d => lineGenerator(d.values))
         .attr('stroke', d => colorScale(d.key));
 
     // selectedYear
     const selectedYearDate = parseYear(selectedYear);
-    g.append('line')
+    // g.append('line')
+    //     .attr('class', 'selected-year-line')
+    //     .attr('x1', xScale(selectedYearDate))
+    //     .attr('x2', xScale(selectedYearDate))
+    //     .attr('y1', 0)
+    //     .attr('y2', innerHeight);
+    gEnter
+        .append('line')
         .attr('class', 'selected-year-line')
+        .attr('y1', 0)
+        .merge(g.select('.selected-year-line'))
         .attr('x1', xScale(selectedYearDate))
         .attr('x2', xScale(selectedYearDate))
-        .attr('y1', 0)
         .attr('y2', innerHeight);
 
-    g.append('text')
+    // g.append('text')
+    //     .attr('class', 'title')
+    //     .attr('x', 240)
+    //     .attr('y', -10)
+    //     .text(title);
+    gEnter
+        .append('text')
         .attr('class', 'title')
-        .attr('x', 240)
         .attr('y', -10)
+        .merge(g.select('.title'))
         .text(title);
 
-    g.append('rect')
-        .attr('class', 'mouse-event-rect')
+    // g.append('rect')
+    //     .attr('class', 'mouse-event-rect')
+    //     .attr('width', innerWidth)
+    //     .attr('height', innerHeight)
+    //     .attr('pointer-events', 'all')
+    //     .on('mousemove', () => {
+    //         const x = mouse(g.node())[0];
+    //         const hoveredDate = xScale.invert(x);
+    //         const hoverYr = hoveredDate.getFullYear();
+    //         console.log(hoverYr);
+    //         setYr(hoverYr);
+    //     })
+    gEnter
+        .append('rect')
+        .attr('class', 'mouse-interceptor')
+        .attr('fill', 'none')
+        .attr('pointer-events', 'all')
+        .merge(g.select('.mouse-interceptor'))
         .attr('width', innerWidth)
         .attr('height', innerHeight)
-        .attr('pointer-events', 'all')
-        .on('mousemove', () => {
-            const x = mouse(g.node())[0];
+        .on('mousemove', function () {
+            const x = mouse(this)[0];
             const hoveredDate = xScale.invert(x);
-            const hoverYr = hoveredDate.getFullYear();
-            console.log(hoverYr);
-            setYr(hoverYr);
-        })
-
-    svg.append('g')
-        .attr('transform', `translate(700,110)`)
-        .call(colorLegend, {
-            colorScale,
-            circleRadius: 10,
-            spacing: 55,
-            textOffset: 15
+            setYr(hoveredDate.getFullYear());
         });
+
+    // svg.append('g')
+    //     .attr('transform', `translate(700,110)`)
+    //     .call(colorLegend, {
+    //         colorScale,
+    //         circleRadius: 10,
+    //         spacing: 55,
+    //         textOffset: 15
+    //     });
 }
