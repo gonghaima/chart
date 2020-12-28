@@ -126,6 +126,10 @@ rect {
   fill: #e5ddbc;
 }
 
+rect.mouse-interceptor {
+  fill: none;
+}
+
 .mouse-event-rect {
   fill: none;
 }

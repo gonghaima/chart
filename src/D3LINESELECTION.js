@@ -20,15 +20,16 @@ export const D3LINESELECTION = () => {
     let selectedYear = 2018;
     let data;
     let svg;
+    let colorLegendG;
 
     const setYr = year => {
         selectedYear = year;
-        lineChart(width, height, data, svg, selectedYear, setYr);
+        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG);
     }
 
     const render = (data, svg) => {
         // lineChart()
-        lineChart(width, height, data, svg, selectedYear, setYr);
+        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG);
     };
     useEffect(() => {
         svg = d3
@@ -36,6 +37,7 @@ export const D3LINESELECTION = () => {
             .append('svg');
         svg.attr('width', containerWidth);
         svg.attr('height', height);
+        colorLegendG = colorLegendG ?? svg.append('g');
 
 
         // https://vizhub.com/curran/datasets/data-canvas-sense-your-city-one-week.csv
