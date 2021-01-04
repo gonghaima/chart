@@ -17,6 +17,7 @@ export const D3LINESELECTION = () => {
     const width = '850';
     const containerWidth = '100%';
     const height = '450';
+    const colorScale = scaleOrdinal(schemeCategory10);
     let selectedYear = 2018;
     let data;
     let svg;
@@ -24,12 +25,21 @@ export const D3LINESELECTION = () => {
 
     const setYr = year => {
         selectedYear = year;
-        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG);
+        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG, colorScale);
     }
 
     const render = (data, svg) => {
         // lineChart()
-        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG);
+        lineChart(width, height, data, svg, selectedYear, setYr, colorLegendG, colorScale);
+
+        svg.append('g')
+            .attr('transform', `translate(700,110)`)
+            .call(colorLegend, {
+                colorScale,
+                circleRadius: 10,
+                spacing: 55,
+                textOffset: 15
+            });
     };
     useEffect(() => {
         svg = d3
@@ -40,6 +50,7 @@ export const D3LINESELECTION = () => {
         colorLegendG = colorLegendG ?? svg.append('g');
 
 
+
         // https://vizhub.com/curran/datasets/data-canvas-sense-your-city-one-week.csv
         loadAndProcessData()
             .then(dataResult => {
@@ -48,6 +59,7 @@ export const D3LINESELECTION = () => {
             })
             .catch(err => {
             })
+
     });
     return (
         <div>

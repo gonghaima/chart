@@ -1,7 +1,7 @@
 import { csv, curveBasis, descending, extent, format, line, mouse, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10, timeParse } from 'd3';
 import { colorLegend } from './colorLegendMeltingData';
 
-export const lineChart = (width, height, data, svg, selectedYear, setYr, selection) => {
+export const lineChart = (width, height, data, svg, selectedYear, setYr, selection, colorScale) => {
 
     const title = 'Population over Time by Region';
 
@@ -37,7 +37,7 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr, selecti
     gEnter.merge(g)
         .attr('transform', `translate(${margin.left + 40},${margin.top})`);
 
-    const colorScale = scaleOrdinal(schemeCategory10);
+    // const colorScale = scaleOrdinal(schemeCategory10);
     // svg.selectAll('g').remove();
     // const g = svg.append('g')//
     //     .attr('transform', `translate(${margin.left + 40},${margin.top})`);
@@ -127,17 +127,17 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr, selecti
 
     colorScale.domain(nested.map(d => d.key));
 
-    // g.selectAll('.line-path').data(nested)
+    // g.selectAll('.line-path-multi').data(nested)
     //     .enter().append('path')
-    //     .attr('class', 'line-path-melting-data')
+    //     .attr('class', 'line-path-multi-melting-data')
     //     .attr('d', d => lineGenerator(d.values))
     //     .attr('stroke', d => colorScale(d.key));
 
     const linePaths = g.merge(gEnter)
-        .selectAll('.line-path').data(nested);
+        .selectAll('.line-path-multi').data(nested);
     linePaths
         .enter().append('path')
-        .attr('class', 'line-path')
+        .attr('class', 'line-path-multi')
         .merge(linePaths)
         .attr('d', d => lineGenerator(d.values))
         .attr('stroke', d => colorScale(d.key));
