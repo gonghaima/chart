@@ -1,7 +1,7 @@
 import { csv, curveBasis, descending, extent, format, line, mouse, scaleLinear, scaleTime, scaleOrdinal, axisLeft, axisBottom, nest, schemeCategory10, timeParse } from 'd3';
 import { colorLegend } from './colorLegendMeltingData';
 
-export const lineChart = (width, height, data, svg, selectedYear, setYr, selection) => {
+export const lineChart = (width, height, data, svg, selectedYear, setYr, selection, colorScale) => {
 
     const title = 'Population over Time by Region';
 
@@ -37,7 +37,7 @@ export const lineChart = (width, height, data, svg, selectedYear, setYr, selecti
     gEnter.merge(g)
         .attr('transform', `translate(${margin.left + 40},${margin.top})`);
 
-    const colorScale = scaleOrdinal(schemeCategory10);
+    // const colorScale = scaleOrdinal(schemeCategory10);
     // svg.selectAll('g').remove();
     // const g = svg.append('g')//
     //     .attr('transform', `translate(${margin.left + 40},${margin.top})`);
